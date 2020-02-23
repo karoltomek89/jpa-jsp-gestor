@@ -72,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `gestorDatabase`.`teachers` (
   UNIQUE INDEX `teacherId_UNIQUE` (`teacherId` ASC) VISIBLE,
   UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE)
 ENGINE = InnoDB
-DEFAULT CHARACTER SET = utf32;
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
@@ -100,7 +100,7 @@ COLLATE = utf8_polish_ci;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `gestorDatabase`.`grades` (
   `gradeId` INT NOT NULL AUTO_INCREMENT,
-  `value` VARCHAR(45) NOT NULL,
+  `value` DECIMAL(2,1) NOT NULL,
   `students_studentId` INT NOT NULL,
   `subjects_subjectId` INT NOT NULL,
   PRIMARY KEY (`gradeId`),
