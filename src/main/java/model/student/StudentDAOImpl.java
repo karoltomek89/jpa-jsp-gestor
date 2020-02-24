@@ -5,6 +5,7 @@ import model.parent.Parent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -17,9 +18,37 @@ public class StudentDAOImpl implements StudentDAO {
 
     SessionFactory sessionFactory = new SessionFactory();
 
+
+    @Override
+    public void register(String name, String surname, String email, String password) {
+
+        Student newStudent = new Student();
+
+        newStudent.setName(name);
+        newStudent.setSurname(surname);
+        newStudent.setEmail(email);
+        newStudent.setPassword(password);
+
+        save(newStudent);
+    }
+
     @Override
     public void save(Student s) {
+        String query = "INSERT INTO students (name, surname, email, password) VALUES (?,?,?,?)";
 
+        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+            //parameterIndex zaczyna się od 1!
+            statement.setString(1, s.getName());
+            statement.setString(2, s.getSurname());
+            statement.setString(3, s.getEmail());
+            statement.setString(4, s.getPassword());
+            int i = statement.executeUpdate();
+            if (i == 0) {
+                logger.info("Student not added");
+            }
+        } catch (SQLException e) {
+            logger.error("Student cannot be added", e);
+        }
     }
 
     @Override

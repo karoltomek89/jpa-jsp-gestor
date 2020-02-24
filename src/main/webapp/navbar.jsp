@@ -33,38 +33,42 @@
                         </div>
                         <div class="modal-body">
 
-                            <form>
+                            <form id="registration" method="post" action="student">
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label for="inputEmail4">Twój adres e-mail</label>
-                                        <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+                                        <label for="Name">Imię</label>
+                                        <input type="text" class="form-control" name="name" placeholder="Name">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="inputPassword4">Twoje hasło</label>
-                                        <input type="password" class="form-control" id="inputPassword4" placeholder="Hasło">
+                                        <label for="Surname">Nazwisko</label>
+                                        <input type="text" class="form-control" name="surname" placeholder="Surname">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="inputSchoolName">Nazwa szkoły</label>
-                                    <input type="text" class="form-control" id="inputSchoolName" placeholder="Nazwa szkoły">
+                                    <label for="Email">Email</label>
+                                    <input type="text" class="form-control" name="email" placeholder="Email">
                                 </div>
                                 <div class="form-group">
-                                    <label>Typ konta</label>
-                                    <select class="custom-select">
+                                    <label for="Password">Hasło</label>
+                                    <input type="text" class="form-control" name="password" placeholder="Password">
+                                </div>
+                                <div class="form-group">
+                                    <label for="Type" id="type" >Typ konta</label>
+                                    <select name="type" class="custom-select">
                                         <option selected>Wybierz typ konta</option>
-                                        <option value="1">Uczeń</option>
-                                        <option value="2">Nauczyciel</option>
-                                        <option value="3">Dyrektor</option>
-                                        <option value="4">Rodzic</option>
+                                        <option value="student">student</option>
+                                        <option value="teacher">Nauczyciel</option>
+                                        <option value="director">Dyrektor</option>
+                                        <option value="parent">Rodzic</option>
                                     </select>
-
                                 </div>
                             </form>
-
                         </div>
                         <div class="modal-footer">
+
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
-                            <button type="button" class="btn btn-primary">Zarejestruj</button>
+                            <input type="submit" form="registration" class="btn btn-primary">Zarejestruj</input>
+
                         </div>
                     </div>
                 </div>
