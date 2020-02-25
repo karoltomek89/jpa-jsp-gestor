@@ -52,18 +52,74 @@ public class StudentDAOImpl implements StudentDAO {
     }
 
     @Override
-    public void update(Student p) {
+    public void update(Student s) {
 
+        String query = "UPDATE students SET name = ?, surname =?, " +
+                "email =?, password= ?" +
+                " WHERE studentId= ?";
+
+        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+            statement.setString(1, s.getName());
+            statement.setString(2, s.getSurname());
+            statement.setString(3, s.getEmail());
+            statement.setString(4, s.getPassword());
+            statement.setInt(5, s.getStudentId());
+            int i = statement.executeUpdate();
+            if (i == 0) {
+                logger.info("Nothing changed");
+            } else {
+                logger.info(i + " students changed");
+            }
+
+        } catch (SQLException e) {
+            logger.error("Student cannot be changed", e);
+        }
     }
 
     @Override
     public void delete(String id) {
 
+        String query = "DELETE FROM students WHERE studentId= ?";
+
+        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+            statement.setString(1, id);
+            int i = statement.executeUpdate();
+
+            if (i == 0) {
+                logger.info("Nothing deleted");
+            } else {
+                logger.info("Student deleted");
+            }
+
+        } catch (SQLException e) {
+            logger.error("Student cannot be deleted",e);
+        }
     }
 
     @Override
     public Student find(String id) {
-        return null;
+
+        Student student = new Student();
+
+        String query = "SELECT * FROM students WHERE studentId= ?";
+
+        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+            statement.setString(1, id);
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                student.setName(result.getString("studentId"));
+                student.setSurname(result.getString("surname"));
+                student.setEmail(result.getString("email"));
+                student.setPassword(result.getString("password"));
+                student.setStudentId(result.getInt("studentId"));
+            } else {
+                logger.info("Nothing found");
+                return null;
+            }
+        } catch (SQLException e) {
+            logger.error("Error searching students", e);
+        }
+        return student;
     }
 
     @Override
