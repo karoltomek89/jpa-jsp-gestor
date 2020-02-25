@@ -1,10 +1,10 @@
 package model.subject;
 
 import model.SessionFactory;
-import model.parent.Parent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -18,23 +18,85 @@ public class SubjectDAOImpl implements SubjectDAO {
     SessionFactory sessionFactory = new SessionFactory();
 
     @Override
-    public void save(Subject s) {
+    public void register(String name) {
+        Subject newSubject = new Subject();
 
+        newSubject.setName(name);
+
+        save(newSubject);
     }
 
     @Override
-    public void update(Subject p) {
+    public void save(Subject s) {
+        String query = "INSERT INTO subjects (name) VALUES (?)";
 
+        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+            statement.setString(1, s.getName());
+            int i = statement.executeUpdate();
+            if (i == 0) {
+                logger.info("Subject not added");
+            }
+        } catch (SQLException e) {
+            logger.error("Subject cannot be added", e);
+        }
+    }
+
+    @Override
+    public void update(Subject s) {
+        String query = "UPDATE subjects SET name = ? WHERE subjectId= ?";
+
+        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+            statement.setString(1, s.getName());
+            int i = statement.executeUpdate();
+            if (i == 0) {
+                logger.info("Nothing changed");
+            } else {
+                logger.info(i + " subjects changed");
+            }
+
+        } catch (SQLException e) {
+            logger.error("Subject cannot be changed", e);
+        }
     }
 
     @Override
     public void delete(String id) {
+        String query = "DELETE FROM subjects WHERE subjectId= ?";
 
+        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+            statement.setString(1, id);
+            int i = statement.executeUpdate();
+
+            if (i == 0) {
+                logger.info("Nothing deleted");
+            } else {
+                logger.info("Subject deleted");
+            }
+
+        } catch (SQLException e) {
+            logger.error("Subject cannot be deleted",e);
+        }
     }
 
     @Override
     public Subject find(String id) {
-        return null;
+        Subject subject = new Subject();
+
+        String query = "SELECT * FROM subjects WHERE subjectId= ?";
+
+        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+            statement.setString(1, id);
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                subject.setName(result.getString("subjectId"));
+            } else {
+                logger.info("Nothing found");
+                return null;
+            }
+        } catch (SQLException e) {
+            logger.error("Error searching subjects", e);
+        }
+        return subject;
     }
 
     @Override

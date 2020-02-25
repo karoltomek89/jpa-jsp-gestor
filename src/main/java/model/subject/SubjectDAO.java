@@ -6,9 +6,11 @@ import java.util.List;
 
 public interface SubjectDAO {
 
+    void register (String s);
+
     void save(Subject s);
 
-    void update (Subject p);
+    void update (Subject s);
 
     void delete (String id);
 
