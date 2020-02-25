@@ -1,7 +1,6 @@
 package model.student;
 
 import model.SessionFactory;
-import model.parent.Parent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
