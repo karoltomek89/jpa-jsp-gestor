@@ -2,9 +2,11 @@ package model.teacher;
 
 import model.SessionFactory;
 import model.parent.Parent;
+import model.teacher.Teacher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,23 +21,100 @@ public class TeacherDAOImpl implements TeacherDAO {
     SessionFactory sessionFactory = new SessionFactory();
 
     @Override
-    public void save(Teacher t) {
+    public void register(String name, String surname, String email, String password) {
+        Teacher newTeacher = new Teacher();
 
+        newTeacher.setName(name);
+        newTeacher.setSurname(surname);
+        newTeacher.setEmail(email);
+        newTeacher.setPassword(password);
+
+        save(newTeacher);
+    }
+
+    @Override
+    public void save(Teacher t) {
+        String query = "INSERT INTO teachers (name, surname, email, password) VALUES (?,?,?,?)";
+
+        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+            //parameterIndex zaczyna się od 1!
+            statement.setString(1, t.getName());
+            statement.setString(2, t.getSurname());
+            statement.setString(3, t.getEmail());
+            statement.setString(4, t.getPassword());
+            int i = statement.executeUpdate();
+            if (i == 0) {
+                logger.info("Teacher not added");
+            }
+        } catch (SQLException e) {
+            logger.error("Teacher cannot be added", e);
+        }
     }
 
     @Override
     public void update(Teacher t) {
+        String query = "UPDATE teachers SET name = ?, surname =?, mail =?, password= ? WHERE teacherId= ?";
 
+        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+            statement.setString(1, t.getName());
+            statement.setString(2, t.getSurname());
+            statement.setString(3, t.getEmail());
+            statement.setString(4, t.getPassword());
+            statement.setInt(5, t.getTeacherId());
+            int i = statement.executeUpdate();
+            if (i == 0) {
+                logger.info("Nothing changed");
+            } else {
+                logger.info(i + " teachers changed");
+            }
+
+        } catch (SQLException e) {
+            logger.error("Teacher cannot be changed", e);
+        }
     }
 
     @Override
     public void delete(String id) {
+        String query = "DELETE FROM teachers WHERE teacherId= ?";
 
+        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+            statement.setString(1, id);
+            int i = statement.executeUpdate();
+
+            if (i == 0) {
+                logger.info("Nothing deleted");
+            } else {
+                logger.info("Teacher deleted");
+            }
+
+        } catch (SQLException e) {
+            logger.error("Teacher cannot be deleted",e);
+        }
     }
 
     @Override
     public Teacher find(String id) {
-        return null;
+        Teacher teacher = new Teacher();
+
+        String query = "SELECT * FROM teachers WHERE teacherId= ?";
+
+        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+            statement.setString(1, id);
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                teacher.setName(result.getString("teacherId"));
+                teacher.setSurname(result.getString("surname"));
+                teacher.setEmail(result.getString("email"));
+                teacher.setPassword(result.getString("password"));
+                teacher.setTeacherId(result.getInt("teacherId"));
+            } else {
+                logger.info("Nothing found");
+                return null;
+            }
+        } catch (SQLException e) {
+            logger.error("Error searching teachers", e);
+        }
+        return teacher;
     }
 
     @Override

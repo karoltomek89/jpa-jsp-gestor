@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface TeacherDAO {
 
+    void register(String name, String surname, String email, String password);
+
     void save(Teacher t);
 
     void update (Teacher t);
