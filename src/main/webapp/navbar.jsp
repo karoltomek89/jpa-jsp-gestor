@@ -6,7 +6,6 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="start" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
@@ -14,19 +13,19 @@
                 </a>
 
                 <div class="dropdown-menu" aria-labelledby="start">
-                    <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal2">Logowanie</a>
+                    <a class="dropdown-item" data-toggle="modal" data-target="#loginModal">Logowanie</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" data-toggle="modal" data-target="#exampleModal1">Rejestracja</a>
+                    <a class="dropdown-item" data-toggle="modal" data-target="#registrationModal">Rejestracja</a>
                 </div>
             </li>
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog"
-                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="registrationModal" tabindex="-1" role="dialog"
+                 aria-labelledby="registrationModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Panel rejestracji</h5>
+                            <h5 class="modal-title" id="registrationModalLabel">Panel rejestracji</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -79,29 +78,30 @@
 
 
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog"
-                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
+                 aria-labelledby="loginModalLabel" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabe2">Panel logowania</h5>
+                            <h5 class="modal-title" id="loginModalLabel">Panel logowania</h5>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
                         <div class="modal-body">
 
-                            <form>
+
+                            <form id="login" method="post" action="login">
                                 <div class="form-group row">
-                                    <label for="staticEmail" class="col-4 col-form-label">Twój adres e-mail</label>
+                                    <label for="inputEmail" class="col-4 col-form-label">Twój adres e-mail</label>
                                     <div class="col-8">
-                                        <input type="text" class="form-control" id="inputEmail" placeholder="e-mail">
+                                        <input type="text" class="form-control" id="inputEmail" name="inputEmail" placeholder="e-mail">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="inputPassword" class="col-4 col-form-label">Twoje hasło</label>
                                     <div class="col-8">
-                                        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+                                        <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Password">
                                     </div>
                                 </div>
                             </form>
@@ -109,7 +109,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
-                            <button type="button" class="btn btn-primary">Zaloguj</button>
+                            <input type="submit" form="login" class="btn btn-primary">Zaloguj</input>
                         </div>
                     </div>
                 </div>

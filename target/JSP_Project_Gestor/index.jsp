@@ -3,6 +3,7 @@
 <%@taglib prefix="r" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@page isELIgnored="false"%>
+<%@ page session="true" %>
 
 <!doctype html>
 <html lang="en">
@@ -19,8 +20,51 @@
 
 <%@ include file="navbar.jsp"%>
 
+<%--to bylo uzywane z cookie--%>
+<%--<c:if test="${!cookie.LoginCookie.value.equals('9')}">--%>
+<%--    <%@ include file="menu_boczne.jsp"%>--%>
+<%--</c:if>--%>
+
+<%--<c:if test="${cookie.LoginCookie.value.equals('9')}">--%>
+<%--    <%@ include file="student.jsp"%>--%>
+<%--</c:if>--%>
+
+<c:set value="${sessionScope.acces_accesId}" var="acces"/>
+<c:set value="1" var="student"/>
+<c:set value="2" var="teacher"/>
+<c:set value="3" var="parent"/>
+
+<%--<c:if test="${}">--%>
+<%--</c:if>--%>
+
+<%--<c:if test="${}">--%>
+<%--</c:if>--%>
+
+<%--<c:if test="${}">--%>
+<%--</c:if>--%>
+
+<%--<c:if test="${!student eq acces}">--%>
+<%--</c:if>--%>
+
+
+<c:choose>
+    <c:when test="${student eq acces}">
+        <%@ include file="student.jsp"%>
+    </c:when>
+    <c:when test="${parent eq acces}">
+        <%@ include file="parent.jsp"%>
+    </c:when>
+    <c:when test="${teacher eq acces}">
+        <%@ include file="teacher.jsp"%>
+    </c:when>
+    <c:otherwise>
+        <%@ include file="menu_boczne.jsp"%>
+    </c:otherwise>
+</c:choose>
+
+
+
 <body>
-<%@ include file="menu_boczne.jsp"%>
 
 
 

@@ -21,13 +21,14 @@ public class TeacherDAOImpl implements TeacherDAO {
     SessionFactory sessionFactory = new SessionFactory();
 
     @Override
-    public void register(String name, String surname, String email, String password) {
+    public void register(String name, String surname, String email, String password, int acces) {
         Teacher newTeacher = new Teacher();
 
         newTeacher.setName(name);
         newTeacher.setSurname(surname);
         newTeacher.setEmail(email);
         newTeacher.setPassword(password);
+        newTeacher.setAcces(acces);
 
         save(newTeacher);
     }

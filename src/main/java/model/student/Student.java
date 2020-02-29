@@ -6,6 +6,15 @@ public class Student {
     private String surname;
     private String email;
     private String password;
+    private int acces_accesId;
+
+    public int getAcces() {
+        return acces_accesId;
+    }
+
+    public void setAcces(int acces) {
+        this.acces_accesId = acces;
+    }
 
     public int getStudentId() {
         return studentId;
@@ -55,6 +64,7 @@ public class Student {
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", acces=" + acces_accesId +
                 '}';
     }
 }

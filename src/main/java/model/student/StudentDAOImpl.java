@@ -19,7 +19,7 @@ public class StudentDAOImpl implements StudentDAO {
 
 
     @Override
-    public void register(String name, String surname, String email, String password) {
+    public void register(String name, String surname, String email, String password, int acces_accesId) {
 
         Student newStudent = new Student();
 
@@ -27,13 +27,14 @@ public class StudentDAOImpl implements StudentDAO {
         newStudent.setSurname(surname);
         newStudent.setEmail(email);
         newStudent.setPassword(password);
+        newStudent.setAcces(acces_accesId);
 
         save(newStudent);
     }
 
     @Override
     public void save(Student s) {
-        String query = "INSERT INTO students (name, surname, email, password) VALUES (?,?,?,?)";
+        String query = "INSERT INTO students (name, surname, email, password, acces_accesId) VALUES (?,?,?,?,?)";
 
         try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
             //parameterIndex zaczyna się od 1!
@@ -41,6 +42,7 @@ public class StudentDAOImpl implements StudentDAO {
             statement.setString(2, s.getSurname());
             statement.setString(3, s.getEmail());
             statement.setString(4, s.getPassword());
+            statement.setInt(5, s.getAcces());
             int i = statement.executeUpdate();
             if (i == 0) {
                 logger.info("Student not added");
@@ -119,6 +121,32 @@ public class StudentDAOImpl implements StudentDAO {
             logger.error("Error searching students", e);
         }
         return student;
+    }
+
+    @Override
+    public int login(String email, String password) {
+        Student student = new Student();
+
+        String query = "SELECT * FROM students WHERE email= ? && password= ?";
+
+        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+            statement.setString(1, email);
+            statement.setString(2, password);
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                student.setName(result.getString("studentId"));
+                student.setSurname(result.getString("surname"));
+                student.setEmail(result.getString("email"));
+                student.setPassword(result.getString("password"));
+                student.setStudentId(result.getInt("studentId"));
+            } else {
+                logger.info("Error login student");
+                return 0;
+            }
+        } catch (SQLException e) {
+            logger.error("Error login student", e);
+        }
+        return student.getStudentId();
     }
 
     @Override

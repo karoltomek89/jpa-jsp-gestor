@@ -21,7 +21,7 @@ public class ParentDAOImpl implements ParentDAO {
 
     
     @Override
-    public void register(String name, String surname, String email, String password) {
+    public void register(String name, String surname, String email, String password, int acces) {
 
         Parent newParent = new Parent();
 
@@ -29,6 +29,7 @@ public class ParentDAOImpl implements ParentDAO {
         newParent.setSurname(surname);
         newParent.setEmail(email);
         newParent.setPassword(password);
+        newParent.setAcces(acces);
 
         save(newParent);
         

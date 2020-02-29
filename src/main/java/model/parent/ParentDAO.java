@@ -6,7 +6,7 @@ public interface ParentDAO {
 
     void save(Parent p);
 
-    void register(String name, String surname, String email, String password);
+    void register(String name, String surname, String email, String password, int acces);
 
     void update (Parent p);
 

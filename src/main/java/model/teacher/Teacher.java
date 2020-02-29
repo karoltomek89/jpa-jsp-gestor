@@ -6,6 +6,15 @@ public class Teacher {
     private String surname;
     private String email;
     private String password;
+    private int acces;
+
+    public int getAcces() {
+        return acces;
+    }
+
+    public void setAcces(int acces) {
+        this.acces = acces;
+    }
 
     public int getTeacherId() {
         return teacherId;

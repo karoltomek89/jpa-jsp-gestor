@@ -1,7 +1,10 @@
 package controller;
 
+import model.SessionFactory;
 import model.student.Student;
 import model.student.StudentDAOImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,7 +33,8 @@ public class StudentServlet extends HttpServlet {
                     req.getParameter("name"),
                     req.getParameter("surname"),
                     req.getParameter("email"),
-                    req.getParameter("password"));
+                    req.getParameter("password"),
+                    1);
         }
     }
 }
