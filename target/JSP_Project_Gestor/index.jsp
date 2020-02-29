@@ -20,31 +20,11 @@
 
 <%@ include file="navbar.jsp"%>
 
-<%--to bylo uzywane z cookie--%>
-<%--<c:if test="${!cookie.LoginCookie.value.equals('9')}">--%>
-<%--    <%@ include file="menu_boczne.jsp"%>--%>
-<%--</c:if>--%>
-
-<%--<c:if test="${cookie.LoginCookie.value.equals('9')}">--%>
-<%--    <%@ include file="student.jsp"%>--%>
-<%--</c:if>--%>
 
 <c:set value="${sessionScope.acces_accesId}" var="acces"/>
 <c:set value="1" var="student"/>
 <c:set value="2" var="teacher"/>
 <c:set value="3" var="parent"/>
-
-<%--<c:if test="${}">--%>
-<%--</c:if>--%>
-
-<%--<c:if test="${}">--%>
-<%--</c:if>--%>
-
-<%--<c:if test="${}">--%>
-<%--</c:if>--%>
-
-<%--<c:if test="${!student eq acces}">--%>
-<%--</c:if>--%>
 
 
 <c:choose>

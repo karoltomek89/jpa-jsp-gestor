@@ -109,7 +109,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
-                            <input type="submit" form="login" class="btn btn-primary">Zaloguj</input>
+                            <button type="submit" form="login" class="btn btn-primary">Zaloguj</button>
                         </div>
                     </div>
                 </div>

@@ -36,10 +36,13 @@ public class LoginServlet extends HttpServlet {
 //            logger.info("student not found");
 //        }
 
-        HttpSession session = req.getSession();
-        session.setAttribute("studentId", id);
-        session.setAttribute("acces_accesId", access);
-
+        if(id > 0) {
+            HttpSession session = req.getSession();
+            session.setAttribute("studentId", id);
+            session.setAttribute("acces_accesId", access);
+        }
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+            dispatcher.forward(req, resp);
 
     }
 }
