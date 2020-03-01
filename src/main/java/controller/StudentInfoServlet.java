@@ -21,7 +21,7 @@ public class StudentInfoServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Student newStudent = student.find(req.getSession().getAttribute("studentId").toString());
+        Student newStudent = student.find(req.getSession().getAttribute("userId").toString());
         req.setAttribute("user", newStudent);
 //        System.out.println(newStudent);
 //  resp.getWriter().println("qwertyqwertyqwerty");

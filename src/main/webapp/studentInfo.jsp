@@ -23,8 +23,8 @@
 
 <c:set value="${sessionScope.acces_accesId}" var="acces"/>
 <c:set value="1" var="student"/>
-<c:set value="2" var="teacher"/>
-<c:set value="3" var="parent"/>
+<c:set value="3" var="teacher"/>
+<c:set value="2" var="parent"/>
 
 <c:choose>
     <c:when test="${student eq acces}">

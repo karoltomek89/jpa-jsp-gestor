@@ -17,7 +17,7 @@ public class TeacherInfoServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Teacher newTeacher = teacher.find(req.getSession().getAttribute("teacherId").toString());
+        Teacher newTeacher = teacher.find(req.getSession().getAttribute("userId").toString());
         req.setAttribute("user", newTeacher);
 //        System.out.println(newTeacher);
 //  resp.getWriter().println("qwertyqwertyqwerty");

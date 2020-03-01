@@ -4,9 +4,7 @@ import java.util.List;
 
 public interface GradeDAO {
 
-    void register(Double value);
-
-    void save(Grade g);
+    void save(int value, int students_studentId, int subjects_subjectId);
 
     void update (Grade g);
 
@@ -15,4 +13,6 @@ public interface GradeDAO {
     Grade find (String id);
 
     List<Grade> findAll();
+
+    List<Grade> findAllByStudentId(String studentId);
 }

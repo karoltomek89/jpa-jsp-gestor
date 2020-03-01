@@ -19,21 +19,15 @@ public class GradeDAOImpl implements GradeDAO {
     SessionFactory sessionFactory = new SessionFactory();
 
     @Override
-    public void register(Double value) {
-        Grade newGrade = new Grade();
-
-        newGrade.setValue(value);
-
-        save(newGrade);
-    }
-
-    @Override
-    public void save(Grade g) {
-        String query = "INSERT INTO grades (value) VALUES (?)";
+    public void save(int value, int students_studentId, int subjects_subjectId) {
+        String query = "INSERT INTO grades (value, students_studentId, subjects_subjectId) VALUES (?, ?, ?)";
 
         try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
-            statement.setDouble(1, g.getValue());
+            statement.setDouble(1, value);
+            statement.setInt(2, students_studentId);
+            statement.setInt(3, subjects_subjectId);
             int i = statement.executeUpdate();
+            logger.info("Grade added");
             if (i == 0) {
                 logger.info("Grade not added");
             }
@@ -119,5 +113,28 @@ public class GradeDAOImpl implements GradeDAO {
         }
 
         return list;
+    }
+
+    @Override
+    public List<Grade> findAllByStudentId(String studentId) {
+        List<Grade> list = new ArrayList<>();
+
+        String query = "SELECT * FROM grades WHERE students_studentId= ?";
+
+        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+            statement.setString(1, studentId);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                Grade grade = new Grade();
+                grade.setGradeId(result.getInt("gradeId"));
+                grade.setValue(result.getDouble("value"));
+                list.add(grade);
+            }
+        } catch (SQLException e) {
+            logger.error("Error listing all grades", e);
+        }
+
+        return list;
+
     }
 }

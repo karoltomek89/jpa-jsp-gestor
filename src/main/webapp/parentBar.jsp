@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-1">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <a class="nav-link" id="v-pills-grades-tab" data-toggle="pill" href="#v-pills-grades" role="tab" aria-controls="v-pills-grades" aria-selected="true">Oceny</a>
+            <a class="nav-link" id="v-pills-grades-tab" data-toggle="pill" href="#v-pills-grades" role="tab" aria-controls="v-pills-grades" aria-selected="true">Dzieci</a>
             <a class="nav-link" id="v-pills-notes-tab" data-toggle="pill" href="#v-pills-notes" role="tab" aria-controls="v-pills-notes" aria-selected="false">Uwagi</a>
             <a class="nav-link" id="v-pills-homework-tab" data-toggle="pill" href="#v-pills-homework" role="tab" aria-controls="v-pills-homework" aria-selected="false">Prace domowe</a>
         </div>
