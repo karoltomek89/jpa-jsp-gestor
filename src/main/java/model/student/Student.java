@@ -6,7 +6,7 @@ public class Student {
     private String surname;
     private String email;
     private String password;
-    private int acces_accesId;
+    private int acces_accesId = 1;
 
     public int getAcces() {
         return acces_accesId;

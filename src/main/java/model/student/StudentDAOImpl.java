@@ -108,11 +108,12 @@ public class StudentDAOImpl implements StudentDAO {
             statement.setString(1, id);
             ResultSet result = statement.executeQuery();
             if (result.next()) {
-                student.setName(result.getString("studentId"));
+                student.setName(result.getString("name"));
                 student.setSurname(result.getString("surname"));
                 student.setEmail(result.getString("email"));
                 student.setPassword(result.getString("password"));
                 student.setStudentId(result.getInt("studentId"));
+                student.setAcces(result.getInt("acces_accesId"));
             } else {
                 logger.info("Nothing found");
                 return null;
@@ -139,6 +140,7 @@ public class StudentDAOImpl implements StudentDAO {
                 student.setEmail(result.getString("email"));
                 student.setPassword(result.getString("password"));
                 student.setStudentId(result.getInt("studentId"));
+                student.setAcces(result.getInt("acces_accesId"));
             } else {
                 logger.info("Error login student");
                 return 0;
@@ -164,6 +166,7 @@ public class StudentDAOImpl implements StudentDAO {
                 student.setSurname(result.getString("surname"));
                 student.setEmail(result.getString("email"));
                 student.setPassword(result.getString("password"));
+                student.setAcces(result.getInt("acces_accesId"));
                 list.add(student);
             }
         } catch (SQLException e) {

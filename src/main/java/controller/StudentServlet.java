@@ -21,14 +21,18 @@ public class StudentServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PrintWriter out = resp.getWriter();
-        out.println(student.findAll());
+        Student newStudent = student.find(req.getSession().getAttribute("studentId").toString());
+        req.setAttribute("user", newStudent);
+//        System.out.println(newStudent);
+//  resp.getWriter().println("qwertyqwertyqwerty");
+       RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/studentInfo.jsp");
+       dispatcher.forward(req, resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        if("student".equals(req.getParameter("type"))) {
+        if ("student".equals(req.getParameter("type"))) {
             student.register(
                     req.getParameter("name"),
                     req.getParameter("surname"),
