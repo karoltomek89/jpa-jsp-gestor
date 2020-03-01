@@ -20,7 +20,7 @@ public class GradeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Optional<Object> grades_value = Optional.ofNullable(req.getParameter("value"));
+        Optional<Object> grades_value = Optional.ofNullable(req.getParameter("grade"));
         Optional<Object> students_studentId = Optional.ofNullable(req.getParameter("studentId"));
         Optional<Object> subjects_subjectId = Optional.ofNullable(req.getParameter("subjectId"));
 
@@ -32,10 +32,10 @@ public class GradeServlet extends HttpServlet {
             grade.save(value, studentId, subjectId);
 
         } else {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/teacherInfo.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
             dispatcher.forward(req, resp);
         }
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/teacherInfo.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
         dispatcher.forward(req, resp);
     }
 }

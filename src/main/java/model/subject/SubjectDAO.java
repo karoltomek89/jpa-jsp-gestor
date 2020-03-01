@@ -17,4 +17,6 @@ public interface SubjectDAO {
     Subject find (String id);
 
     List<Subject> findAll();
+
+    List<Subject> findAllByTeacherId(String id);
 }

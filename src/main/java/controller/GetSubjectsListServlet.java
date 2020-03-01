@@ -1,5 +1,9 @@
 package controller;
 
+import model.grade.Grade;
+import model.grade.GradeDAOImpl;
+import model.subject.Subject;
+import model.subject.SubjectDAOImpl;
 import model.teacher.Teacher;
 import model.teacher.TeacherDAOImpl;
 
@@ -10,18 +14,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
 
-@WebServlet(name = "TeacherInfoServlet", value = "/teacher")
+@WebServlet(name = "GetSubjectListServlet", value = "/getsubjectlist")
 public class GetSubjectsListServlet extends HttpServlet {
-    TeacherDAOImpl teacher = new TeacherDAOImpl();
+    List<Subject> subjectList = new LinkedList<>();
+    SubjectDAOImpl subject = new SubjectDAOImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Teacher newTeacher = teacher.find(req.getSession().getAttribute("userId").toString());
-        req.setAttribute("user", newTeacher);
-//        System.out.println(newTeacher);
-//  resp.getWriter().println("qwertyqwertyqwerty");
-       RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/teacherInfo.jsp");
-       dispatcher.forward(req, resp);
+
+        Optional<Object> teacherId_value = Optional.ofNullable(req.getSession().getAttribute("userId").toString());
+
+        if (!teacherId_value.isEmpty()) {
+            String teacherId = teacherId_value.get().toString();
+            subjectList = subject.findAllByTeacherId(teacherId);
+            req.setAttribute("subjectList", subjectList);
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/teacherAddGrade.jsp");
+            dispatcher.forward(req, resp);
+        } else {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+            dispatcher.forward(req, resp);
+        }
     }
 }
