@@ -2,6 +2,8 @@ package controller;
 
 import model.SessionFactory;
 import model.student.StudentDAOImpl;
+import model.teacher.Teacher;
+import model.teacher.TeacherDAOImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,13 +19,33 @@ public class LoginServlet extends HttpServlet {
     private static Logger logger = LoggerFactory.getLogger(SessionFactory.class);
 
     StudentDAOImpl student = new StudentDAOImpl();
+    TeacherDAOImpl teacher = new TeacherDAOImpl();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         int id = student.login(
                 req.getParameter("inputEmail"),
                 req.getParameter("inputPassword"));
-        int access = 1;
+        int access;
+
+        if (id > 0) {
+           access = 1;
+        }else{
+            id = teacher.login(
+                    req.getParameter("inputEmail"),
+                    req.getParameter("inputPassword"));
+            access = 3;
+        }
+
+        if (id > 0) {
+            HttpSession session = req.getSession();
+            session.setAttribute("userId", id);
+            session.setAttribute("acces_accesId", access);
+        }
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+        dispatcher.forward(req, resp);
+
 
         // ustawienie ciasteczka z ID użytkownika
 //        if (id != 0) {
@@ -36,13 +58,6 @@ public class LoginServlet extends HttpServlet {
 //            logger.info("student not found");
 //        }
 
-        if(id > 0) {
-            HttpSession session = req.getSession();
-            session.setAttribute("studentId", id);
-            session.setAttribute("acces_accesId", access);
-        }
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-            dispatcher.forward(req, resp);
 
     }
 }
