@@ -17,40 +17,29 @@
 
     <title>Gestor - Twój elektroniczny dziennik</title>
 </head>
+<body>
 
-<%@ include file="navbar.jsp"%>
-
+<%@ include file="navBarHorizontal.jsp"%>
 
 <c:set value="${sessionScope.acces_accesId}" var="acces"/>
 <c:set value="1" var="student"/>
 <c:set value="2" var="teacher"/>
 <c:set value="3" var="parent"/>
 
-
 <c:choose>
     <c:when test="${student eq acces}">
-        <%@ include file="student.jsp"%>
+        <%@ include file="studentBar.jsp"%>
     </c:when>
     <c:when test="${parent eq acces}">
-        <%@ include file="parent.jsp"%>
+        <%@ include file="parentBar.jsp"%>
     </c:when>
     <c:when test="${teacher eq acces}">
-        <%@ include file="teacher.jsp"%>
+        <%@ include file="teacherBar.jsp"%>
     </c:when>
     <c:otherwise>
-        <%@ include file="menu_boczne.jsp"%>
+        <%@ include file="navBarVertical.jsp"%>
     </c:otherwise>
 </c:choose>
-
-
-
-<body>
-
-
-
-
-
-
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
