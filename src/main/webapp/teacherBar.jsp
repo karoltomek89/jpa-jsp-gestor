@@ -4,6 +4,8 @@
             <a class="nav-link" id="v-pills-grades-tab" data-toggle="pill" href="#v-pills-grades" role="tab" aria-controls="v-pills-grades" aria-selected="true">Oceny</a>
             <a class="nav-link" id="v-pills-notes-tab" data-toggle="pill" href="#v-pills-notes" role="tab" aria-controls="v-pills-notes" aria-selected="false">Uwagi</a>
             <a class="nav-link" id="v-pills-homework-tab" data-toggle="pill" href="#v-pills-homework" role="tab" aria-controls="v-pills-homework" aria-selected="false">Prace domowe</a>
+            <a class="nav-link" id="v-pills-logout-tab"  href="${pageContext.request.contextPath}/logout" role="tab" aria-controls="v-pills-logout" aria-selected="false" >Wyloguj</a>
+            <a class="nav-link" id="v-pills-student-tab"  href="${pageContext.request.contextPath}/teacher" role="tab" aria-controls="v-pills-logout" aria-selected="false" >Info</a>
         </div>
     </div>
     <div class="col-11">

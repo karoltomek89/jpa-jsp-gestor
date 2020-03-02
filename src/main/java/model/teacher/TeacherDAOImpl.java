@@ -2,6 +2,8 @@ package model.teacher;
 
 import model.SessionFactory;
 import model.parent.Parent;
+import model.student.Student;
+import model.teacher.Teacher;
 import model.teacher.Teacher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,11 +33,12 @@ public class TeacherDAOImpl implements TeacherDAO {
         newTeacher.setAcces(acces);
 
         save(newTeacher);
+        logger.info("Teacher registered");
     }
 
     @Override
     public void save(Teacher t) {
-        String query = "INSERT INTO teachers (name, surname, email, password) VALUES (?,?,?,?)";
+        String query = "INSERT INTO teachers (name, surname, email, password, acces_accesId) VALUES (?,?,?,?,?)";
 
         try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
             //parameterIndex zaczyna się od 1!
@@ -43,6 +46,7 @@ public class TeacherDAOImpl implements TeacherDAO {
             statement.setString(2, t.getSurname());
             statement.setString(3, t.getEmail());
             statement.setString(4, t.getPassword());
+            statement.setInt(5, t.getAcces());
             int i = statement.executeUpdate();
             if (i == 0) {
                 logger.info("Teacher not added");
@@ -141,5 +145,32 @@ public class TeacherDAOImpl implements TeacherDAO {
 
         return list;
 
+    }
+
+    @Override
+    public int login(String email, String password) {
+        Teacher teacher = new Teacher();
+
+        String query = "SELECT * FROM teachers WHERE email= ? && password= ?";
+
+        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+            statement.setString(1, email);
+            statement.setString(2, password);
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                teacher.setName(result.getString("teacherId"));
+                teacher.setSurname(result.getString("surname"));
+                teacher.setEmail(result.getString("email"));
+                teacher.setPassword(result.getString("password"));
+                teacher.setTeacherId(result.getInt("teacherId"));
+                teacher.setAcces(result.getInt("acces_accesId"));
+            } else {
+                logger.info("Error login teacher");
+                return 0;
+            }
+        } catch (SQLException e) {
+            logger.error("Error login teacher", e);
+        }
+        return teacher.getTeacherId();
     }
 }

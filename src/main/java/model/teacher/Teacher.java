@@ -6,14 +6,14 @@ public class Teacher {
     private String surname;
     private String email;
     private String password;
-    private int acces;
+    private int acces_accesId = 3;
 
     public int getAcces() {
-        return acces;
+        return acces_accesId;
     }
 
     public void setAcces(int acces) {
-        this.acces = acces;
+        this.acces_accesId = acces;
     }
 
     public int getTeacherId() {

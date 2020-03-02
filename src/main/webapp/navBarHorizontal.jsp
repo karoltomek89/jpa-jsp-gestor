@@ -32,7 +32,7 @@
                         </div>
                         <div class="modal-body">
 
-                            <form id="registration" method="post" action="student">
+                            <form id="registration" method="post" action="register">
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="Name">Imię</label>
@@ -66,7 +66,7 @@
                         <div class="modal-footer">
 
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
-                            <input type="submit" form="registration" class="btn btn-primary">Zarejestruj</input>
+                            <button type="submit" form="registration" class="btn btn-primary">Zarejestruj</button>
 
                         </div>
                     </div>
