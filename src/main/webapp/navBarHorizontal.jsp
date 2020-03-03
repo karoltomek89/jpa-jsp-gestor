@@ -35,24 +35,24 @@
                             <form id="registration" method="post" action="register">
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label for="Name">Imię</label>
+                                        <label>Imię</label>
                                         <input type="text" class="form-control" name="name" placeholder="Name">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="Surname">Nazwisko</label>
+                                        <label>Nazwisko</label>
                                         <input type="text" class="form-control" name="surname" placeholder="Surname">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label for="Email">Email</label>
+                                    <label>Email</label>
                                     <input type="text" class="form-control" name="email" placeholder="Email">
                                 </div>
                                 <div class="form-group">
-                                    <label for="Password">Hasło</label>
+                                    <label>Hasło</label>
                                     <input type="text" class="form-control" name="password" placeholder="Password">
                                 </div>
                                 <div class="form-group">
-                                    <label for="Type" id="type" >Typ konta</label>
+                                    <label for="Type" id="type">Typ konta</label>
                                     <select name="type" class="custom-select">
                                         <option selected>Wybierz typ konta</option>
                                         <option value="student">student</option>

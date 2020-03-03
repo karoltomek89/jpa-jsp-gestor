@@ -1,7 +1,5 @@
 package model.subject;
 
-import model.student.Student;
-
 import java.util.List;
 
 public interface SubjectDAO {

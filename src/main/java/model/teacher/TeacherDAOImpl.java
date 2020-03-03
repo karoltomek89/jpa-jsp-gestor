@@ -1,10 +1,6 @@
 package model.teacher;
 
 import model.SessionFactory;
-import model.parent.Parent;
-import model.student.Student;
-import model.teacher.Teacher;
-import model.teacher.Teacher;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

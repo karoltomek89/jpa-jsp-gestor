@@ -1,7 +1,5 @@
 package model.teacher;
 
-import model.subject.Subject;
-
 import java.util.List;
 
 public interface TeacherDAO {

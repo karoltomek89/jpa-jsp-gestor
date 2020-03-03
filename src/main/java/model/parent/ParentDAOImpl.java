@@ -1,8 +1,6 @@
 package model.parent;
 
 import model.SessionFactory;
-import model.grade.Grade;
-import model.parent.Parent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

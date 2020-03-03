@@ -1,8 +1,6 @@
 package controller;
 
 import model.grade.GradeDAOImpl;
-import model.student.StudentDAOImpl;
-import model.teacher.TeacherDAOImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

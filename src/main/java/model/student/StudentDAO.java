@@ -1,7 +1,5 @@
 package model.student;
 
-import model.parent.Parent;
-
 import java.util.List;
 
 public interface StudentDAO {

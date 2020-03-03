@@ -1,7 +1,6 @@
 package model.subject;
 
 import model.SessionFactory;
-import model.grade.Grade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

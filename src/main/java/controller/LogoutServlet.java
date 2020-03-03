@@ -1,7 +1,6 @@
 package controller;
 
 import model.SessionFactory;
-import model.student.StudentDAOImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

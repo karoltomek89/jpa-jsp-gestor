@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html; charset=UTF-8" %>
+<%@page contentType="text/html; charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="r" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
@@ -12,25 +12,27 @@
             <a class="nav-link" id="v-pills-homework-tab" data-toggle="pill" href="#v-pills-homework" role="tab" aria-controls="v-pills-homework" aria-selected="false">Prace domowe</a>
             <a class="nav-link" id="v-pills-students-tab" data-toggle="pill" href="#v-pills-students" role="tab" aria-controls="v-pills-students" aria-selected="false">Uczniowie</a>
             <a class="nav-link" id="v-pills-logout-tab"  href="${pageContext.request.contextPath}/logout" role="tab" aria-controls="v-pills-logout" aria-selected="false" >Wyloguj</a>
-            <a class="nav-link" id="v-pills-teacher-tab"  href="${pageContext.request.contextPath}/teacher" role="tab" aria-controls="v-pills-teacher" aria-selected="false" >Info</a>
+            <a class="nav-link" id="v-pills-teacher-tab" href="${pageContext.request.contextPath}/teacher" role="tab"
+               aria-controls="v-pills-teacher" aria-selected="false">Info</a>
         </div>
     </div>
     <div class="col-11">
         <div class="tab-content" id="v-pills-tabContent">
-            <div class="tab-pane fade active show" id="v-pills-grades" role="tabpanel" aria-labelledby="v-pills-home-tab">
+            <div class="tab-pane fade active show" id="v-pills-grades" role="tabpanel"
+                 aria-labelledby="v-pills-home-tab">
                 <div class="modal-body">
-                <form id="addGrade" method="post" action="addgrade">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label for="StudentId">Id ucznia</label>
-                            <input type="text" class="form-control" name="studentId" placeholder="StudentId">
-                        </div>
+                    <form id="addGrade" method="post" action="addgrade">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Id ucznia</label>
+                                <input type="text" class="form-control" name="studentId" placeholder="StudentId">
+                            </div>
 
-                        <div class="form-group col-md-6">
-                            <label for="Subject">Wybierz przedmiot</label>
-                            <select name="subjectId" class="custom-select">
+                            <div class="form-group col-md-6">
+                                <label>Wybierz przedmiot</label>
+                                <select name="subjectId" class="custom-select">
 
-                                <c:forEach var="item" items="${subjectList}">
+                                    <c:forEach var="item" items="${subjectList}">
                                     <option value="${item.subjectId}">${item.name}</option>
                                 </c:forEach>
 
