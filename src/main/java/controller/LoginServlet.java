@@ -1,6 +1,6 @@
 package controller;
 
-import model.SessionFactory;
+import model.SQLSessionFactory;
 import model.student.StudentDAOImpl;
 import model.teacher.TeacherDAOImpl;
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ import java.io.IOException;
 @WebServlet(name = "LoginServlet", value = "/login")
 public class LoginServlet extends HttpServlet {
 
-    private static Logger logger = LoggerFactory.getLogger(SessionFactory.class);
+    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
 
     StudentDAOImpl student = new StudentDAOImpl();
     TeacherDAOImpl teacher = new TeacherDAOImpl();

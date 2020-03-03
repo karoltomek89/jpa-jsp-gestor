@@ -1,6 +1,6 @@
 package model.parent;
 
-import model.SessionFactory;
+import model.SQLSessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,9 +13,9 @@ import java.util.List;
 
 public class ParentDAOImpl implements ParentDAO {
 
-    private static Logger logger = LoggerFactory.getLogger(SessionFactory.class);
+    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
 
-    SessionFactory sessionFactory = new SessionFactory();
+    SQLSessionFactory SQLSessionFactory = new SQLSessionFactory();
 
     
     @Override
@@ -38,7 +38,7 @@ public class ParentDAOImpl implements ParentDAO {
 
         String query = "INSERT INTO parents (name, surname, email, password) VALUES (?,?,?,?)";
 
-        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             //parameterIndex zaczyna się od 1!
             statement.setString(1, p.getName());
             statement.setString(2, p.getSurname());
@@ -59,7 +59,7 @@ public class ParentDAOImpl implements ParentDAO {
 
         String query = "UPDATE parents SET name = ?, surname =?, email =?, password= ? WHERE parentId= ?";
 
-        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, p.getName());
             statement.setString(2, p.getSurname());
             statement.setString(3, p.getEmail());
@@ -83,7 +83,7 @@ public class ParentDAOImpl implements ParentDAO {
 
         String query = "DELETE FROM parents WHERE parentId= ?";
 
-        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, id);
             int i = statement.executeUpdate();
 
@@ -105,7 +105,7 @@ public class ParentDAOImpl implements ParentDAO {
 
         String query = "SELECT * FROM parents WHERE parentId= ?";
 
-        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, id);
             ResultSet result = statement.executeQuery();
             if (result.next()) {
@@ -130,7 +130,7 @@ public class ParentDAOImpl implements ParentDAO {
 
         String query = "SELECT * FROM parents";
 
-        try (Statement statement = sessionFactory.getConnection().createStatement()) {
+        try (Statement statement = SQLSessionFactory.getConnection().createStatement()) {
             ResultSet result = statement.executeQuery(query);
             while (result.next()) {
                 Parent parent = new Parent();

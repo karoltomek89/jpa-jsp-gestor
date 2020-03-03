@@ -1,7 +1,6 @@
 package model.grade;
 
-import model.SessionFactory;
-import model.grade.Grade;
+import model.SQLSessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,15 +13,15 @@ import java.util.List;
 
 public class GradeDAOImpl implements GradeDAO {
 
-    private static Logger logger = LoggerFactory.getLogger(SessionFactory.class);
+    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
 
-    SessionFactory sessionFactory = new SessionFactory();
+    SQLSessionFactory SQLSessionFactory = new SQLSessionFactory();
 
     @Override
     public void save(int value, int students_studentId, int subjects_subjectId) {
         String query = "INSERT INTO grades (value, students_studentId, subjects_subjectId) VALUES (?, ?, ?)";
 
-        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setDouble(1, value);
             statement.setInt(2, students_studentId);
             statement.setInt(3, subjects_subjectId);
@@ -40,7 +39,7 @@ public class GradeDAOImpl implements GradeDAO {
     public void update(Grade g) {
         String query = "UPDATE grades SET value = ? WHERE gradeId= ?";
 
-        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setDouble(1, g.getValue());
             int i = statement.executeUpdate();
             if (i == 0) {
@@ -58,7 +57,7 @@ public class GradeDAOImpl implements GradeDAO {
     public void delete(String id) {
         String query = "DELETE FROM grades WHERE gradeId= ?";
 
-        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, id);
             int i = statement.executeUpdate();
 
@@ -79,7 +78,7 @@ public class GradeDAOImpl implements GradeDAO {
 
         String query = "SELECT * FROM grades WHERE gradeId= ?";
 
-        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, id);
             ResultSet result = statement.executeQuery();
             if (result.next()) {
@@ -100,7 +99,7 @@ public class GradeDAOImpl implements GradeDAO {
 
         String query = "SELECT * FROM grades";
 
-        try (Statement statement = sessionFactory.getConnection().createStatement()) {
+        try (Statement statement = SQLSessionFactory.getConnection().createStatement()) {
             ResultSet result = statement.executeQuery(query);
             while (result.next()) {
                 Grade grade = new Grade();
@@ -121,7 +120,7 @@ public class GradeDAOImpl implements GradeDAO {
 
         String query = "SELECT * FROM grades WHERE students_studentId= ?";
 
-        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, studentId);
             ResultSet result = statement.executeQuery();
             while (result.next()) {

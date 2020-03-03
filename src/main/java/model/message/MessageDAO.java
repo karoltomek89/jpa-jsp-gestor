@@ -14,6 +14,6 @@ public interface MessageDAO {
 
     List<Message> findAll();
 
-    List<Message> findAllByStudentId(String studentId);
+    List<Message> findAllOfUser(String userEmail);
 
 }

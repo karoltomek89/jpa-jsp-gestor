@@ -1,6 +1,6 @@
 package controller;
 
-import model.SessionFactory;
+import model.SQLSessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +16,7 @@ import java.io.IOException;
 @WebServlet(name = "LogoutServlet", value = "/logout")
 public class LogoutServlet extends HttpServlet {
 
-    private static Logger logger = LoggerFactory.getLogger(SessionFactory.class);
+    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
