@@ -3,10 +3,9 @@
 <%@taglib prefix="r" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@page isELIgnored="false" %>
-<%@ page %>
 
 <!doctype html>
-<html lang="en">
+<html lang="pl">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -29,13 +28,13 @@
 
 <c:choose>
     <c:when test="${student eq acces}">
-        <%@ include file="studentBar.jsp" %>
+        <%@ include file="studentDefault.jsp" %>
     </c:when>
     <c:when test="${parent eq acces}">
-        <%@ include file="parentBar.jsp" %>
+        <%@ include file="parentBarDefault.jsp" %>
     </c:when>
     <c:when test="${teacher eq acces}">
-        <%@ include file="teacherBar.jsp" %>
+        <%@ include file="teacherAddGrade.jsp" %>
     </c:when>
     <c:otherwise>
         <%@ include file="navBarVertical.jsp" %>

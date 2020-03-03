@@ -74,9 +74,6 @@
             </div>
 
 
-
-
-
             <!-- Modal -->
             <div class="modal fade" id="loginModal" tabindex="-1" role="dialog"
                  aria-labelledby="loginModalLabel" aria-hidden="true">
@@ -95,13 +92,15 @@
                                 <div class="form-group row">
                                     <label for="inputEmail" class="col-4 col-form-label">Twój adres e-mail</label>
                                     <div class="col-8">
-                                        <input type="text" class="form-control" id="inputEmail" name="inputEmail" placeholder="e-mail">
+                                        <input type="text" class="form-control" id="inputEmail" name="inputEmail"
+                                               placeholder="e-mail">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label for="inputPassword" class="col-4 col-form-label">Twoje hasło</label>
                                     <div class="col-8">
-                                        <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Password">
+                                        <input type="password" class="form-control" id="inputPassword"
+                                               name="inputPassword" placeholder="Password">
                                     </div>
                                 </div>
                             </form>
@@ -114,8 +113,6 @@
                     </div>
                 </div>
             </div>
-
-
 
 
         </ul>

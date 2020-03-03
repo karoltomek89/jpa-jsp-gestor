@@ -21,7 +21,7 @@ public class StudentInfoServlet extends HttpServlet {
         req.setAttribute("user", newStudent);
 //        System.out.println(newStudent);
 //  resp.getWriter().println("qwertyqwertyqwerty");
-       RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/studentInfo.jsp");
+       RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/studentBarGetInfo.jsp");
        dispatcher.forward(req, resp);
     }
 }

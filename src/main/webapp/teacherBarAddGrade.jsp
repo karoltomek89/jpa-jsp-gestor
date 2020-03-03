@@ -1,67 +1,61 @@
 <%@page contentType="text/html; charset=UTF-8" %>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="r" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="r" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@page isELIgnored="false"%>
+<%@page isELIgnored="false" %>
+<%@ page %>
 
-<div class="row">
-    <div class="col-1">
-        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <a class="nav-link active" id="v-pills-grades-tab" data-toggle="pill" href="#v-pills-grades" role="tab" aria-controls="v-pills-grades" aria-selected="true">Dodaj ocenę</a>
-            <a class="nav-link" id="v-pills-notes-tab" data-toggle="pill" href="#v-pills-notes" role="tab" aria-controls="v-pills-notes" aria-selected="false">Uwagi</a>
-            <a class="nav-link" id="v-pills-homework-tab" data-toggle="pill" href="#v-pills-homework" role="tab" aria-controls="v-pills-homework" aria-selected="false">Prace domowe</a>
-            <a class="nav-link" id="v-pills-students-tab" data-toggle="pill" href="#v-pills-students" role="tab" aria-controls="v-pills-students" aria-selected="false">Uczniowie</a>
-            <a class="nav-link" id="v-pills-logout-tab"  href="${pageContext.request.contextPath}/logout" role="tab" aria-controls="v-pills-logout" aria-selected="false" >Wyloguj</a>
-            <a class="nav-link" id="v-pills-teacher-tab" href="${pageContext.request.contextPath}/teacher" role="tab"
-               aria-controls="v-pills-teacher" aria-selected="false">Info</a>
-        </div>
-    </div>
-    <div class="col-11">
-        <div class="tab-content" id="v-pills-tabContent">
-            <div class="tab-pane fade active show" id="v-pills-grades" role="tabpanel"
-                 aria-labelledby="v-pills-home-tab">
-                <div class="modal-body">
-                    <form id="addGrade" method="post" action="addgrade">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label>Id ucznia</label>
-                                <input type="text" class="form-control" name="studentId" placeholder="StudentId">
-                            </div>
+<!doctype html>
+<html lang="pl">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-                            <div class="form-group col-md-6">
-                                <label>Wybierz przedmiot</label>
-                                <select name="subjectId" class="custom-select">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
-                                    <c:forEach var="item" items="${subjectList}">
-                                    <option value="${item.subjectId}">${item.name}</option>
-                                </c:forEach>
+    <title>Gestor - Twój elektroniczny dziennik</title>
+</head>
+<body>
 
-                            </select>
-                        </div>
+<%@ include file="navBarHorizontal.jsp" %>
 
-                    </div>
-                    <div class="form-group">
-                        <label for="Grade" id="grade" >Ocena</label>
-                        <select name="grade" class="custom-select">
-                            <option selected>Wybierz ocenę</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                        </select>
-                    </div>
-                </form>
-            </div>
-                <div class="modal-footer">
+<c:set value="${sessionScope.acces_accesId}" var="acces"/>
+<c:set value="1" var="student"/>
+<c:set value="3" var="teacher"/>
+<c:set value="2" var="parent"/>
 
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
-                    <button type="submit"form="addGrade" class="btn btn-primary">Dodaj ocenę</button>
+<c:choose>
+    <c:when test="${student eq acces}">
+        <%@ include file="studentDefault.jsp" %>
+    </c:when>
+    <c:when test="${parent eq acces}">
+        <%@ include file="parentBarDefault.jsp" %>
+    </c:when>
+    <c:when test="${teacher eq acces}">
+        <%@ include file="teacherAddGrade.jsp" %>
+    </c:when>
+    <c:otherwise>
+        <%@ include file="navBarVertical.jsp" %>
+    </c:otherwise>
+</c:choose>
 
-                </div></div>
-            <div class="tab-pane fade" id="v-pills-notes" role="tabpanel" aria-labelledby="v-pills-notes-tab">Uwagi i wiadomości od nauczycieli</div>
-            <div class="tab-pane fade" id="v-pills-homework" role="tabpanel" aria-labelledby="v-pills-homework-tab">Zadane prace domowe oraz przesłane/odebrane pliki</div>
-        </div>
-    </div>
-</div>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+
+

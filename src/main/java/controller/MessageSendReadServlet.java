@@ -22,10 +22,12 @@ public class MessageSendReadServlet extends HttpServlet {
     StudentDAOImpl student = new StudentDAOImpl();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
 
         String email = student.getEmail(req.getSession().getAttribute("userId").toString());
         messagesList = messages.findAllOfUser(email);
+
         req.setAttribute("messagesList", messagesList);
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/messages.jsp");
@@ -33,7 +35,8 @@ public class MessageSendReadServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         super.doPost(req, resp);
     }
 }

@@ -24,7 +24,7 @@ public class StudentGradeServlet extends HttpServlet {
         req.setAttribute("grades", gradeList);
 //        System.out.println(newStudent);
 //  resp.getWriter().println("qwertyqwertyqwerty");
-       RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/studentGrades.jsp");
+       RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/studentBarGetGrades.jsp");
        dispatcher.forward(req, resp);
     }
 }

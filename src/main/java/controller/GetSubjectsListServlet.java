@@ -28,7 +28,7 @@ public class GetSubjectsListServlet extends HttpServlet {
             String teacherId = teacherId_value.get().toString();
             subjectList = subject.findAllByTeacherId(teacherId);
             req.setAttribute("subjectList", subjectList);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/teacherAddGrade.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/teacherBarAddGrade.jsp");
             dispatcher.forward(req, resp);
         } else {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
