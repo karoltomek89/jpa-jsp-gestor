@@ -7,11 +7,13 @@ public class Message {
     private ObjectId id;
     private String from;
     private String to;
+    private String topic;
     private String text;
 
-    public Message(String from, String to, String text) {
+    public Message(String from, String to, String topic, String text) {
         this.from = from;
         this.to = to;
+        this.to = topic;
         this.text = text;
     }
 
@@ -25,6 +27,7 @@ public class Message {
                 "id=" + id +
                 ", from='" + from + '\'' +
                 ", to='" + to + '\'' +
+                ", topic='" + topic + '\'' +
                 ", text='" + text + '\'' +
                 '}';
     }
@@ -51,6 +54,14 @@ public class Message {
 
     public void setTo(String to) {
         this.to = to;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.to = topic;
     }
 
     public String getText() {

@@ -15,13 +15,13 @@ public class MessageDAOImpl implements MessageDAO {
 
     public static void main(String[] args) {
 
-        Message newMessage1 = new Message("adamadamski@xyz.pl", "ziutek@yyy.pl", "text1");
-        Message newMessage2 = new Message("bartoszbartowski@xxx.pl", "ziutek@yyy.pl", "text2");
-        Message newMessage3 = new Message("cecyliancecylowski@zz.pl", "ziutek@yyy.pl", "text3");
+        Message newMessage1 = new Message("adamadamski@xyz.pl", "ziutek@yyy.pl", "topic1", "text1");
+        Message newMessage2 = new Message("bartoszbartowski@xxx.pl", "ziutek@yyy.pl", "topic1", "text2");
+        Message newMessage3 = new Message("cecyliancecylowski@zz.pl", "ziutek@yyy.pl", "topic1", "text3");
 
-        Message newMessage4 = new Message("adamadamski@xyz.pl", "ziutka@xxx.pl", "text4");
-        Message newMessage5 = new Message("bartoszbartowski@xxx.pl", "ziutka@xxx.pl", "text5");
-        Message newMessage6 = new Message("cecyliancecylowski@zz.pl", "ziutka@xxx.pl", "text6");
+        Message newMessage4 = new Message("adamadamski@xyz.pl", "ziutka@xxx.pl", "topic1", "text4");
+        Message newMessage5 = new Message("bartoszbartowski@xxx.pl", "ziutka@xxx.pl", "topic1", "text5");
+        Message newMessage6 = new Message("cecyliancecylowski@zz.pl", "ziutka@xxx.pl", "topic1", "text6");
 
         MongoDBSessionFactory mongoDBSessionFactory = new MongoDBSessionFactory();
         mongoDBSessionFactory.getCollection().insertOne(newMessage1);
@@ -34,10 +34,10 @@ public class MessageDAOImpl implements MessageDAO {
     }
 
     @Override
-    public void insert(String from, String to, String text) {
+    public void insert(String from, String to, String topic, String text) {
 
 
-        Message newMessage = new Message(from, to, text);
+        Message newMessage = new Message(from, to, topic, text);
 
         mongoDBSessionFactory.getCollection().insertOne(newMessage);
 

@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface MessageDAO {
 
-    void insert(String from, String to, String text);
+    void insert(String from, String to, String topic, String text);
 
     Message find (String id);
 
