@@ -5,7 +5,7 @@
 <%@page isELIgnored="false"%>
 
 <!doctype html>
-<html lang="pl">
+<html lang="pl      ">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">

@@ -11,7 +11,8 @@
                aria-controls="v-pills-homework" aria-selected="false">Prace domowe</a>
             <a class="nav-link" id="v-pills-students-tab" data-toggle="pill" href="#v-pills-students" role="tab"
                aria-controls="v-pills-students" aria-selected="false">Uczniowie</a>
-            <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab"
+            <a class="nav-link" id="v-pills-messages-tab" href="${pageContext.request.contextPath}/getstudentlist"
+               role="tab"
                aria-controls="v-pills-messages" aria-selected="false">Wiadomości</a>
             <a class="nav-link" id="v-pills-logout-tab" href="${pageContext.request.contextPath}/logout" role="tab"
                aria-controls="v-pills-logout" aria-selected="false">Wyloguj</a>

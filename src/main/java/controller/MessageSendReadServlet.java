@@ -3,6 +3,7 @@ package controller;
 import model.message.Message;
 import model.message.MessageDAOImpl;
 import model.student.StudentDAOImpl;
+import model.teacher.TeacherDAOImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,6 +22,7 @@ public class MessageSendReadServlet extends HttpServlet {
     List<Message> messagesList = new ArrayList<>();
     MessageDAOImpl messages = new MessageDAOImpl();
     StudentDAOImpl student = new StudentDAOImpl();
+    TeacherDAOImpl teacher = new TeacherDAOImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -39,7 +41,7 @@ public class MessageSendReadServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        String email = student.getEmail(req.getSession().getAttribute("userId").toString());
+        String email = teacher.getEmail(req.getSession().getAttribute("userId").toString());
         Optional<Object> toValue = Optional.ofNullable(req.getParameter("to"));
         Optional<Object> topicValue = Optional.ofNullable(req.getParameter("topic"));
         Optional<Object> textValue = Optional.ofNullable(req.getParameter("text"));
@@ -51,6 +53,7 @@ public class MessageSendReadServlet extends HttpServlet {
             String text = textValue.get().toString();
 
             messages.insert(from, to, topic, text);
+
 
         } else {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");

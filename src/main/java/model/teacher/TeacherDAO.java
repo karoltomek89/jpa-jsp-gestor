@@ -8,13 +8,15 @@ public interface TeacherDAO {
 
     void save(Teacher t);
 
-    void update (Teacher t);
+    void update(Teacher t);
 
-    void delete (String id);
+    void delete(String id);
 
-    Teacher find (String id);
+    Teacher find(String id);
 
-    int login (String email, String password);
+    int login(String email, String password);
 
     List<Teacher> findAll();
+
+    String getEmail(String id);
 }

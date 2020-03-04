@@ -169,4 +169,10 @@ public class TeacherDAOImpl implements TeacherDAO {
         }
         return teacher.getTeacherId();
     }
+
+    @Override
+    public String getEmail(String id) {
+        String email = find(id).getEmail();
+        return email;
+    }
 }
