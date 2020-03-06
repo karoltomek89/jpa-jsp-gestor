@@ -1,19 +1,19 @@
-<%@page language="java" contentType="text/html; charset=UTF-8" %>
+<%@page contentType="text/html; charset=UTF-8" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="r" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@page isELIgnored="false"%>
-<%@ page session="true" %>
 
 <!doctype html>
-<html lang="en">
+<html lang="pl">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <title>Gestor - Twój elektroniczny dziennik</title>
 </head>
@@ -23,18 +23,18 @@
 
 <c:set value="${sessionScope.acces_accesId}" var="acces"/>
 <c:set value="1" var="student"/>
-<c:set value="2" var="teacher"/>
-<c:set value="3" var="parent"/>
+<c:set value="3" var="teacher"/>
+<c:set value="2" var="parent"/>
 
 <c:choose>
     <c:when test="${student eq acces}">
-        <%@ include file="studentBar.jsp"%>
+        <%@ include file="studentDefault.jsp" %>
     </c:when>
     <c:when test="${parent eq acces}">
-        <%@ include file="parentBar.jsp"%>
+        <%@ include file="parentBarDefault.jsp" %>
     </c:when>
     <c:when test="${teacher eq acces}">
-        <%@ include file="teacherBar.jsp"%>
+        <%@ include file="teacherDefault.jsp" %>
     </c:when>
     <c:otherwise>
         <%@ include file="navBarVertical.jsp"%>

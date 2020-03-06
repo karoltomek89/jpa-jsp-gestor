@@ -1,7 +1,5 @@
 package model.subject;
 
-import model.student.Student;
-
 import java.util.List;
 
 public interface SubjectDAO {
@@ -17,4 +15,6 @@ public interface SubjectDAO {
     Subject find (String id);
 
     List<Subject> findAll();
+
+    List<Subject> findAllByTeacherId(String id);
 }

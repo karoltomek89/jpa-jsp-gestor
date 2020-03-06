@@ -1,7 +1,5 @@
 package model.student;
 
-import model.parent.Parent;
-
 import java.util.List;
 
 public interface StudentDAO {
@@ -10,13 +8,15 @@ public interface StudentDAO {
 
     void save(Student s);
 
-    void update (Student p);
+    void update(Student s);
 
-    void delete (String id);
+    void delete(String id);
 
-    Student find (String id);
+    Student find(String id);
 
-    int login (String email, String password);
+    int login(String email, String password);
 
     List<Student> findAll();
+
+    String getEmail(String id);
 }

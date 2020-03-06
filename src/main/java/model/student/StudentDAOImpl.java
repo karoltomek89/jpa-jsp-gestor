@@ -1,6 +1,6 @@
 package model.student;
 
-import model.SessionFactory;
+import model.SQLSessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,9 +13,9 @@ import java.util.List;
 
 public class StudentDAOImpl implements StudentDAO {
 
-    private static Logger logger = LoggerFactory.getLogger(SessionFactory.class);
+    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
 
-    SessionFactory sessionFactory = new SessionFactory();
+    SQLSessionFactory SQLSessionFactory = new SQLSessionFactory();
 
 
     @Override
@@ -36,7 +36,7 @@ public class StudentDAOImpl implements StudentDAO {
     public void save(Student s) {
         String query = "INSERT INTO students (name, surname, email, password, acces_accesId) VALUES (?,?,?,?,?)";
 
-        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             //parameterIndex zaczyna się od 1!
             statement.setString(1, s.getName());
             statement.setString(2, s.getSurname());
@@ -59,7 +59,7 @@ public class StudentDAOImpl implements StudentDAO {
                 "email =?, password= ?" +
                 " WHERE studentId= ?";
 
-        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, s.getName());
             statement.setString(2, s.getSurname());
             statement.setString(3, s.getEmail());
@@ -82,7 +82,7 @@ public class StudentDAOImpl implements StudentDAO {
 
         String query = "DELETE FROM students WHERE studentId= ?";
 
-        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, id);
             int i = statement.executeUpdate();
 
@@ -104,7 +104,7 @@ public class StudentDAOImpl implements StudentDAO {
 
         String query = "SELECT * FROM students WHERE studentId= ?";
 
-        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, id);
             ResultSet result = statement.executeQuery();
             if (result.next()) {
@@ -130,7 +130,7 @@ public class StudentDAOImpl implements StudentDAO {
 
         String query = "SELECT * FROM students WHERE email= ? && password= ?";
 
-        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, email);
             statement.setString(2, password);
             ResultSet result = statement.executeQuery();
@@ -157,7 +157,7 @@ public class StudentDAOImpl implements StudentDAO {
 
         String query = "SELECT * FROM students";
 
-        try (Statement statement = sessionFactory.getConnection().createStatement()) {
+        try (Statement statement = SQLSessionFactory.getConnection().createStatement()) {
             ResultSet result = statement.executeQuery(query);
             while (result.next()) {
                 Student student = new Student();
@@ -175,5 +175,11 @@ public class StudentDAOImpl implements StudentDAO {
 
         return list;
 
+    }
+
+    @Override
+    public String getEmail(String id) {
+        String email = find(id).getEmail();
+        return email;
     }
 }

@@ -1,6 +1,6 @@
 package model.subject;
 
-import model.SessionFactory;
+import model.SQLSessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,9 +13,9 @@ import java.util.List;
 
 public class SubjectDAOImpl implements SubjectDAO {
 
-    private static Logger logger = LoggerFactory.getLogger(SessionFactory.class);
+    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
 
-    SessionFactory sessionFactory = new SessionFactory();
+    SQLSessionFactory SQLSessionFactory = new SQLSessionFactory();
 
     @Override
     public void register(String name) {
@@ -30,7 +30,7 @@ public class SubjectDAOImpl implements SubjectDAO {
     public void save(Subject s) {
         String query = "INSERT INTO subjects (name) VALUES (?)";
 
-        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, s.getName());
             int i = statement.executeUpdate();
             if (i == 0) {
@@ -45,7 +45,7 @@ public class SubjectDAOImpl implements SubjectDAO {
     public void update(Subject s) {
         String query = "UPDATE subjects SET name = ? WHERE subjectId= ?";
 
-        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, s.getName());
             int i = statement.executeUpdate();
             if (i == 0) {
@@ -63,7 +63,7 @@ public class SubjectDAOImpl implements SubjectDAO {
     public void delete(String id) {
         String query = "DELETE FROM subjects WHERE subjectId= ?";
 
-        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, id);
             int i = statement.executeUpdate();
 
@@ -84,7 +84,7 @@ public class SubjectDAOImpl implements SubjectDAO {
 
         String query = "SELECT * FROM subjects WHERE subjectId= ?";
 
-        try (PreparedStatement statement = sessionFactory.getConnection().prepareStatement(query)) {
+        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, id);
             ResultSet result = statement.executeQuery();
             if (result.next()) {
@@ -105,7 +105,7 @@ public class SubjectDAOImpl implements SubjectDAO {
 
         String query = "SELECT * FROM subject";
 
-        try (Statement statement = sessionFactory.getConnection().createStatement()) {
+        try (Statement statement = SQLSessionFactory.getConnection().createStatement()) {
             ResultSet result = statement.executeQuery(query);
             while (result.next()) {
                 Subject subject = new Subject();
@@ -115,6 +115,30 @@ public class SubjectDAOImpl implements SubjectDAO {
             }
         } catch (SQLException e) {
             logger.error("Error listing all subjects", e);
+        }
+
+        return list;
+
+    }
+
+
+    @Override
+    public List<Subject> findAllByTeacherId(String teacherId) {
+        List<Subject> list = new ArrayList<>();
+
+        String query = "SELECT * FROM subjects JOIN teachers_has_subjects ON subjects.subjectId = teachers_has_subjects.subjects_subjectId WHERE teachers_teacherId= ?";
+
+        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
+            statement.setString(1, teacherId);
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                Subject subject = new Subject();
+                subject.setSubjectId(result.getInt("subjectId"));
+                subject.setName(result.getString("name"));
+                list.add(subject);
+            }
+        } catch (SQLException e) {
+            logger.error("Error listing subjects", e);
         }
 
         return list;

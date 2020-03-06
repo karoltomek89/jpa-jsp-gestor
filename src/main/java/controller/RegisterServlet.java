@@ -1,8 +1,6 @@
 package controller;
 
 import model.student.StudentDAOImpl;
-import model.teacher.Teacher;
-import model.student.Student;
 import model.teacher.TeacherDAOImpl;
 
 import javax.servlet.RequestDispatcher;
@@ -25,7 +23,7 @@ public class RegisterServlet extends HttpServlet {
         Optional<Object> optional = Optional.ofNullable(req.getParameter("type"));
 
         if (!optional.isEmpty()) {
-            String accesType = (String) optional.get().toString();
+            String accesType = optional.get().toString();
             if (accesType.equals("student")) {
                 student.register(
                         req.getParameter("name"),
