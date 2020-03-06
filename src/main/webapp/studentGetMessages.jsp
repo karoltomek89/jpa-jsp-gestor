@@ -28,15 +28,18 @@
 
                     <p>
                         <button class="btn btn-primary" type="button">
-                                ${item.from}
+                            Nadawca: ${item.from}
                         </button>
+
                         <button class="btn btn-primary" type="button">
-                                ${item.topic}
+                            Temat: ${item.topic}
                         </button>
+
                         <button class="btn btn-primary" type="button" data-toggle="collapse"
                                 data-target="#collapse${item.id}" aria-expanded="false" aria-controls="collapse">
-                            Pokaż
+                            Pokaz wiadomość
                         </button>
+
                     </p>
                     <div class="collapse" id="collapse${item.id}">
                         <div class="card card-body">

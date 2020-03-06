@@ -15,6 +15,7 @@ public class MessageDAOImpl implements MessageDAO {
 
     public static void main(String[] args) {
 
+
         Message newMessage1 = new Message("adamadamski@xyz.pl", "ziutek@yyy.pl", "topic1", "text1");
         Message newMessage2 = new Message("bartoszbartowski@xxx.pl", "ziutek@yyy.pl", "topic1", "text2");
         Message newMessage3 = new Message("cecyliancecylowski@zz.pl", "ziutek@yyy.pl", "topic1", "text3");
@@ -24,6 +25,7 @@ public class MessageDAOImpl implements MessageDAO {
         Message newMessage6 = new Message("cecyliancecylowski@zz.pl", "ziutka@xxx.pl", "topic1", "text6");
 
         MongoDBSessionFactory mongoDBSessionFactory = new MongoDBSessionFactory();
+        mongoDBSessionFactory.getCollection().drop();
         mongoDBSessionFactory.getCollection().insertOne(newMessage1);
         mongoDBSessionFactory.getCollection().insertOne(newMessage2);
         mongoDBSessionFactory.getCollection().insertOne(newMessage3);

@@ -13,23 +13,12 @@ public class Message {
     public Message(String from, String to, String topic, String text) {
         this.from = from;
         this.to = to;
-        this.to = topic;
+        this.topic = topic;
         this.text = text;
     }
 
     public Message() {
 
-    }
-
-    @Override
-    public String toString() {
-        return "Message{" +
-                "id=" + id +
-                ", from='" + from + '\'' +
-                ", to='" + to + '\'' +
-                ", topic='" + topic + '\'' +
-                ", text='" + text + '\'' +
-                '}';
     }
 
     public ObjectId getId() {
@@ -61,7 +50,7 @@ public class Message {
     }
 
     public void setTopic(String topic) {
-        this.to = topic;
+        this.topic = topic;
     }
 
     public String getText() {
@@ -70,5 +59,16 @@ public class Message {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "id=" + id +
+                ", from='" + from + '\'' +
+                ", to='" + to + '\'' +
+                ", topic='" + topic + '\'' +
+                ", text='" + text + '\'' +
+                '}';
     }
 }

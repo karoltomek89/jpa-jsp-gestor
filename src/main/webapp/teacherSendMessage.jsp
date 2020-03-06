@@ -25,7 +25,7 @@
             <div class="tab-pane fade show active" id="v-pills-messages" role="tabpanel"
                  aria-labelledby="v-pills-messages-tab">
                 <div class="modal-body">
-                    <form id="sendMessage" method="post" action="message">
+                    <form id="sendMessage" method="post" action="messages">
                         <div class="form-row">
 
                             <div class="form-group col-md-6">
@@ -36,24 +36,29 @@
                                     </c:forEach>
                                 </select>
                             </div>
-
+                        </div>
+                        <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label>Uczeń</label>
-                                <select name="subjectId" class="custom-select">
+                                <select name="studentId" class="custom-select">
                                     <c:forEach var="item" items="${studentsList}">
                                         <option value="${item.studentId}">${item.name} ${item.surname} </option>
                                     </c:forEach>
                                 </select>
                             </div>
-
+                        </div>
+                        <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label>Temat</label>
                                 <input type="text" class="form-control" name="topic">
                             </div>
+                        </div>
 
-                            <div class="form-group col-md-6">
+                        <div class="form-row">
+                            <div class="form-group col-md-6 ">
                                 <label>Tekst</label>
-                                <input type="text" class="form-control" name="text">
+                                <textarea class="form-control" rows="6" placeholder="Wpisz tekst wiadomości"
+                                          name="text"></textarea>
                             </div>
 
                         </div>
@@ -64,7 +69,6 @@
 
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Anuluj</button>
                     <button type="submit" form="sendMessage" class="btn btn-primary">Wyślij</button>
-
                 </div>
             </div>
         </div>

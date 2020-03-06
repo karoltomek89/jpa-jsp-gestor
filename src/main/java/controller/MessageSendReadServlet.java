@@ -41,14 +41,14 @@ public class MessageSendReadServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        String email = teacher.getEmail(req.getSession().getAttribute("userId").toString());
-        Optional<Object> toValue = Optional.ofNullable(req.getParameter("to"));
+        String teacherEmail = teacher.getEmail(req.getSession().getAttribute("userId").toString());
+        Optional<Object> toValue = Optional.ofNullable(req.getParameter("studentId"));
         Optional<Object> topicValue = Optional.ofNullable(req.getParameter("topic"));
         Optional<Object> textValue = Optional.ofNullable(req.getParameter("text"));
 
-        if (!toValue.isEmpty() && !topicValue.isEmpty() && !textValue.isEmpty()) {
-            String from = email;
-            String to = toValue.get().toString();
+        if (!toValue.isEmpty() && !teacherEmail.isEmpty() && !topicValue.isEmpty() && !textValue.isEmpty()) {
+            String from = teacherEmail;
+            String to = student.getEmail(toValue.get().toString());
             String topic = topicValue.get().toString();
             String text = textValue.get().toString();
 
