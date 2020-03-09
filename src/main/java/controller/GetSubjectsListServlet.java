@@ -22,13 +22,13 @@ public class GetSubjectsListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Optional<Object> teacherId_value = Optional.ofNullable(req.getSession().getAttribute("userId").toString());
+        Optional<Object> userId_value = Optional.ofNullable(req.getSession().getAttribute("userId").toString());
 
-        if (!teacherId_value.isEmpty()) {
-            String teacherId = teacherId_value.get().toString();
-            subjectList = subject.findAllByTeacherId(teacherId);
+        if (!userId_value.isEmpty()) {
+            String userId = userId_value.get().toString();
+            subjectList = subject.findAllByUserId(userId);
             req.setAttribute("subjectList", subjectList);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/teacherBarAddGrade.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/userBarAddGrade.jsp");
             dispatcher.forward(req, resp);
         } else {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");

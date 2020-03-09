@@ -1,8 +1,9 @@
 package controller;
 
 import model.message.Message;
+import model.message.MessageDAO;
 import model.message.MessageDAOImpl;
-import model.student.StudentDAOImpl;
+import model.user.UserDAO;
 import model.user.UserDAOImpl;
 
 import javax.servlet.RequestDispatcher;
@@ -20,15 +21,14 @@ import java.util.Optional;
 public class MessageSendReadServlet extends HttpServlet {
 
     List<Message> messagesList = new ArrayList<>();
-    MessageDAOImpl messages = new MessageDAOImpl();
-    StudentDAOImpl student = new StudentDAOImpl();
-    UserDAOImpl teacher = new UserDAOImpl();
+    MessageDAO messages = new MessageDAOImpl();
+    UserDAO user = new UserDAOImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        String email = student.getEmail(req.getSession().getAttribute("userId").toString());
+        String email = user.getEmail(req.getSession().getAttribute("userId").toString());
         messagesList = messages.findAllOfUser(email);
 
         req.setAttribute("messagesList", messagesList);
@@ -41,14 +41,14 @@ public class MessageSendReadServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
 
-        String teacherEmail = teacher.getEmail(req.getSession().getAttribute("userId").toString());
+        String teacherEmail = user.getEmail(req.getSession().getAttribute("userId").toString());
         Optional<Object> toValue = Optional.ofNullable(req.getParameter("studentId"));
         Optional<Object> topicValue = Optional.ofNullable(req.getParameter("topic"));
         Optional<Object> textValue = Optional.ofNullable(req.getParameter("text"));
 
         if (!toValue.isEmpty() && !teacherEmail.isEmpty() && !topicValue.isEmpty() && !textValue.isEmpty()) {
             String from = teacherEmail;
-            String to = student.getEmail(toValue.get().toString());
+            String to = user.getEmail(toValue.get().toString());
             String topic = topicValue.get().toString();
             String text = textValue.get().toString();
 

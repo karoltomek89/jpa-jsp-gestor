@@ -1,6 +1,7 @@
 package controller;
 
 import model.grade.Grade;
+import model.grade.GradeDAO;
 import model.grade.GradeDAOImpl;
 
 import javax.servlet.RequestDispatcher;
@@ -16,15 +17,14 @@ import java.util.List;
 @WebServlet(name = "StudentGradeServlet", value = "/showgrades")
 public class StudentGradeServlet extends HttpServlet {
     List<Grade> gradeList = new LinkedList<>();
-    GradeDAOImpl grades = new GradeDAOImpl();
+    GradeDAO grades = new GradeDAOImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         gradeList = grades.findAllByStudentId(req.getSession().getAttribute("userId").toString());
         req.setAttribute("grades", gradeList);
-//        System.out.println(newStudent);
-//  resp.getWriter().println("qwertyqwertyqwerty");
-       RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/studentBarGetGrades.jsp");
+
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/studentBarGetGrades.jsp");
        dispatcher.forward(req, resp);
     }
 }

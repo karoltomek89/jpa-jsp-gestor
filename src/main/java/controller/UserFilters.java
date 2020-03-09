@@ -1,5 +1,7 @@
 package controller;
 
+import model.Membership;
+
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
@@ -21,18 +23,23 @@ public class UserFilters implements Filter {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
 
-        Optional<Object> optional = Optional.ofNullable(req.getSession().getAttribute("acces_accesId"));
+        Optional<Object> optional = Optional.ofNullable(req.getSession().getAttribute("membershipId"));
 
         if (!optional.isEmpty()) {
-            String accesType = optional.get().toString();
-            if (accesType.equals("1")) {
+            int membershipId = Integer.parseInt(optional.get().toString());
+            if (membershipId == Membership.STUDENT.getMembershipId()) {
                 RequestDispatcher dispatcher = servletRequest.getServletContext().getRequestDispatcher("/student");
                 dispatcher.forward(req, resp);
-            }else if (accesType.equals("3")) {
+            } else if (membershipId == Membership.TEACHER.getMembershipId()) {
                 RequestDispatcher dispatcher = servletRequest.getServletContext().getRequestDispatcher("/teacher");
                 dispatcher.forward(req, resp);
-            }
-            else {
+            } else if (membershipId == Membership.PARENT.getMembershipId()) {
+                RequestDispatcher dispatcher = servletRequest.getServletContext().getRequestDispatcher("/parent");
+                dispatcher.forward(req, resp);
+            } else if (membershipId == Membership.DIRECTOR.getMembershipId()) {
+                RequestDispatcher dispatcher = servletRequest.getServletContext().getRequestDispatcher("/director");
+                dispatcher.forward(req, resp);
+            } else {
                 RequestDispatcher dispatcher = servletRequest.getServletContext().getRequestDispatcher("/index.jsp");
                 dispatcher.forward(req, resp);
             }

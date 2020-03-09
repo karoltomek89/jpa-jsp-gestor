@@ -14,13 +14,17 @@ public interface UserDAO {
 
     void delete(String id);
 
-    User find(String id);
+    User findByID(String id);
 
     int login(String email, String password);
 
     List<User> findAll();
 
+    List<User> findAllByMembership(Membership membership);
+
     String getEmail(String id);
 
     Membership getMembershipById(int membershipId);
+
+    int getUserId(User user);
 }

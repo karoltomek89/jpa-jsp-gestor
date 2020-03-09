@@ -94,8 +94,9 @@ public class UserDAOImpl implements UserDAO {
         }
     }
 
+
     @Override
-    public User find(String id) {
+    public User findByID(String id) {
         User user = new User();
 
         String query = "SELECT * FROM users WHERE userId= ?";
@@ -147,6 +148,33 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public List<User> findAllByMembership(Membership membership) {
+        List<User> list = new ArrayList<>();
+        Integer id = membership.getMembershipId();
+
+        String query = "SELECT * FROM users WHERE membershipId= ?";
+
+        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
+            statement.setString(1, id.toString());
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                User user = new User();
+                user.setUserId(result.getInt("userId"));
+                user.setName(result.getString("name"));
+                user.setSurname(result.getString("surname"));
+                user.setEmail(result.getString("email"));
+                user.setPassword(result.getString("password"));
+                user.setMembership(getMembershipById(result.getInt("membeshipId")));
+                list.add(user);
+            }
+        } catch (SQLException e) {
+            logger.error("Error listing users by membershipId", e);
+        }
+
+        return list;
+    }
+
+    @Override
     public int login(String email, String password) {
         User user = new User();
 
@@ -165,7 +193,7 @@ public class UserDAOImpl implements UserDAO {
                 user.setMembership(getMembershipById(result.getInt("membeshipId")));
             } else {
                 logger.info("Error login user");
-                return 0;
+                return user.getUserId();
             }
         } catch (SQLException e) {
             logger.error("Error login user", e);
@@ -175,7 +203,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public String getEmail(String id) {
-        String email = find(id).getEmail();
+        String email = findByID(id).getEmail();
         return email;
     }
 
@@ -194,5 +222,10 @@ public class UserDAOImpl implements UserDAO {
             default:
                 return Membership.UNSET;
         }
+    }
+
+    @Override
+    public int getUserId(User user) {
+        return user.getUserId();
     }
 }

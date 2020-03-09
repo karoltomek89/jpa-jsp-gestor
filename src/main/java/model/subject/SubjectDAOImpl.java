@@ -123,13 +123,13 @@ public class SubjectDAOImpl implements SubjectDAO {
 
 
     @Override
-    public List<Subject> findAllByTeacherId(String teacherId) {
+    public List<Subject> findAllByUserId(String userId) {
         List<Subject> list = new ArrayList<>();
 
-        String query = "SELECT * FROM subjects JOIN teachers_has_subjects ON subjects.subjectId = teachers_has_subjects.subjects_subjectId WHERE teachers_teacherId= ?";
+        String query = "SELECT * FROM subjects JOIN users_has_subjects ON subjects.subjectId = users_has_subjects.subjects_subjectId WHERE users_userId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
-            statement.setString(1, teacherId);
+            statement.setString(1, userId);
             ResultSet result = statement.executeQuery();
             while (result.next()) {
                 Subject subject = new Subject();
