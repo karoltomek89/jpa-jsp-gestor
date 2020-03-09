@@ -21,20 +21,24 @@
 
 <%@ include file="navBarHorizontal.jsp" %>
 
-<c:set value="${sessionScope.acces_accesId}" var="acces"/>
+<c:set value="${sessionScope.membershipId}" var="membershipId"/>
 <c:set value="1" var="student"/>
-<c:set value="3" var="user"/>
-<c:set value="2" var="parent"/>
+<c:set value="2" var="teacher"/>
+<c:set value="3" var="parent"/>
+<c:set value="4" var="director"/>
 
 <c:choose>
-    <c:when test="${student eq acces}">
+    <c:when test="${student eq membershipId}">
         <%@ include file="studentGetInfo.jsp" %>
     </c:when>
-    <c:when test="${parent eq acces}">
-        <%@ include file="parentBarDefault.jsp" %>
+    <c:when test="${teacher eq membershipId}">
+        <%@ include file="teacherDefault.jsp" %>
     </c:when>
-    <c:when test="${user eq acces}">
-        <%@ include file="teacherAddGrade.jsp" %>
+    <c:when test="${parent eq membershipId}">
+        <%@ include file="parentDefault.jsp" %>
+    </c:when>
+    <c:when test="${director eq membershipId}">
+        <%@ include file="directorDefault.jsp" %>
     </c:when>
     <c:otherwise>
         <%@ include file="navBarVertical.jsp" %>
