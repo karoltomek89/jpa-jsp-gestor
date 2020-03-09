@@ -228,4 +228,52 @@ public class UserDAOImpl implements UserDAO {
     public int getUserId(User user) {
         return user.getUserId();
     }
+
+    @Override
+    public int getUserGroupId(String userId) {
+
+        int groupId = 0;
+
+        String query = "SELECT groups_groupId FROM groups_has_users WHERE users_userId= ?";
+
+        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
+            statement.setString(1, userId);
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                groupId = result.getInt("groups_groupId");
+            } else {
+                logger.info("Nothing found");
+                return groupId;
+            }
+        } catch (SQLException e) {
+            logger.error("Error searching group", e);
+        }
+        return groupId;
+    }
+
+    @Override
+    public List<User> findAllByGroup(String groupId) {
+        List<User> list = new ArrayList<>();
+
+        String query = "SELECT * FROM users JOIN groups_has_users ON users.userId = groups_has_users.users_userId WHERE groups_groupId= ?";
+
+        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
+            statement.setString(1, groupId);
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                User user = new User();
+                user.setUserId(result.getInt("userId"));
+                user.setName(result.getString("name"));
+                user.setSurname(result.getString("surname"));
+                user.setEmail(result.getString("email"));
+                user.setPassword(result.getString("password"));
+                user.setMembership(getMembershipById(result.getInt("membeshipId")));
+                list.add(user);
+            }
+        } catch (SQLException e) {
+            logger.error("Error listing users by groupId", e);
+        }
+
+        return list;
+    }
 }

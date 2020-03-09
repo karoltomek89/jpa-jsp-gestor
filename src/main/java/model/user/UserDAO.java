@@ -8,13 +8,13 @@ public interface UserDAO {
 
     void register(String name, String surname, String email, String password, Membership membership);
 
-    void save(User u);
+    void save(User user);
 
-    void update(User u);
+    void update(User user);
 
-    void delete(String id);
+    void delete(String userId);
 
-    User findByID(String id);
+    User findByID(String userId);
 
     int login(String email, String password);
 
@@ -22,9 +22,13 @@ public interface UserDAO {
 
     List<User> findAllByMembership(Membership membership);
 
-    String getEmail(String id);
+    String getEmail(String userId);
 
     Membership getMembershipById(int membershipId);
 
     int getUserId(User user);
+
+    int getUserGroupId(String userId);
+
+    List<User> findAllByGroup(String groupId);
 }
