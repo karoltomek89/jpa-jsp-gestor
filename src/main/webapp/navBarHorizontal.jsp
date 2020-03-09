@@ -56,7 +56,7 @@
                                     <select name="type" class="custom-select">
                                         <option selected>Wybierz typ konta</option>
                                         <option value="student">student</option>
-                                        <option value="teacher">Nauczyciel</option>
+                                        <option value="user">Nauczyciel</option>
                                         <option value="director">Dyrektor</option>
                                         <option value="parent">Rodzic</option>
                                     </select>

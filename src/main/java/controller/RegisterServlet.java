@@ -1,7 +1,7 @@
 package controller;
 
 import model.student.StudentDAOImpl;
-import model.teacher.TeacherDAOImpl;
+import model.user.UserDAOImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @WebServlet(name = "RegisterServlet", value = "/register")
 public class RegisterServlet extends HttpServlet {
-    TeacherDAOImpl teacher = new TeacherDAOImpl();
+    UserDAOImpl teacher = new UserDAOImpl();
     StudentDAOImpl student = new StudentDAOImpl();
 
     @Override

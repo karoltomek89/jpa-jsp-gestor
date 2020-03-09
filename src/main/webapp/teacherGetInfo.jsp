@@ -1,9 +1,9 @@
 <div class="row">
     <div class="col-1">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <a class="nav-link active" id="v-pills-teacher-tab" href="${pageContext.request.contextPath}/teacher"
+            <a class="nav-link active" id="v-pills-user-tab" href="${pageContext.request.contextPath}/user"
                role="tab"
-               aria-controls="v-pills-teacher" aria-selected="false">Info</a>
+               aria-controls="v-pills-user" aria-selected="false">Info</a>
             <a class="nav-link" id="v-pills-grades-tab" href="${pageContext.request.contextPath}/getsubjectlist"
                role="tab" aria-controls="v-pills-grades" aria-selected="true">Dodaj ocenę</a>
             <a class="nav-link" id="v-pills-notes-tab" data-toggle="pill" href="#v-pills-notes" role="tab"
@@ -22,8 +22,8 @@
     </div>
     <div class="col-11">
         <div class="tab-content" id="v-pills-tabContent">
-            <div class="tab-pane fade show active" id="v-pills-teacher" role="tabpanel"
-                 aria-labelledby="v-pills-teacher-tab">
+            <div class="tab-pane fade show active" id="v-pills-user" role="tabpanel"
+                 aria-labelledby="v-pills-user-tab">
                 Result: <c:out value="${user}"/>
             </div>
         </div>

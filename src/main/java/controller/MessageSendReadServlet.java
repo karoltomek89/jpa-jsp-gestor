@@ -3,7 +3,7 @@ package controller;
 import model.message.Message;
 import model.message.MessageDAOImpl;
 import model.student.StudentDAOImpl;
-import model.teacher.TeacherDAOImpl;
+import model.user.UserDAOImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,7 +22,7 @@ public class MessageSendReadServlet extends HttpServlet {
     List<Message> messagesList = new ArrayList<>();
     MessageDAOImpl messages = new MessageDAOImpl();
     StudentDAOImpl student = new StudentDAOImpl();
-    TeacherDAOImpl teacher = new TeacherDAOImpl();
+    UserDAOImpl teacher = new UserDAOImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

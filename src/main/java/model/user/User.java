@@ -1,27 +1,29 @@
-package model.teacher;
+package model.user;
 
-public class Teacher {
-    private int teacherId;
+import model.Membership;
+
+public class User {
+    private int userId;
     private String name;
     private String surname;
     private String email;
     private String password;
-    private int acces_accesId = 3;
+    private Membership membership;
 
-    public int getAcces() {
-        return acces_accesId;
+    public Membership getMembership() {
+        return membership;
     }
 
-    public void setAcces(int acces) {
-        this.acces_accesId = acces;
+    public void setMembership(Membership membership) {
+        this.membership = membership;
     }
 
-    public int getTeacherId() {
-        return teacherId;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setTeacherId(int teacherId) {
-        this.teacherId = teacherId;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getName() {
@@ -58,12 +60,13 @@ public class Teacher {
 
     @Override
     public String toString() {
-        return "Teacher{" +
-                "teacherId=" + teacherId +
+        return "User{" +
+                "userId=" + userId +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", membership=" + membership +
                 '}';
     }
 }

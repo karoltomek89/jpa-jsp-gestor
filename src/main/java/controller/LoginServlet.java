@@ -2,7 +2,7 @@ package controller;
 
 import model.SQLSessionFactory;
 import model.student.StudentDAOImpl;
-import model.teacher.TeacherDAOImpl;
+import model.user.UserDAOImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +21,7 @@ public class LoginServlet extends HttpServlet {
     private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
 
     StudentDAOImpl student = new StudentDAOImpl();
-    TeacherDAOImpl teacher = new TeacherDAOImpl();
+    UserDAOImpl teacher = new UserDAOImpl();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

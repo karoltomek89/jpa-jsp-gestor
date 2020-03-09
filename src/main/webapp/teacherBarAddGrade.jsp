@@ -24,7 +24,7 @@
 
 <c:set value="${sessionScope.acces_accesId}" var="acces"/>
 <c:set value="1" var="student"/>
-<c:set value="3" var="teacher"/>
+<c:set value="3" var="user"/>
 <c:set value="2" var="parent"/>
 
 <c:choose>
@@ -34,7 +34,7 @@
     <c:when test="${parent eq acces}">
         <%@ include file="parentBarDefault.jsp" %>
     </c:when>
-    <c:when test="${teacher eq acces}">
+    <c:when test="${user eq acces}">
         <%@ include file="teacherAddGrade.jsp" %>
     </c:when>
     <c:otherwise>
