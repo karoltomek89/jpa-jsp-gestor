@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-1">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <a class="nav-link" id="v-pills-user-tab" href="${pageContext.request.contextPath}/user" role="tab"
+            <a class="nav-link" id="v-pills-user-tab" href="${pageContext.request.contextPath}/teacher" role="tab"
                aria-controls="v-pills-user" aria-selected="false">Info</a>
             <a class="nav-link" id="v-pills-grades-tab" href="${pageContext.request.contextPath}/getsubjectlist"
                role="tab" aria-controls="v-pills-grades" aria-selected="true">Dodaj ocenę</a>
@@ -32,10 +32,6 @@
             <div class="tab-pane fade" id="v-pills-students" role="tabpanel"
                  aria-labelledby="v-pills-students-tab">
                 Tutaj będzie można przeglądać dane o uczniach.
-            </div>
-            <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
-                 aria-labelledby="v-pills-messages-tab">
-                Wysyłanie i odbieranie wiadomości.
             </div>
         </div>
     </div>

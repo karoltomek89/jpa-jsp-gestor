@@ -23,9 +23,9 @@
             </div>
             <div class="tab-pane fade" id="v-pills-notes" role="tabpanel" aria-labelledby="v-pills-notes-tab">
                 Tutaj będą prezetowane uwagi od nauczycieli
-            </div>
-            <div class="tab-pane fade" id="v-pills-homework" role="tabpanel" aria-labelledby="v-pills-homework-tab">
-                Tutaj będą prezentowane zadane prace domowe
+                <div class="tab-pane fade" id="v-pills-homework" role="tabpanel" aria-labelledby="v-pills-homework-tab">
+                    Tutaj będą prezentowane zadane prace domowe
+                </div>
             </div>
         </div>
     </div>

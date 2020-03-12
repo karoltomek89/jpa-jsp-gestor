@@ -208,8 +208,30 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public Membership getMembershipById(int membershipId) {
+    public int getMembershipId(int userId) {
 
+        int membershipId = 0;
+
+        String query = "SELECT membershipId FROM users WHERE userId= ?";
+
+        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
+            statement.setString(1, Integer.toString(userId));
+            ResultSet result = statement.executeQuery();
+            if (result.next()) {
+                membershipId = result.getInt("membershipId");
+            } else {
+                logger.info("Nothing found");
+                return membershipId;
+            }
+        } catch (SQLException e) {
+            logger.error("Error searching membershipId", e);
+        }
+        return membershipId;
+
+    }
+
+    @Override
+    public Membership getMembershipById(int membershipId) {
         switch (membershipId) {
             case 1:
                 return Membership.STUDENT;

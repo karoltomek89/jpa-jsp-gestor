@@ -24,6 +24,8 @@ public interface UserDAO {
 
     String getEmail(String userId);
 
+    int getMembershipId(int userId);
+
     Membership getMembershipById(int membershipId);
 
     int getUserId(User user);

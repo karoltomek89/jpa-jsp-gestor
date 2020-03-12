@@ -21,7 +21,7 @@ public class StudentGradeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        gradeList = grades.findAllByStudentId(req.getSession().getAttribute("userId").toString());
+        gradeList = grades.findAllByStudentId(Integer.valueOf(req.getSession().getAttribute("userId").toString()));
         req.setAttribute("grades", gradeList);
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/studentBarGetGrades.jsp");

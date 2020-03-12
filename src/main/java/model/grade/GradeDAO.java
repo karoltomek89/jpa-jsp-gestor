@@ -14,5 +14,5 @@ public interface GradeDAO {
 
     List<Grade> findAll();
 
-    List<Grade> findAllByStudentId(String studentId);
+    List<Grade> findAllByStudentId(int studentId);
 }

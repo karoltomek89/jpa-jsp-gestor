@@ -115,13 +115,13 @@ public class GradeDAOImpl implements GradeDAO {
     }
 
     @Override
-    public List<Grade> findAllByStudentId(String studentId) {
+    public List<Grade> findAllByStudentId(int studentId) {
         List<Grade> list = new ArrayList<>();
 
-        String query = "SELECT * FROM grades WHERE students_studentId= ?";
+        String query = "SELECT * FROM grades WHERE users_userId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
-            statement.setString(1, studentId);
+            statement.setString(1, Integer.toString(studentId));
             ResultSet result = statement.executeQuery();
             while (result.next()) {
                 Grade grade = new Grade();
