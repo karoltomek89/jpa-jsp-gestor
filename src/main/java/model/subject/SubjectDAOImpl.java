@@ -28,7 +28,7 @@ public class SubjectDAOImpl implements SubjectDAO {
 
     @Override
     public void save(Subject s) {
-        String query = "INSERT INTO subjects (name) VALUES (?)";
+        String query = "INSERT INTO gestordatabase.subjects (name) VALUES (?)";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, s.getName());
@@ -43,7 +43,7 @@ public class SubjectDAOImpl implements SubjectDAO {
 
     @Override
     public void update(Subject s) {
-        String query = "UPDATE subjects SET name = ? WHERE subjectId= ?";
+        String query = "UPDATE gestordatabase.subjects SET name = ? WHERE subjectId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, s.getName());
@@ -61,7 +61,7 @@ public class SubjectDAOImpl implements SubjectDAO {
 
     @Override
     public void delete(String id) {
-        String query = "DELETE FROM subjects WHERE subjectId= ?";
+        String query = "DELETE FROM gestordatabase.subjects WHERE subjectId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, id);
@@ -82,7 +82,7 @@ public class SubjectDAOImpl implements SubjectDAO {
     public Subject find(String id) {
         Subject subject = new Subject();
 
-        String query = "SELECT * FROM subjects WHERE subjectId= ?";
+        String query = "SELECT * FROM gestordatabase.subjects WHERE subjectId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, id);
@@ -103,7 +103,7 @@ public class SubjectDAOImpl implements SubjectDAO {
     public List<Subject> findAll() {
         List<Subject> list = new ArrayList<>();
 
-        String query = "SELECT * FROM subject";
+        String query = "SELECT * FROM gestordatabase.subjects";
 
         try (Statement statement = SQLSessionFactory.getConnection().createStatement()) {
             ResultSet result = statement.executeQuery(query);
@@ -126,7 +126,7 @@ public class SubjectDAOImpl implements SubjectDAO {
     public List<Subject> findAllByUserId(String userId) {
         List<Subject> list = new ArrayList<>();
 
-        String query = "SELECT * FROM subjects JOIN users_has_subjects ON subjects.subjectId = users_has_subjects.subjects_subjectId WHERE users_userId= ?";
+        String query = "SELECT * FROM gestordatabase.subjects JOIN gestordatabase.users_has_subjects ON subjects.subjectId = users_has_subjects.subjects_subjectId WHERE users_userId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, userId);

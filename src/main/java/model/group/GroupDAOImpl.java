@@ -28,7 +28,7 @@ public class GroupDAOImpl implements GroupDAO {
 
     @Override
     public void save(Group g) {
-        String query = "INSERT INTO groups (name) VALUES (?)";
+        String query = "INSERT INTO gestordatabase.groups (name) VALUES (?)";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, g.getName());
@@ -43,7 +43,7 @@ public class GroupDAOImpl implements GroupDAO {
 
     @Override
     public void update(Group g) {
-        String query = "UPDATE groups SET name = ? WHERE groupId= ?";
+        String query = "UPDATE gestordatabase.groups SET name = ? WHERE groupId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, g.getName());
@@ -61,7 +61,7 @@ public class GroupDAOImpl implements GroupDAO {
 
     @Override
     public void delete(String id) {
-        String query = "DELETE FROM groups WHERE groupId= ?";
+        String query = "DELETE FROM gestordatabase.groups WHERE groupId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, id);
@@ -82,7 +82,7 @@ public class GroupDAOImpl implements GroupDAO {
     public Group find(String id) {
         Group groups = new Group();
 
-        String query = "SELECT * FROM groups WHERE groupId= ?";
+        String query = "SELECT * FROM gestordatabase.groups WHERE groupId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, id);
@@ -101,23 +101,23 @@ public class GroupDAOImpl implements GroupDAO {
 
     @Override
     public List<Group> findAll() {
-        List<Group> list = new ArrayList<>();
+        List<Group> groupList = new ArrayList<>();
 
-        String query = "SELECT * FROM groups";
+        String query = "SELECT * FROM gestordatabase.groups";
 
         try (Statement statement = SQLSessionFactory.getConnection().createStatement()) {
             ResultSet result = statement.executeQuery(query);
             while (result.next()) {
-                Group groups = new Group();
-                groups.setGroupId(result.getInt("groupId"));
-                groups.setName(result.getString("name"));
-                list.add(groups);
+                Group group = new Group();
+                group.setGroupId(result.getInt("groupId"));
+                group.setName(result.getString("name"));
+                groupList.add(group);
             }
         } catch (SQLException e) {
             logger.error("Error listing all groups", e);
         }
 
-        return list;
+        return groupList;
 
     }
 

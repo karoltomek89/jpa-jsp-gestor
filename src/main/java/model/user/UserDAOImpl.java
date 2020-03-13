@@ -35,7 +35,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void save(User u) {
-        String query = "INSERT INTO users (name, surname, email, password, membeshipId) VALUES (?,?,?,?,?)";
+        String query = "INSERT INTO gestordatabase.users (name, surname, email, password, membershipId) VALUES (?,?,?,?,?)";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             //parameterIndex zaczyna się od 1!
@@ -55,7 +55,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void update(User u) {
-        String query = "UPDATE users SET name = ?, surname =?, mail =?, password= ? WHERE userId= ?";
+        String query = "UPDATE gestordatabase.users SET name = ?, surname =?, email =?, password= ? WHERE userId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, u.getName());
@@ -77,7 +77,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void delete(String id) {
-        String query = "DELETE FROM users WHERE userId= ?";
+        String query = "DELETE FROM gestordatabase.users WHERE userId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, id);
@@ -99,7 +99,7 @@ public class UserDAOImpl implements UserDAO {
     public User findByID(String id) {
         User user = new User();
 
-        String query = "SELECT * FROM users WHERE userId= ?";
+        String query = "SELECT * FROM gestordatabase.users WHERE userId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, id);
@@ -110,7 +110,7 @@ public class UserDAOImpl implements UserDAO {
                 user.setEmail(result.getString("email"));
                 user.setPassword(result.getString("password"));
                 user.setUserId(result.getInt("userId"));
-                user.setMembership(getMembershipById(result.getInt("membeshipId")));
+                user.setMembership(getMembershipById(result.getInt("membershipId")));
             } else {
                 logger.info("Nothing found");
                 return null;
@@ -125,7 +125,7 @@ public class UserDAOImpl implements UserDAO {
     public List<User> findAll() {
         List<User> list = new ArrayList<>();
 
-        String query = "SELECT * FROM users";
+        String query = "SELECT * FROM gestordatabase.users";
 
         try (Statement statement = SQLSessionFactory.getConnection().createStatement()) {
             ResultSet result = statement.executeQuery(query);
@@ -136,7 +136,7 @@ public class UserDAOImpl implements UserDAO {
                 user.setSurname(result.getString("surname"));
                 user.setEmail(result.getString("email"));
                 user.setPassword(result.getString("password"));
-                user.setMembership(getMembershipById(result.getInt("membeshipId")));
+                user.setMembership(getMembershipById(result.getInt("membershipId")));
                 list.add(user);
             }
         } catch (SQLException e) {
@@ -152,7 +152,7 @@ public class UserDAOImpl implements UserDAO {
         List<User> list = new ArrayList<>();
         Integer id = membership.getMembershipId();
 
-        String query = "SELECT * FROM users WHERE membershipId= ?";
+        String query = "SELECT * FROM gestordatabase.users WHERE membershipId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, id.toString());
@@ -164,7 +164,7 @@ public class UserDAOImpl implements UserDAO {
                 user.setSurname(result.getString("surname"));
                 user.setEmail(result.getString("email"));
                 user.setPassword(result.getString("password"));
-                user.setMembership(getMembershipById(result.getInt("membeshipId")));
+                user.setMembership(getMembershipById(result.getInt("membershipId")));
                 list.add(user);
             }
         } catch (SQLException e) {
@@ -178,7 +178,7 @@ public class UserDAOImpl implements UserDAO {
     public int login(String email, String password) {
         User user = new User();
 
-        String query = "SELECT * FROM users WHERE email= ? && password= ?";
+        String query = "SELECT * FROM gestordatabase.users WHERE email= ? && password= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, email);
@@ -190,7 +190,7 @@ public class UserDAOImpl implements UserDAO {
                 user.setEmail(result.getString("email"));
                 user.setPassword(result.getString("password"));
                 user.setUserId(result.getInt("userId"));
-                user.setMembership(getMembershipById(result.getInt("membeshipId")));
+                user.setMembership(getMembershipById(result.getInt("membershipId")));
             } else {
                 logger.info("Error login user");
                 return user.getUserId();
@@ -212,7 +212,7 @@ public class UserDAOImpl implements UserDAO {
 
         int membershipId = 0;
 
-        String query = "SELECT membershipId FROM users WHERE userId= ?";
+        String query = "SELECT membershipId FROM gestordatabase.users WHERE userId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, Integer.toString(userId));
@@ -256,7 +256,7 @@ public class UserDAOImpl implements UserDAO {
 
         int groupId = 0;
 
-        String query = "SELECT groups_groupId FROM groups_has_users WHERE users_userId= ?";
+        String query = "SELECT groups_groupId FROM gestordatabase.groups_has_users WHERE users_userId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, userId);
@@ -277,7 +277,7 @@ public class UserDAOImpl implements UserDAO {
     public List<User> findAllByGroup(String groupId) {
         List<User> list = new ArrayList<>();
 
-        String query = "SELECT * FROM users JOIN groups_has_users ON users.userId = groups_has_users.users_userId WHERE groups_groupId= ?";
+        String query = "SELECT * FROM gestordatabase.users JOIN gestordatabase.groups_has_users ON users.userId = groups_has_users.users_userId  WHERE groups_groupId= ?;";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, groupId);
@@ -289,7 +289,7 @@ public class UserDAOImpl implements UserDAO {
                 user.setSurname(result.getString("surname"));
                 user.setEmail(result.getString("email"));
                 user.setPassword(result.getString("password"));
-                user.setMembership(getMembershipById(result.getInt("membeshipId")));
+                user.setMembership(getMembershipById(result.getInt("membershipId")));
                 list.add(user);
             }
         } catch (SQLException e) {

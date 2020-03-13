@@ -4,7 +4,7 @@
             <a class="nav-link active" id="v-pills-user-tab" href="${pageContext.request.contextPath}/teacher"
                role="tab"
                aria-controls="v-pills-user" aria-selected="false">Info</a>
-            <a class="nav-link" id="v-pills-grades-tab" href="${pageContext.request.contextPath}/getsubjectlist"
+            <a class="nav-link" id="v-pills-grades-tab" href="${pageContext.request.contextPath}/getgrouplist"
                role="tab" aria-controls="v-pills-grades" aria-selected="true">Dodaj ocenę</a>
             <a class="nav-link" id="v-pills-notes-tab" data-toggle="pill" href="#v-pills-notes" role="tab"
                aria-controls="v-pills-notes" aria-selected="false">Uwagi</a>

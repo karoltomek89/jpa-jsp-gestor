@@ -19,15 +19,15 @@ public class GradeServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         Optional<Object> grades_value = Optional.ofNullable(req.getParameter("grade"));
-        Optional<Object> students_studentId = Optional.ofNullable(req.getParameter("studentId"));
+        Optional<Object> users_userId = Optional.ofNullable(req.getParameter("userId"));
         Optional<Object> subjects_subjectId = Optional.ofNullable(req.getParameter("subjectId"));
 
-        if (!grades_value.isEmpty() && !students_studentId.isEmpty() && !subjects_subjectId.isEmpty()) {
-            int value = Integer.parseInt( grades_value.get().toString());
-            int studentId = Integer.parseInt( students_studentId.get().toString());
-            int subjectId = Integer.parseInt( subjects_subjectId.get().toString());
+        if (!grades_value.isEmpty() && !users_userId.isEmpty() && !subjects_subjectId.isEmpty()) {
+            int value = Integer.parseInt(grades_value.get().toString());
+            int userId = Integer.parseInt(users_userId.get().toString());
+            int subjectId = Integer.parseInt(subjects_subjectId.get().toString());
 
-            grade.save(value, studentId, subjectId);
+            grade.save(value, userId, subjectId);
 
         } else {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
