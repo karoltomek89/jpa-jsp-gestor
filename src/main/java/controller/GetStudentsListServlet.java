@@ -21,7 +21,7 @@ public class GetStudentsListServlet extends HttpServlet {
     UserDAO user = new UserDAOImpl();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         userList = user.findAllByMembership(Membership.STUDENT);
         req.setAttribute("studentsList", userList);

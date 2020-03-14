@@ -3,7 +3,7 @@
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
             <a class="nav-link" id="v-pills-user-tab" href="${pageContext.request.contextPath}/teacher" role="tab"
                aria-controls="v-pills-user" aria-selected="false">Info</a>
-            <a class="nav-link" id="v-pills-grades-tab" href="${pageContext.request.contextPath}/getgrouplist"
+            <a class="nav-link" id="v-pills-grades-tab" href="${pageContext.request.contextPath}/getgrouplistforgrades"
                role="tab" aria-controls="v-pills-grades" aria-selected="true">Dodaj ocenę</a>
             <a class="nav-link" id="v-pills-notes-tab" data-toggle="pill" href="#v-pills-notes" role="tab"
                aria-controls="v-pills-notes" aria-selected="false">Uwagi</a>
@@ -12,7 +12,7 @@
             <a class="nav-link" id="v-pills-students-tab" data-toggle="pill" href="#v-pills-students" role="tab"
                aria-controls="v-pills-students" aria-selected="false">Uczniowie</a>
             <a class="nav-link active" id="v-pills-messages-tab"
-               href="${pageContext.request.contextPath}/getstudentlist"
+               href="${pageContext.request.contextPath}/getgrouplistformessages"
                role="tab"
                aria-controls="v-pills-messages" aria-selected="false">Wiadomości</a>
             <a class="nav-link" id="v-pills-logout-tab" href="${pageContext.request.contextPath}/logout" role="tab"
@@ -27,22 +27,11 @@
                 <div class="modal-body">
                     <form id="sendMessage" method="post" action="messages">
                         <div class="form-row">
-
-                            <div class="form-group col-md-6">
-                                <label>Wybierz klasę</label>
-                                <select name="subjectId" class="custom-select">
-                                    <c:forEach var="item" items="${classesList}">
-                                        <option value="${item.classId}">${item.name}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label>Uczeń</label>
                                 <select name="studentId" class="custom-select">
                                     <c:forEach var="item" items="${studentsList}">
-                                        <option value="${item.studentId}">${item.name} ${item.surname} </option>
+                                        <option value="${item.userId}">${item.name} ${item.surname} </option>
                                     </c:forEach>
                                 </select>
                             </div>
