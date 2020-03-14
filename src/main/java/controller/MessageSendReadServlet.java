@@ -21,7 +21,7 @@ import java.util.Optional;
 public class MessageSendReadServlet extends HttpServlet {
 
     List<Message> messagesList = new ArrayList<>();
-    MessageDAO messages = new MessageDAOImpl();
+    MessageDAO message = new MessageDAOImpl();
     UserDAO user = new UserDAOImpl();
 
     @Override
@@ -29,7 +29,7 @@ public class MessageSendReadServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String email = user.getEmail(req.getSession().getAttribute("userId").toString());
-        messagesList = messages.findAllOfUser(email);
+        messagesList = message.findAllOfUser(email);
 
         req.setAttribute("messagesList", messagesList);
 
@@ -52,7 +52,7 @@ public class MessageSendReadServlet extends HttpServlet {
             String topic = topicValue.get().toString();
             String text = textValue.get().toString();
 
-            messages.insert(from, to, topic, text);
+            message.insert(from, to, topic, text);
 
 
         } else {
