@@ -105,7 +105,7 @@ public class UserDAOImpl implements UserDAO {
             statement.setString(1, id);
             ResultSet result = statement.executeQuery();
             if (result.next()) {
-                user.setName(result.getString("userId"));
+                user.setName(result.getString("name"));
                 user.setSurname(result.getString("surname"));
                 user.setEmail(result.getString("email"));
                 user.setPassword(result.getString("password"));
@@ -185,7 +185,7 @@ public class UserDAOImpl implements UserDAO {
             statement.setString(2, password);
             ResultSet result = statement.executeQuery();
             if (result.next()) {
-                user.setName(result.getString("userId"));
+                user.setName(result.getString("name"));
                 user.setSurname(result.getString("surname"));
                 user.setEmail(result.getString("email"));
                 user.setPassword(result.getString("password"));
