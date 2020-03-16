@@ -136,4 +136,28 @@ public class GradeDAOImpl implements GradeDAO {
         return list;
 
     }
+
+    @Override
+    public List<GradeWithSubjectName> findAllByStudentIdWithName(int studentId) {
+        List<GradeWithSubjectName> list = new ArrayList<>();
+
+        String query = "SELECT * FROM gestordatabase.grades JOIN gestordatabase.subjects ON subjects.subjectId = grades.subjects_subjectId WHERE users_userId= ?";
+
+        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
+            statement.setString(1, Integer.toString(studentId));
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                GradeWithSubjectName grade = new GradeWithSubjectName();
+                grade.setGradeId(result.getInt("gradeId"));
+                grade.setValue(result.getDouble("value"));
+                grade.setName(result.getString("name"));
+                list.add(grade);
+            }
+        } catch (SQLException e) {
+            logger.error("Error listing all grades", e);
+        }
+
+        return list;
+
+    }
 }

@@ -21,7 +21,28 @@
         <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-grades" role="tabpanel"
                  aria-labelledby="v-pills-grades-tab">
-                Result: <c:out value="${grades}"/></div>
+
+
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">Przedmiot</th>
+                        <th scope="col">Ocena</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <c:forEach var="item" items="${grades}">
+                        <tr>
+                            <th scope="row">${item.name}</th>
+                            <td>${item.value}</td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+
+
+            </div>
         </div>
     </div>
 </div>

@@ -1,8 +1,8 @@
 package controller;
 
-import model.grade.Grade;
 import model.grade.GradeDAO;
 import model.grade.GradeDAOImpl;
+import model.grade.GradeWithSubjectName;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,12 +16,12 @@ import java.util.List;
 
 @WebServlet(name = "StudentGradeServlet", value = "/showgrades")
 public class StudentGradeServlet extends HttpServlet {
-    List<Grade> gradeList = new LinkedList<>();
+    List<GradeWithSubjectName> gradeList = new LinkedList<>();
     GradeDAO grades = new GradeDAOImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        gradeList = grades.findAllByStudentId(Integer.valueOf(req.getSession().getAttribute("userId").toString()));
+        gradeList = grades.findAllByStudentIdWithName(Integer.valueOf(req.getSession().getAttribute("userId").toString()));
         req.setAttribute("grades", gradeList);
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/studentBarGetGrades.jsp");
