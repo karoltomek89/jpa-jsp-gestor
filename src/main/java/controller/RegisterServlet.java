@@ -1,7 +1,8 @@
 package controller;
 
-import model.student.StudentDAOImpl;
-import model.teacher.TeacherDAOImpl;
+import model.Membership;
+import model.user.UserDAO;
+import model.user.UserDAOImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,8 +15,7 @@ import java.util.Optional;
 
 @WebServlet(name = "RegisterServlet", value = "/register")
 public class RegisterServlet extends HttpServlet {
-    TeacherDAOImpl teacher = new TeacherDAOImpl();
-    StudentDAOImpl student = new StudentDAOImpl();
+    UserDAO user = new UserDAOImpl();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,29 +25,39 @@ public class RegisterServlet extends HttpServlet {
         if (!optional.isEmpty()) {
             String accesType = optional.get().toString();
             if (accesType.equals("student")) {
-                student.register(
+                user.register(
                         req.getParameter("name"),
                         req.getParameter("surname"),
                         req.getParameter("email"),
                         req.getParameter("password"),
-                        1);
-            }else if (accesType.equals("teacher")) {
-                teacher.register(
+                        Membership.STUDENT);
+            } else if (accesType.equals("teacher")) {
+                user.register(
                         req.getParameter("name"),
                         req.getParameter("surname"),
                         req.getParameter("email"),
                         req.getParameter("password"),
-                        3);
-            }
-            else {
+                        Membership.TEACHER);
+            } else if (accesType.equals("parent")) {
+                user.register(
+                        req.getParameter("name"),
+                        req.getParameter("surname"),
+                        req.getParameter("email"),
+                        req.getParameter("password"),
+                        Membership.PARENT);
+            } else if (accesType.equals("director")) {
+                user.register(
+                        req.getParameter("name"),
+                        req.getParameter("surname"),
+                        req.getParameter("email"),
+                        req.getParameter("password"),
+                        Membership.DIRECTOR);
+            } else {
                 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
                 dispatcher.forward(req, resp);
             }
-        } else {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
             dispatcher.forward(req, resp);
         }
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-        dispatcher.forward(req, resp);
     }
 }

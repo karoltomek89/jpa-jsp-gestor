@@ -18,12 +18,12 @@ public class GradeDAOImpl implements GradeDAO {
     SQLSessionFactory SQLSessionFactory = new SQLSessionFactory();
 
     @Override
-    public void save(int value, int students_studentId, int subjects_subjectId) {
-        String query = "INSERT INTO grades (value, students_studentId, subjects_subjectId) VALUES (?, ?, ?)";
+    public void save(int value, int userId, int subjects_subjectId) {
+        String query = "INSERT INTO gestordatabase.grades (value, users_userId, subjects_subjectId) VALUES (?, ?, ?)";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setDouble(1, value);
-            statement.setInt(2, students_studentId);
+            statement.setInt(2, userId);
             statement.setInt(3, subjects_subjectId);
             int i = statement.executeUpdate();
             logger.info("Grade added");
@@ -37,7 +37,7 @@ public class GradeDAOImpl implements GradeDAO {
 
     @Override
     public void update(Grade g) {
-        String query = "UPDATE grades SET value = ? WHERE gradeId= ?";
+        String query = "UPDATE gestordatabase.grades SET value = ? WHERE gradeId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setDouble(1, g.getValue());
@@ -55,7 +55,7 @@ public class GradeDAOImpl implements GradeDAO {
 
     @Override
     public void delete(String id) {
-        String query = "DELETE FROM grades WHERE gradeId= ?";
+        String query = "DELETE FROM gestordatabase.grades WHERE gradeId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, id);
@@ -76,7 +76,7 @@ public class GradeDAOImpl implements GradeDAO {
     public Grade find(String id) {
         Grade grade = new Grade();
 
-        String query = "SELECT * FROM grades WHERE gradeId= ?";
+        String query = "SELECT * FROM gestordatabase.grades WHERE gradeId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, id);
@@ -97,7 +97,7 @@ public class GradeDAOImpl implements GradeDAO {
     public List<Grade> findAll() {
         List<Grade> list = new ArrayList<>();
 
-        String query = "SELECT * FROM grades";
+        String query = "SELECT * FROM gestordatabase.grades";
 
         try (Statement statement = SQLSessionFactory.getConnection().createStatement()) {
             ResultSet result = statement.executeQuery(query);
@@ -115,18 +115,42 @@ public class GradeDAOImpl implements GradeDAO {
     }
 
     @Override
-    public List<Grade> findAllByStudentId(String studentId) {
+    public List<Grade> findAllByStudentId(int studentId) {
         List<Grade> list = new ArrayList<>();
 
-        String query = "SELECT * FROM grades WHERE students_studentId= ?";
+        String query = "SELECT * FROM gestordatabase.grades WHERE users_userId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
-            statement.setString(1, studentId);
+            statement.setString(1, Integer.toString(studentId));
             ResultSet result = statement.executeQuery();
             while (result.next()) {
                 Grade grade = new Grade();
                 grade.setGradeId(result.getInt("gradeId"));
                 grade.setValue(result.getDouble("value"));
+                list.add(grade);
+            }
+        } catch (SQLException e) {
+            logger.error("Error listing all grades", e);
+        }
+
+        return list;
+
+    }
+
+    @Override
+    public List<GradeWithSubjectName> findAllByStudentIdWithName(int studentId) {
+        List<GradeWithSubjectName> list = new ArrayList<>();
+
+        String query = "SELECT * FROM gestordatabase.grades JOIN gestordatabase.subjects ON subjects.subjectId = grades.subjects_subjectId WHERE users_userId= ?";
+
+        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
+            statement.setString(1, Integer.toString(studentId));
+            ResultSet result = statement.executeQuery();
+            while (result.next()) {
+                GradeWithSubjectName grade = new GradeWithSubjectName();
+                grade.setGradeId(result.getInt("gradeId"));
+                grade.setValue(result.getDouble("value"));
+                grade.setName(result.getString("name"));
                 list.add(grade);
             }
         } catch (SQLException e) {

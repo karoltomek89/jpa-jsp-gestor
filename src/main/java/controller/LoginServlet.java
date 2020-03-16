@@ -1,8 +1,8 @@
 package controller;
 
 import model.SQLSessionFactory;
-import model.student.StudentDAOImpl;
-import model.teacher.TeacherDAOImpl;
+import model.user.UserDAO;
+import model.user.UserDAOImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,31 +20,19 @@ public class LoginServlet extends HttpServlet {
 
     private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
 
-    StudentDAOImpl student = new StudentDAOImpl();
-    TeacherDAOImpl teacher = new TeacherDAOImpl();
+    UserDAO user = new UserDAOImpl();
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        int id = student.login(
+        int userId = user.login(
                 req.getParameter("inputEmail"),
                 req.getParameter("inputPassword"));
-        int access;
 
-        if (id > 0) {
-           access = 1;
-        }else{
-            id = teacher.login(
-                    req.getParameter("inputEmail"),
-                    req.getParameter("inputPassword"));
-            access = 3;
-        }
+        HttpSession session = req.getSession();
+        session.setAttribute("userId", userId);
+        session.setAttribute("membershipId", user.getMembershipId(userId));
 
-        if (id > 0) {
-            HttpSession session = req.getSession();
-            session.setAttribute("userId", id);
-            session.setAttribute("acces_accesId", access);
-        }
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
         dispatcher.forward(req, resp);
 
@@ -57,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 //            resp.addCookie(cookie);
 //            logger.info("studet founded");
 //        } else {
-//            logger.info("student not found");
+//            logger.info("user not found");
 //        }
 
 

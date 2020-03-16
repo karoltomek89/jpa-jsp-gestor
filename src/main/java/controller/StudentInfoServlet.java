@@ -1,7 +1,8 @@
 package controller;
 
-import model.student.Student;
-import model.student.StudentDAOImpl;
+import model.user.User;
+import model.user.UserDAO;
+import model.user.UserDAOImpl;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,15 +14,14 @@ import java.io.IOException;
 
 @WebServlet(name = "StudentInfoServlet", value = "/student")
 public class StudentInfoServlet extends HttpServlet {
-    StudentDAOImpl student = new StudentDAOImpl();
+    UserDAO user = new UserDAOImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        Student newStudent = student.find(req.getSession().getAttribute("userId").toString());
-        req.setAttribute("user", newStudent);
-//        System.out.println(newStudent);
-//  resp.getWriter().println("qwertyqwertyqwerty");
-       RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/studentBarGetInfo.jsp");
-       dispatcher.forward(req, resp);
+        User newUser = user.findByID(req.getSession().getAttribute("userId").toString());
+        req.setAttribute("user", newUser);
+
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/studentBarGetInfo.jsp");
+        dispatcher.forward(req, resp);
     }
 }
