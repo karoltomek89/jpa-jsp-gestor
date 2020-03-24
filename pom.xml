@@ -29,7 +29,7 @@
             <version>4.11</version>
             <scope>test</scope>
         </dependency>
-        <!-- PODPOWIADANIE SKLADNI-->
+        <!-- syntax prompting -->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
@@ -40,7 +40,7 @@
             <artifactId>javax.servlet-api</artifactId>
             <version>4.0.1</version>
         </dependency>
-        <!-- sterownik JDBC do bazy MySql -->
+        <!-- JDBC driver for MySql database -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
