@@ -22,5 +22,32 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
+# idea local storage ignored files
+/.idea/
 .idea
+.idea/
+/.idea/checkstyleidea-libs/
+/.idea/checkstyleidea-libs
+/.idea/dataSources/
+/.idea/dataSources
+
+
+# target local storage ignored files
+/target/
 target
+target/
+/target/generated-sources/
+/target/generated-sources
+/target/JSP_Project_Gestor/
+/target/JSP_Project_Gestor
+/target/classes/
+/target/classes
+
+/target/JSP_Project_Gestor.war
+
+
+
+
+
+
+
