@@ -5,11 +5,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.kt</groupId>
-  <artifactId>JSP_Project_Gestor</artifactId>
+  <artifactId>JspGestor</artifactId>
   <version>1.0.0</version>
   <packaging>war</packaging>
 
-  <name>JSP_Project_Gestor Maven Webapp</name>
+  <name>JspGestor Maven Webapp</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
