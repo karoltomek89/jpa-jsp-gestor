@@ -35,19 +35,5 @@ public class LoginServlet extends HttpServlet {
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
         dispatcher.forward(req, resp);
-
-
-        // ustawienie ciasteczka z ID użytkownika
-//        if (id != 0) {
-//            Cookie cookie = new Cookie("LoginCookie", String.valueOf(100));
-//            cookie.setMaxAge(100);
-//            cookie.setValue(Integer.toString(id));
-//            resp.addCookie(cookie);
-//            logger.info("studet founded");
-//        } else {
-//            logger.info("user not found");
-//        }
-
-
     }
 }

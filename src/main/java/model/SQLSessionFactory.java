@@ -13,7 +13,6 @@ public class SQLSessionFactory {
 
     private MysqlDataSource dataSource;
 
-    // SQLSessionFactory(String filename)
     public SQLSessionFactory() {
 
         try {
@@ -34,12 +33,6 @@ public class SQLSessionFactory {
 
     }
 
-//    public SQLSessionFactory() {
-//
-//        this("/database.properties");
-//
-//    }
-
     public static void main(String[] args) throws SQLException {
 
         SQLSessionFactory SQLSessionFactory = new SQLSessionFactory();
@@ -55,44 +48,6 @@ public class SQLSessionFactory {
         logger.info("Database name = " + connection.getCatalog());
         return connection;
 
-
-//          obsługa wyjątku w ciele metody, bez wyrzucania go na zewnątrz
-//        try (Connection connection = dataSource.getConnection()) {
-//            logger.info("Connected database successfully!");
-//
-//            /**
-//             *Pobieramy informacje o bazie danych i połączeniu
-//             */
-//            logger.info("Connection = " + connection);
-//            logger.info("Database name = " + connection.getCatalog());
-//            return connection;
-//
-//        } catch (SQLException e) {
-//            /**
-//             *Obsługa wyjątków które mogą pojawić się w trakcie pracy z bazą danych
-//             */
-//            logger.error("Connection error", e);
-//            return null;
-//        }
-
-
     }
-
-//    private Properties getDataBaseProperties(String filename) {
-//        Properties properties = new Properties();
-//        try {
-//            InputStream propertiesStream = SQLSessionFactory.class.getResourceAsStream(filename);
-//            if (propertiesStream == null) {
-//                throw new IllegalArgumentException("Can't find file: " + filename);
-//            }
-//            properties.load(propertiesStream);
-//        } catch (IOException e) {
-//            logger.error("Error during fetching properties for database", e);
-//            return null;
-//        }
-//
-//        return properties;
-//    }
-
 
 }

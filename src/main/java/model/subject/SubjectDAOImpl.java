@@ -74,7 +74,7 @@ public class SubjectDAOImpl implements SubjectDAO {
             }
 
         } catch (SQLException e) {
-            logger.error("Subject cannot be deleted",e);
+            logger.error("Subject cannot be deleted", e);
         }
     }
 
@@ -133,15 +133,15 @@ public class SubjectDAOImpl implements SubjectDAO {
             ResultSet result = statement.executeQuery();
             while (result.next()) {
                 Subject subject = new Subject();
-                subject.setSubjectId(result.getInt("subjectId"));
+                subject.setSubjectId(result.getInt("subjec\n" +
+                        "        }tId"));
                 subject.setName(result.getString("name"));
                 list.add(subject);
             }
         } catch (SQLException e) {
             logger.error("Error listing subjects", e);
         }
-
         return list;
-
     }
 }
+

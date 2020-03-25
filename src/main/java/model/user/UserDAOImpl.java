@@ -38,7 +38,6 @@ public class UserDAOImpl implements UserDAO {
         String query = "INSERT INTO gestordatabase.users (name, surname, email, password, membershipId) VALUES (?,?,?,?,?)";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
-            //parameterIndex zaczyna się od 1!
             statement.setString(1, u.getName());
             statement.setString(2, u.getSurname());
             statement.setString(3, u.getEmail());
