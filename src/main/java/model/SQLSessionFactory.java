@@ -4,11 +4,8 @@ import com.mysql.cj.jdbc.MysqlDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Properties;
 
 public class SQLSessionFactory {
 
@@ -16,15 +13,16 @@ public class SQLSessionFactory {
 
     private MysqlDataSource dataSource;
 
-    public SQLSessionFactory(String filename) {
+    // SQLSessionFactory(String filename)
+    public SQLSessionFactory() {
 
         try {
             dataSource = new MysqlDataSource();
-            dataSource.setServerName(getDataBaseProperties(filename).getProperty("gestor.jdbc.db.server"));
-            dataSource.setDatabaseName(getDataBaseProperties(filename).getProperty("gestor.jdbc.db.name"));
-            dataSource.setUser(getDataBaseProperties(filename).getProperty("gestor.jdbc.db.user"));
-            dataSource.setPassword(getDataBaseProperties(filename).getProperty("gestor.jdbc.db.password"));
-            dataSource.setPort(Integer.parseInt(getDataBaseProperties(filename).getProperty("gestor.jdbc.db.port")));
+            dataSource.setServerName(System.getenv("gestor_jdbc_db_server"));
+            dataSource.setDatabaseName(System.getenv("gestor_jdbc_db_name"));
+            dataSource.setUser(System.getenv("gestor_jdbc_db_user"));
+            dataSource.setPassword(System.getenv("gestor_jdbc_db_password"));
+            dataSource.setPort(Integer.parseInt(System.getenv("gestor_jdbc_db_port")));
             dataSource.setServerTimezone("Europe/Warsaw");
             dataSource.setUseSSL(false);
             dataSource.setCharacterEncoding("UTF-8");
@@ -36,11 +34,11 @@ public class SQLSessionFactory {
 
     }
 
-    public SQLSessionFactory() {
-
-        this("/database.properties");
-
-    }
+//    public SQLSessionFactory() {
+//
+//        this("/database.properties");
+//
+//    }
 
     public static void main(String[] args) throws SQLException {
 
@@ -80,21 +78,21 @@ public class SQLSessionFactory {
 
     }
 
-    private Properties getDataBaseProperties(String filename) {
-        Properties properties = new Properties();
-        try {
-            InputStream propertiesStream = SQLSessionFactory.class.getResourceAsStream(filename);
-            if (propertiesStream == null) {
-                throw new IllegalArgumentException("Can't find file: " + filename);
-            }
-            properties.load(propertiesStream);
-        } catch (IOException e) {
-            logger.error("Error during fetching properties for database", e);
-            return null;
-        }
-
-        return properties;
-    }
+//    private Properties getDataBaseProperties(String filename) {
+//        Properties properties = new Properties();
+//        try {
+//            InputStream propertiesStream = SQLSessionFactory.class.getResourceAsStream(filename);
+//            if (propertiesStream == null) {
+//                throw new IllegalArgumentException("Can't find file: " + filename);
+//            }
+//            properties.load(propertiesStream);
+//        } catch (IOException e) {
+//            logger.error("Error during fetching properties for database", e);
+//            return null;
+//        }
+//
+//        return properties;
+//    }
 
 
 }
