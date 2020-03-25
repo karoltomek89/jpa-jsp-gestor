@@ -95,7 +95,7 @@ public class UserDAOImpl implements UserDAO {
 
 
     @Override
-    public User findByID(String id) {
+    public User findById(String id) {
         User user = new User();
 
         String query = "SELECT * FROM gestordatabase.users WHERE userId= ?";
@@ -202,7 +202,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public String getEmail(String id) {
-        String email = findByID(id).getEmail();
+        String email = findById(id).getEmail();
         return email;
     }
 
