@@ -29,16 +29,16 @@
 
 <c:choose>
     <c:when test="${student eq membershipId}">
-        <%@ include file="studentDefault.jsp" %>
+        <%@ include file="student/studentDefault.jsp" %>
     </c:when>
     <c:when test="${teacher eq membershipId}">
-        <%@ include file="teacherDefault.jsp" %>
+        <%@ include file="teacher/teacherDefault.jsp" %>
     </c:when>
     <c:when test="${parent eq membershipId}">
-        <%@ include file="parentDefault.jsp" %>
+        <%@ include file="parent/parentDefault.jsp" %>
     </c:when>
     <c:when test="${director eq membershipId}">
-        <%@ include file="directorDefault.jsp" %>
+        <%@ include file="director/directorDefault.jsp" %>
     </c:when>
     <c:otherwise>
         <%@ include file="navBarVertical.jsp" %>
