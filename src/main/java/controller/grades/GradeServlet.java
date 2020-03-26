@@ -18,16 +18,19 @@ public class GradeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Optional<Object> grades_value = Optional.ofNullable(req.getParameter("grade"));
-        Optional<Object> users_userId = Optional.ofNullable(req.getParameter("userId"));
-        Optional<Object> subjects_subjectId = Optional.ofNullable(req.getParameter("subjectId"));
+        Optional<Object> gradesValue = Optional.ofNullable(req.getParameter("grade"));
+        Optional<Object> usersUserId = Optional.ofNullable(req.getParameter("userId"));
+        Optional<Object> subjectsSubjectId = Optional.ofNullable(req.getParameter("subjectId"));
 
-        if (!grades_value.isEmpty() && !users_userId.isEmpty() && !subjects_subjectId.isEmpty()) {
-            int value = Integer.parseInt(grades_value.get().toString());
-            int userId = Integer.parseInt(users_userId.get().toString());
-            int subjectId = Integer.parseInt(subjects_subjectId.get().toString());
+        if (!gradesValue.isEmpty() && !usersUserId.isEmpty() && !subjectsSubjectId.isEmpty()) {
+            int value = Integer.parseInt(gradesValue.get().toString());
+            int userId = Integer.parseInt(usersUserId.get().toString());
+            int subjectId = Integer.parseInt(subjectsSubjectId.get().toString());
 
             grade.save(value, userId, subjectId);
+
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+            dispatcher.forward(req, resp);
 
         } else {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");

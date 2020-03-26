@@ -24,7 +24,7 @@ public class StudentGradeServlet extends HttpServlet {
         gradeList = grades.findAllByStudentIdWithName(Integer.valueOf(req.getSession().getAttribute("userId").toString()));
         req.setAttribute("grades", gradeList);
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/student/action/studentBarGetGrades.jsp");
-       dispatcher.forward(req, resp);
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/student/bar/studentBarGetGrades.jsp");
+        dispatcher.forward(req, resp);
     }
 }

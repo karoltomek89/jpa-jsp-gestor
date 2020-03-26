@@ -54,7 +54,8 @@ public class MessageSendReadServlet extends HttpServlet {
 
             message.insert(from, to, topic, text);
 
-
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+            dispatcher.forward(req, resp);
         } else {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
             dispatcher.forward(req, resp);

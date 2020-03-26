@@ -48,6 +48,9 @@ public class RegisterServlet extends HttpServlet {
                     req.getParameter("password"),
                     accountType);
 
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+            dispatcher.forward(req, resp);
+
         } else {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
             dispatcher.forward(req, resp);

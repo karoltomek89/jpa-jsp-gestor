@@ -28,15 +28,15 @@ public class GetSubjectsListServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Optional<Object> userId_value = Optional.ofNullable(req.getSession().getAttribute("userId").toString());
-        Optional<Object> groupId_value = Optional.ofNullable(req.getParameter("groupId"));
+        Optional<Object> userIdValue = Optional.ofNullable(req.getSession().getAttribute("userId").toString());
+        Optional<Object> groupIdValue = Optional.ofNullable(req.getParameter("groupId"));
 
-        if (!userId_value.isEmpty()) {
-            String userId = userId_value.get().toString();
+        if (!userIdValue.isEmpty()) {
+            String userId = userIdValue.get().toString();
             subjectList = subject.findAllByUserId(userId);
             req.setAttribute("subjectList", subjectList);
 
-            String groupId = groupId_value.get().toString();
+            String groupId = groupIdValue.get().toString();
             studentList = user.findAllByGroup(groupId);
             req.setAttribute("studentList", studentList);
 

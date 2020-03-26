@@ -23,10 +23,9 @@ public class GetGroupListForGradesServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Optional<Object> userId_value = Optional.ofNullable(req.getSession().getAttribute("userId").toString());
+        Optional<Object> userIdValue = Optional.ofNullable(req.getSession().getAttribute("userId").toString());
 
-        if (!userId_value.isEmpty()) {
-            String userId = userId_value.get().toString();
+        if (!userIdValue.isEmpty()) {
             groupList = group.findAll();
             req.setAttribute("groupList", groupList);
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/teacher/bar/teacherBarChooseGroupForGrades.jsp");

@@ -133,8 +133,7 @@ public class SubjectDAOImpl implements SubjectDAO {
             ResultSet result = statement.executeQuery();
             while (result.next()) {
                 Subject subject = new Subject();
-                subject.setSubjectId(result.getInt("subjec\n" +
-                        "        }tId"));
+                subject.setSubjectId(result.getInt("subjectId"));
                 subject.setName(result.getString("name"));
                 list.add(subject);
             }
