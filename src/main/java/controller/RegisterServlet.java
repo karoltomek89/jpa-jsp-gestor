@@ -24,38 +24,33 @@ public class RegisterServlet extends HttpServlet {
 
         if (!optional.isEmpty()) {
             String accesType = optional.get().toString();
-            if (accesType.equals("student")) {
-                user.register(
-                        req.getParameter("name"),
-                        req.getParameter("surname"),
-                        req.getParameter("email"),
-                        req.getParameter("password"),
-                        Membership.STUDENT);
-            } else if (accesType.equals("teacher")) {
-                user.register(
-                        req.getParameter("name"),
-                        req.getParameter("surname"),
-                        req.getParameter("email"),
-                        req.getParameter("password"),
-                        Membership.TEACHER);
-            } else if (accesType.equals("parent")) {
-                user.register(
-                        req.getParameter("name"),
-                        req.getParameter("surname"),
-                        req.getParameter("email"),
-                        req.getParameter("password"),
-                        Membership.PARENT);
-            } else if (accesType.equals("director")) {
-                user.register(
-                        req.getParameter("name"),
-                        req.getParameter("surname"),
-                        req.getParameter("email"),
-                        req.getParameter("password"),
-                        Membership.DIRECTOR);
-            } else {
-                RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-                dispatcher.forward(req, resp);
+            Membership accountType = Membership.UNSET;
+
+            switch (accesType) {
+                case "student":
+                    accountType = Membership.STUDENT;
+                    break;
+                case "teacher":
+                    accountType = Membership.TEACHER;
+                    break;
+                case "parent":
+                    accountType = Membership.PARENT;
+                    break;
+                case "director":
+                    accountType = Membership.DIRECTOR;
+                    break;
             }
+
+            user.register(
+                    req.getParameter("name"),
+                    req.getParameter("surname"),
+                    req.getParameter("email"),
+                    req.getParameter("password"),
+                    accountType);
+
+        } else {
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+            dispatcher.forward(req, resp);
         }
     }
 }
