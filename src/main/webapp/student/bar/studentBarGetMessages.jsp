@@ -3,7 +3,6 @@
 <%@taglib prefix="r" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@page isELIgnored="false" %>
-<%@ page %>
 
 <!doctype html>
 <html lang="pl">
@@ -20,7 +19,7 @@
 </head>
 <body>
 
-<%@ include file="../navBarHorizontal.jsp" %>
+<%@ include file="../../navBarHorizontal.jsp" %>
 
 <c:set value="${sessionScope.membershipId}" var="membershipId"/>
 <c:set value="1" var="student"/>
@@ -30,22 +29,21 @@
 
 <c:choose>
     <c:when test="${student eq membershipId}">
-        <%@ include file="../student/studentDefault.jsp" %>
+        <%@ include file="../action/studentGetMessages.jsp" %>
     </c:when>
     <c:when test="${teacher eq membershipId}">
-        <%@ include file="teacherSendMessage.jsp" %>
+        <%@ include file="../../teacher/teacherDefault.jsp" %>
     </c:when>
     <c:when test="${parent eq membershipId}">
-        <%@ include file="../parent/parentDefault.jsp" %>
+        <%@ include file="../../parent/parentDefault.jsp" %>
     </c:when>
     <c:when test="${director eq membershipId}">
-        <%@ include file="../director/directorDefault.jsp" %>
+        <%@ include file="../../director/directorDefault.jsp" %>
     </c:when>
     <c:otherwise>
-        <%@ include file="../navBarVertical.jsp" %>
+        <%@ include file="../../navBarVertical.jsp" %>
     </c:otherwise>
 </c:choose>
-
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -59,7 +57,6 @@
         crossorigin="anonymous"></script>
 </body>
 </html>
-
 
 
 
