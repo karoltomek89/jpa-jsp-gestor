@@ -20,6 +20,7 @@ public class TeacherInfoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User newUser = user.findById(req.getSession().getAttribute("userId").toString());
         req.setAttribute("user", newUser);
+
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/teacherBarGetInfo.jsp");
         dispatcher.forward(req, resp);
     }

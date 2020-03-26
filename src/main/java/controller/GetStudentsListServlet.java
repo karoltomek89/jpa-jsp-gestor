@@ -27,6 +27,5 @@ public class GetStudentsListServlet extends HttpServlet {
         req.setAttribute("studentsList", userList);
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/teacherBarSendMessage.jsp");
         dispatcher.forward(req, resp);
-
     }
 }
