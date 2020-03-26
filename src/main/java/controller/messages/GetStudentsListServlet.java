@@ -1,4 +1,4 @@
-package controller;
+package controller.messages;
 
 import model.Membership;
 import model.user.User;

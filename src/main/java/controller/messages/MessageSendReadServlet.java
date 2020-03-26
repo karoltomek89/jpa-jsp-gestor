@@ -1,4 +1,4 @@
-package controller;
+package controller.messages;
 
 import model.message.Message;
 import model.message.MessageDAO;

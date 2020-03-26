@@ -1,4 +1,4 @@
-package controller;
+package controller.users;
 
 import model.SQLSessionFactory;
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package controller;
+package controller.grades;
 
 import model.grade.GradeDAOImpl;
 

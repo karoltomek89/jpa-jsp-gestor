@@ -1,4 +1,4 @@
-package controller;
+package controller.users;
 
 import model.Membership;
 import model.user.UserDAO;

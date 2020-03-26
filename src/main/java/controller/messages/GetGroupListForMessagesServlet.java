@@ -1,4 +1,4 @@
-package controller;
+package controller.messages;
 
 import model.group.Group;
 import model.group.GroupDAO;
@@ -15,8 +15,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@WebServlet(name = "GetGroupListForGradesServlet", value = "/getgrouplistforgrades")
-public class GetGroupListForGradesServlet extends HttpServlet {
+@WebServlet(name = "GetGroupListForMessagesServlet", value = "/getgrouplistformessages")
+public class GetGroupListForMessagesServlet extends HttpServlet {
     List<Group> groupList = new ArrayList<>();
     GroupDAO group = new GroupDAOImpl();
 
@@ -29,7 +29,7 @@ public class GetGroupListForGradesServlet extends HttpServlet {
             String userId = userId_value.get().toString();
             groupList = group.findAll();
             req.setAttribute("groupList", groupList);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/teacherBarChooseGroupForGrades.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/teacherBarChooseGroupForMessages.jsp");
             dispatcher.forward(req, resp);
         } else {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
