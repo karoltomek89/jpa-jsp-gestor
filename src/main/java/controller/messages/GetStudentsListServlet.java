@@ -25,7 +25,7 @@ public class GetStudentsListServlet extends HttpServlet {
 
         userList = user.findAllByMembership(Membership.STUDENT);
         req.setAttribute("studentsList", userList);
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/teacherBarSendMessage.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/teacher/bar/teacherBarSendMessage.jsp");
         dispatcher.forward(req, resp);
     }
 }

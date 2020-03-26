@@ -40,7 +40,7 @@ public class GetSubjectsListServlet extends HttpServlet {
             studentList = user.findAllByGroup(groupId);
             req.setAttribute("studentList", studentList);
 
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/teacherBarAddGrade.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/teacher/bar/teacherBarAddGrade.jsp");
             dispatcher.forward(req, resp);
         } else {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");

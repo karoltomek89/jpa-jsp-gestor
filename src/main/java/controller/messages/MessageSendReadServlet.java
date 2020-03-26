@@ -33,7 +33,7 @@ public class MessageSendReadServlet extends HttpServlet {
 
         req.setAttribute("messagesList", messagesList);
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/studentBarGetMessages.jsp");
+        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/student/bar/studentBarGetMessages.jsp");
         dispatcher.forward(req, resp);
     }
 

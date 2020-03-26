@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Optional;
 
-@WebServlet(name = "RegisterServlet", value = "/addgrade")
+@WebServlet(name = "GradeServlet", value = "/addgrade")
 public class GradeServlet extends HttpServlet {
     GradeDAOImpl grade = new GradeDAOImpl();
 
