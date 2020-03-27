@@ -74,7 +74,7 @@ public class SubjectDAOImpl implements SubjectDAO {
             }
 
         } catch (SQLException e) {
-            logger.error("Subject cannot be deleted",e);
+            logger.error("Subject cannot be deleted", e);
         }
     }
 
@@ -140,8 +140,7 @@ public class SubjectDAOImpl implements SubjectDAO {
         } catch (SQLException e) {
             logger.error("Error listing subjects", e);
         }
-
         return list;
-
     }
 }
+
