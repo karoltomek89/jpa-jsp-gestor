@@ -29,11 +29,11 @@ public class GradeServlet extends HttpServlet {
 
             grade.save(value, userId, subjectId);
 
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/teacher/bar/teacherBarGradeAdded.jsp");
             dispatcher.forward(req, resp);
 
         } else {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
+            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/teacher/bar/teacherBarGradeNotAdded.jsp");
             dispatcher.forward(req, resp);
         }
     }
