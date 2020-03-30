@@ -36,7 +36,7 @@
             <div class="tab-pane fade show active" id="v-pills-messages" role="tabpanel"
                  aria-labelledby="v-pills-messages-tab">
                 <div class="modal-body">
-                    <form id="sendMessage" method="post" action="messages">
+                    <form id="sendMessage" method="post" action="messages" enctype="text/html;charset=UTF-8">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label>Uczeń</label>

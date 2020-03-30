@@ -4,32 +4,26 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
-@WebFilter(servletNames = {"/*"})
+@WebFilter(urlPatterns = {"/*"})
 public class CharsetFilters implements Filter {
 
-    private String encoding;
+    private String encoding = "utf-8";
 
-    @Override
-    public void init(FilterConfig filterConfig) {
-        encoding = filterConfig.getInitParameter("requestEncoding");
-        if (encoding == null) encoding = "UTF-8";
+    public void doFilter(ServletRequest request, ServletResponse response,
+                         FilterChain filterChain) throws IOException, ServletException {
+        request.setCharacterEncoding(encoding);
+        filterChain.doFilter(request, response);
     }
 
-    @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-
-        if (null == servletRequest.getCharacterEncoding()) {
-            servletRequest.setCharacterEncoding(encoding);
+    public void init(FilterConfig filterConfig) throws ServletException {
+        String encodingParam = filterConfig.getInitParameter("encoding");
+        if (encodingParam != null) {
+            encoding = encodingParam;
         }
-
-        // Set the default response content type and encoding
-        servletResponse.setContentType("text/html; charset=UTF-8");
-        servletResponse.setCharacterEncoding("UTF-8");
-
-        filterChain.doFilter(servletRequest, servletResponse);
     }
 
-    @Override
     public void destroy() {
+        // nothing todo
     }
+
 }
