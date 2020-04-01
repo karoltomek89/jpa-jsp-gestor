@@ -10,7 +10,7 @@ public interface MessageDAO {
 
     void update (Message m);
 
-    void remove (String id);
+    void delete(String id);
 
     List<Message> findAll();
 

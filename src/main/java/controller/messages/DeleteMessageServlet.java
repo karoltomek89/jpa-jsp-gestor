@@ -24,7 +24,9 @@ public class DeleteMessageServlet extends HttpServlet {
         Optional<Object> messageId = Optional.ofNullable(req.getParameter("messageId"));
 
         if (!messageId.isEmpty()) {
-            message.remove((req.getSession().getAttribute("messageId").toString()));
+            String id = messageId.get().toString();
+            message.delete(id);
+
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/student/bar/studentBarGetMessages.jsp");
             dispatcher.forward(req, resp);
         } else {
