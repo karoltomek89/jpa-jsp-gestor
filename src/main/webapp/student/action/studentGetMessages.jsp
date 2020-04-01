@@ -51,6 +51,12 @@
                             Pokaz wiadomość
                         </button>
 
+                    <FORM id="deleteMessage" method="POST" action="${pageContext.request.contextPath}/deleteMessage">
+                        <INPUT TYPE="hidden" NAME="messageId" VALUE="${item.id}">
+                    </FORM>
+
+                    <button type="submit" form="deleteMessage" class="btn btn-primary">Usuń wiadomość</button>
+
                     </p>
                     <div class="collapse" id="collapse${item.id}">
                         <div class="card card-body">

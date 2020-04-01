@@ -23,7 +23,6 @@ public class CharsetFilters implements Filter {
     }
 
     public void destroy() {
-        // nothing todo
     }
 
 }
