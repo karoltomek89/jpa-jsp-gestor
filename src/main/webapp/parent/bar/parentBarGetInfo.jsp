@@ -33,13 +33,13 @@
 
 <c:choose>
     <c:when test="${student eq membershipId}">
-        <%@ include file="../action/parentGetInfo.jsp" %>
+        <%@ include file="../../student/studentDefault.jsp" %>
     </c:when>
     <c:when test="${teacher eq membershipId}">
         <%@ include file="../../teacher/teacherDefault.jsp" %>
     </c:when>
     <c:when test="${parent eq membershipId}">
-        <%@ include file="../../parent/parentDefault.jsp" %>
+        <%@ include file="../action/parentGetInfo.jsp" %>
     </c:when>
     <c:when test="${director eq membershipId}">
         <%@ include file="../../director/directorDefault.jsp" %>
