@@ -3,7 +3,6 @@ package controller.messages;
 import model.message.MessageDAO;
 import model.message.MessageDAOImpl;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,12 +26,10 @@ public class DeleteMessageServlet extends HttpServlet {
             String id = messageId.get().toString();
             message.delete(id);
 
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/student/bar/studentBarGetMessages.jsp");
-            dispatcher.forward(req, resp);
+            resp.sendRedirect(req.getContextPath() + "/messages");
         } else {
 
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/student/bar/studentBarGetMessages.jsp");
-            dispatcher.forward(req, resp);
+            resp.sendRedirect(req.getContextPath() + "/messages");
         }
     }
 }
