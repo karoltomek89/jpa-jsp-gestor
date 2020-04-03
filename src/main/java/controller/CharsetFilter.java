@@ -5,7 +5,7 @@ import javax.servlet.annotation.WebFilter;
 import java.io.IOException;
 
 @WebFilter(urlPatterns = {"/*"})
-public class CharsetFilters implements Filter {
+public class CharsetFilter implements Filter {
 
     private String encoding = "utf-8";
 

@@ -13,7 +13,7 @@
     <div class="col-1">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
 
-            <a class="nav-link" id="v-pills-user-tab" href="${pageContext.request.contextPath}/teacher" role="tab"
+            <a class="nav-link" id="v-pills-user-tab" href="${pageContext.request.contextPath}/info" role="tab"
                aria-controls="v-pills-user" aria-selected="false">Info</a>
 
             <a class="nav-link active" id="v-pills-grades-tab"

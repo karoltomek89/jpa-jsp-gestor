@@ -12,7 +12,7 @@
 <div class="row">
     <div class="col-1">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <a class="nav-link" id="v-pills-student-tab" href="${pageContext.request.contextPath}/parent" role="tab"
+            <a class="nav-link" id="v-pills-student-tab" href="${pageContext.request.contextPath}/info" role="tab"
                aria-controls="v-pills-student" aria-selected="false">Info</a>
             <a class="nav-link" id="v-pills-grades-tab" data-toggle="pill" href="#v-pills-grades" role="tab"
                aria-controls="v-pills-grades" aria-selected="true">Oceny dzieci</a>
