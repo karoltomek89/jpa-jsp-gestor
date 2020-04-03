@@ -33,8 +33,22 @@ public class MessageSendReadServlet extends HttpServlet {
 
         req.setAttribute("messagesList", messagesList);
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/student/bar/studentBarGetMessages.jsp");
+        RequestDispatcher dispatcher;
+
+        switch (user.getMembershipById(
+                user.getMembershipId(
+                        Integer.parseInt(req.getSession().getAttribute("userId").toString())))) {
+            case STUDENT:
+                dispatcher = getServletContext().getRequestDispatcher("/student/bar/studentBarGetMessages.jsp");
+                break;
+            case PARENT:
+                dispatcher = getServletContext().getRequestDispatcher("/parent/bar/parentBarGetMessages.jsp");
+                break;
+            default:
+                dispatcher = getServletContext().getRequestDispatcher("index.jsp");
+        }
         dispatcher.forward(req, resp);
+
     }
 
     @Override
