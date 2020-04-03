@@ -12,7 +12,8 @@
 <div class="row">
     <div class="col-1">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <a class="nav-link" id="v-pills-director-tab" href="${pageContext.request.contextPath}/director" role="tab"
+            <a class="nav-link active" id="v-pills-director-tab" href="${pageContext.request.contextPath}/director"
+               role="tab"
                aria-controls="v-pills-diretor" aria-selected="false">Info</a>
             <a class="nav-link" id="v-pills-permissions-tab" data-toggle="pill" href="#v-pills-permissions" role="tab"
                aria-controls="v-pills-permissions" aria-selected="true">Nadaj uprawnienia</a>
@@ -22,7 +23,7 @@
                aria-controls="v-pills-logout" aria-selected="false">Wyloguj</a>
         </div>
     </div>
-
+    <%@ include file="/userGetInfo.jsp" %>
     <div class="col-11">
         <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade" id="v-pills-permissions" role="tabpanel"
