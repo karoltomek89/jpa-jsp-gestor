@@ -36,10 +36,10 @@
         <%@ include file="../../student/studentDefault.jsp" %>
     </c:when>
     <c:when test="${teacher eq membershipId}">
-        <%@ include file="../action/teacherGradeAdded.jsp" %>
+        <%@ include file="../../teacher/teacherDefault.jsp" %>
     </c:when>
     <c:when test="${parent eq membershipId}">
-        <%@ include file="../../parent/parentDefault.jsp" %>
+        <%@ include file="../action/parentGetMessages.jsp" %>
     </c:when>
     <c:when test="${director eq membershipId}">
         <%@ include file="../../director/directorDefault.jsp" %>
@@ -48,7 +48,6 @@
         <%@ include file="../../navBarVertical.jsp" %>
     </c:otherwise>
 </c:choose>
-
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
@@ -60,14 +59,8 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
-<script>
-    $(document).ready(function () {
-        $("#exampleModalCenter").modal('show');
-    });
-</script>
 </body>
 </html>
-
 
 
 

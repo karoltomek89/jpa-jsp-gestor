@@ -20,10 +20,9 @@ public class SubjectDAOImpl implements SubjectDAO {
     @Override
     public void register(String name) {
         Subject newSubject = new Subject();
-
         newSubject.setName(name);
-
         save(newSubject);
+        logger.info("Subject registered");
     }
 
     @Override
@@ -89,6 +88,7 @@ public class SubjectDAOImpl implements SubjectDAO {
             ResultSet result = statement.executeQuery();
             if (result.next()) {
                 subject.setName(result.getString("subjectId"));
+                logger.info("Subject found");
             } else {
                 logger.info("Nothing found");
                 return null;
@@ -112,21 +112,22 @@ public class SubjectDAOImpl implements SubjectDAO {
                 subject.setSubjectId(result.getInt("subjectId"));
                 subject.setName(result.getString("name"));
                 list.add(subject);
+                logger.info("Subject added");
             }
         } catch (SQLException e) {
             logger.error("Error listing all subjects", e);
         }
-
         return list;
-
     }
-
 
     @Override
     public List<Subject> findAllByUserId(String userId) {
         List<Subject> list = new ArrayList<>();
 
-        String query = "SELECT * FROM gestordatabase.subjects JOIN gestordatabase.users_has_subjects ON subjects.subjectId = users_has_subjects.subjects_subjectId WHERE users_userId= ?";
+        String query = "SELECT * FROM gestordatabase.subjects " +
+                "JOIN gestordatabase.users_has_subjects " +
+                "ON subjects.subjectId = users_has_subjects.subjects_subjectId " +
+                "WHERE users_userId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, userId);
@@ -136,6 +137,7 @@ public class SubjectDAOImpl implements SubjectDAO {
                 subject.setSubjectId(result.getInt("subjectId"));
                 subject.setName(result.getString("name"));
                 list.add(subject);
+                logger.info("Subject added");
             }
         } catch (SQLException e) {
             logger.error("Error listing subjects", e);
@@ -143,4 +145,3 @@ public class SubjectDAOImpl implements SubjectDAO {
         return list;
     }
 }
-

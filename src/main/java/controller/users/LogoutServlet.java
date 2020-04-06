@@ -25,5 +25,7 @@ public class LogoutServlet extends HttpServlet {
         session.invalidate();
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
         dispatcher.forward(req, resp);
+
+        logger.info("Login not correct");
     }
 }

@@ -18,13 +18,13 @@ public class GradeDAOImpl implements GradeDAO {
     SQLSessionFactory SQLSessionFactory = new SQLSessionFactory();
 
     @Override
-    public void save(int value, int userId, int subjects_subjectId) {
+    public void save(int value, int userId, int subjectsSubjectId) {
         String query = "INSERT INTO gestordatabase.grades (value, users_userId, subjects_subjectId) VALUES (?, ?, ?)";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setDouble(1, value);
             statement.setInt(2, userId);
-            statement.setInt(3, subjects_subjectId);
+            statement.setInt(3, subjectsSubjectId);
             int i = statement.executeUpdate();
             logger.info("Grade added");
             if (i == 0) {
@@ -68,7 +68,7 @@ public class GradeDAOImpl implements GradeDAO {
             }
 
         } catch (SQLException e) {
-            logger.error("Grade cannot be deleted",e);
+            logger.error("Grade cannot be deleted", e);
         }
     }
 
@@ -83,6 +83,7 @@ public class GradeDAOImpl implements GradeDAO {
             ResultSet result = statement.executeQuery();
             if (result.next()) {
                 grade.setValue(result.getDouble("value"));
+                logger.info("Grade found");
             } else {
                 logger.info("Nothing found");
                 return null;
@@ -106,11 +107,11 @@ public class GradeDAOImpl implements GradeDAO {
                 grade.setGradeId(result.getInt("gradeId"));
                 grade.setValue(result.getDouble("value"));
                 list.add(grade);
+                logger.info("Grade listed");
             }
         } catch (SQLException e) {
             logger.error("Error listing all grades", e);
         }
-
         return list;
     }
 
@@ -128,13 +129,12 @@ public class GradeDAOImpl implements GradeDAO {
                 grade.setGradeId(result.getInt("gradeId"));
                 grade.setValue(result.getDouble("value"));
                 list.add(grade);
+                logger.info("Grade found");
             }
         } catch (SQLException e) {
             logger.error("Error listing all grades", e);
         }
-
         return list;
-
     }
 
     @Override
@@ -152,12 +152,11 @@ public class GradeDAOImpl implements GradeDAO {
                 grade.setValue(result.getDouble("value"));
                 grade.setName(result.getString("name"));
                 list.add(grade);
+                logger.info("Grade found");
             }
         } catch (SQLException e) {
             logger.error("Error listing all grades", e);
         }
-
         return list;
-
     }
 }

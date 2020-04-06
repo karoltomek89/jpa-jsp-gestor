@@ -35,7 +35,8 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void save(User u) {
-        String query = "INSERT INTO gestordatabase.users (name, surname, email, password, membershipId) VALUES (?,?,?,?,?)";
+        String query =
+                "INSERT INTO gestordatabase.users (name, surname, email, password, membershipId) VALUES (?,?,?,?,?)";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, u.getName());
@@ -110,6 +111,7 @@ public class UserDAOImpl implements UserDAO {
                 user.setPassword(result.getString("password"));
                 user.setUserId(result.getInt("userId"));
                 user.setMembership(getMembershipById(result.getInt("membershipId")));
+                logger.info("User found");
             } else {
                 logger.info("Nothing found");
                 return null;
@@ -141,9 +143,8 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException e) {
             logger.error("Error listing all users", e);
         }
-
+        logger.info("Uers found");
         return list;
-
     }
 
     @Override
@@ -169,7 +170,7 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException e) {
             logger.error("Error listing users by membershipId", e);
         }
-
+        logger.info("Users found");
         return list;
     }
 
@@ -197,13 +198,13 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException e) {
             logger.error("Error login user", e);
         }
+        logger.info("User logged");
         return user.getUserId();
     }
 
     @Override
     public String getEmail(String id) {
-        String email = findById(id).getEmail();
-        return email;
+        return findById(id).getEmail();
     }
 
     @Override
@@ -225,6 +226,7 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException e) {
             logger.error("Error searching membershipId", e);
         }
+        logger.info("Membership found");
         return membershipId;
 
     }
@@ -269,6 +271,7 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException e) {
             logger.error("Error searching group", e);
         }
+        logger.info("User group found");
         return groupId;
     }
 
@@ -276,7 +279,9 @@ public class UserDAOImpl implements UserDAO {
     public List<User> findAllByGroup(String groupId) {
         List<User> list = new ArrayList<>();
 
-        String query = "SELECT * FROM gestordatabase.users JOIN gestordatabase.groups_has_users ON users.userId = groups_has_users.users_userId  WHERE groups_groupId= ?;";
+        String query = "SELECT * FROM gestordatabase.users " +
+                "JOIN gestordatabase.groups_has_users " +
+                "ON users.userId = groups_has_users.users_userId  WHERE groups_groupId= ?;";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, groupId);
@@ -294,7 +299,7 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException e) {
             logger.error("Error listing users by groupId", e);
         }
-
+        logger.info("Users found");
         return list;
     }
 }

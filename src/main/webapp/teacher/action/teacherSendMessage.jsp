@@ -1,7 +1,18 @@
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="r" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@taglib prefix="f" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@page isELIgnored="false" %>
+<%@ page %>
+<%
+    response.setCharacterEncoding("UTF-8");
+    request.setCharacterEncoding("UTF-8");
+%>
+
 <div class="row">
     <div class="col-1">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <a class="nav-link" id="v-pills-user-tab" href="${pageContext.request.contextPath}/teacher" role="tab"
+            <a class="nav-link" id="v-pills-user-tab" href="${pageContext.request.contextPath}/info" role="tab"
                aria-controls="v-pills-user" aria-selected="false">Info</a>
             <a class="nav-link" id="v-pills-grades-tab" href="${pageContext.request.contextPath}/getgrouplistforgrades"
                role="tab" aria-controls="v-pills-grades" aria-selected="true">Dodaj ocenę</a>
@@ -25,7 +36,7 @@
             <div class="tab-pane fade show active" id="v-pills-messages" role="tabpanel"
                  aria-labelledby="v-pills-messages-tab">
                 <div class="modal-body">
-                    <form id="sendMessage" method="post" action="messages">
+                    <form id="sendMessage" method="post" action="messages" enctype="text/html;charset=UTF-8">
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label>Uczeń</label>
