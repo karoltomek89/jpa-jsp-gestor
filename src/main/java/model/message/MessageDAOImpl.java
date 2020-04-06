@@ -28,11 +28,13 @@ public class MessageDAOImpl implements MessageDAO {
 
         List<Message> messageList = new ArrayList<>();
 
-        FindIterable<Message> messagesTo = mongoDBSessionFactory.getCollection().find(eq("to", userEmail));
+        FindIterable<Message> messagesTo = mongoDBSessionFactory.getCollection()
+                .find(eq("to", userEmail));
         for (Message m : messagesTo) {
             messageList.add(m);
         }
-        FindIterable<Message> messagesFrom = mongoDBSessionFactory.getCollection().find(eq("from", userEmail));
+        FindIterable<Message> messagesFrom = mongoDBSessionFactory.getCollection()
+                .find(eq("from", userEmail));
         for (Message m : messagesFrom) {
             messageList.add(m);
         }

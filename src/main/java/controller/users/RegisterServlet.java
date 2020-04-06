@@ -39,6 +39,8 @@ public class RegisterServlet extends HttpServlet {
                 case "director":
                     accountType = Membership.DIRECTOR;
                     break;
+                default:
+                    break;
             }
 
             user.register(

@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 import static org.bson.codecs.configuration.CodecRegistries.fromProviders;
 import static org.bson.codecs.configuration.CodecRegistries.fromRegistries;
 
-
 public class MongoDBSessionFactory {
 
     private static Logger logger = LoggerFactory.getLogger(MongoDBSessionFactory.class);
@@ -21,7 +20,8 @@ public class MongoDBSessionFactory {
             fromProviders(PojoCodecProvider.builder().automatic(true).build()));
 
     MongoClient mongoClient = new MongoClient();
-    MongoDatabase database = mongoClient.getDatabase("gestorMessages").withCodecRegistry(pojoCodecRegistry);
+    MongoDatabase database = mongoClient.getDatabase("gestorMessages")
+            .withCodecRegistry(pojoCodecRegistry);
 
     MongoCollection<Message> collection = database.getCollection("messages", Message.class);
 

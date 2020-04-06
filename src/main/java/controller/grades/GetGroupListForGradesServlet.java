@@ -28,7 +28,8 @@ public class GetGroupListForGradesServlet extends HttpServlet {
         if (!userIdValue.isEmpty()) {
             groupList = group.findAll();
             req.setAttribute("groupList", groupList);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/teacher/bar/teacherBarChooseGroupForGrades.jsp");
+            RequestDispatcher dispatcher = getServletContext()
+                    .getRequestDispatcher("/teacher/bar/teacherBarChooseGroupForGrades.jsp");
             dispatcher.forward(req, resp);
         } else {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");

@@ -6,9 +6,9 @@ public interface MessageDAO {
 
     void insert(String from, String to, String topic, String text);
 
-    Message find (String id);
+    Message find(String id);
 
-    void update (Message m);
+    void update(Message m);
 
     void delete(String id);
 

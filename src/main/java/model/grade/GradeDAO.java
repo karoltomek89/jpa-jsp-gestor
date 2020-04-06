@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface GradeDAO {
 
-    void save(int value, int students_studentId, int subjects_subjectId);
+    void save(int value, int studentsStudentId, int subjectsSubjectId);
 
     void update(Grade g);
 

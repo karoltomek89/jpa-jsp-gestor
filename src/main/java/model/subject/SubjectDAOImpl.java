@@ -126,7 +126,10 @@ public class SubjectDAOImpl implements SubjectDAO {
     public List<Subject> findAllByUserId(String userId) {
         List<Subject> list = new ArrayList<>();
 
-        String query = "SELECT * FROM gestordatabase.subjects JOIN gestordatabase.users_has_subjects ON subjects.subjectId = users_has_subjects.subjects_subjectId WHERE users_userId= ?";
+        String query = "SELECT * FROM gestordatabase.subjects " +
+                "JOIN gestordatabase.users_has_subjects " +
+                "ON subjects.subjectId = users_has_subjects.subjects_subjectId " +
+                "WHERE users_userId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, userId);

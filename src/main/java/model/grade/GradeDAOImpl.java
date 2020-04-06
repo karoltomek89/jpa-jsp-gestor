@@ -18,13 +18,13 @@ public class GradeDAOImpl implements GradeDAO {
     SQLSessionFactory SQLSessionFactory = new SQLSessionFactory();
 
     @Override
-    public void save(int value, int userId, int subjects_subjectId) {
+    public void save(int value, int userId, int subjectsSubjectId) {
         String query = "INSERT INTO gestordatabase.grades (value, users_userId, subjects_subjectId) VALUES (?, ?, ?)";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setDouble(1, value);
             statement.setInt(2, userId);
-            statement.setInt(3, subjects_subjectId);
+            statement.setInt(3, subjectsSubjectId);
             int i = statement.executeUpdate();
             logger.info("Grade added");
             if (i == 0) {

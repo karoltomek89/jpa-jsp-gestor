@@ -35,7 +35,8 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void save(User u) {
-        String query = "INSERT INTO gestordatabase.users (name, surname, email, password, membershipId) VALUES (?,?,?,?,?)";
+        String query =
+                "INSERT INTO gestordatabase.users (name, surname, email, password, membershipId) VALUES (?,?,?,?,?)";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, u.getName());
@@ -276,7 +277,9 @@ public class UserDAOImpl implements UserDAO {
     public List<User> findAllByGroup(String groupId) {
         List<User> list = new ArrayList<>();
 
-        String query = "SELECT * FROM gestordatabase.users JOIN gestordatabase.groups_has_users ON users.userId = groups_has_users.users_userId  WHERE groups_groupId= ?;";
+        String query = "SELECT * FROM gestordatabase.users " +
+                "JOIN gestordatabase.groups_has_users " +
+                "ON users.userId = groups_has_users.users_userId  WHERE groups_groupId= ?;";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, groupId);

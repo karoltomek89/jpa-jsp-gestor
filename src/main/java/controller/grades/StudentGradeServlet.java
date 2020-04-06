@@ -21,10 +21,12 @@ public class StudentGradeServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        gradeList = grades.findAllByStudentIdWithName(Integer.valueOf(req.getSession().getAttribute("userId").toString()));
+        gradeList = grades
+                .findAllByStudentIdWithName(Integer.valueOf(req.getSession().getAttribute("userId").toString()));
         req.setAttribute("grades", gradeList);
 
-        RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/student/bar/studentBarGetGrades.jsp");
+        RequestDispatcher dispatcher = getServletContext()
+                .getRequestDispatcher("/student/bar/studentBarGetGrades.jsp");
         dispatcher.forward(req, resp);
     }
 }

@@ -29,7 +29,8 @@ public class GetGroupListForMessagesServlet extends HttpServlet {
             String userId = userId_value.get().toString();
             groupList = group.findAll();
             req.setAttribute("groupList", groupList);
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/teacher/bar/teacherBarChooseGroupForMessages.jsp");
+            RequestDispatcher dispatcher = getServletContext()
+                    .getRequestDispatcher("/teacher/bar/teacherBarChooseGroupForMessages.jsp");
             dispatcher.forward(req, resp);
         } else {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");

@@ -15,7 +15,7 @@ public class CharsetFilter implements Filter {
         filterChain.doFilter(request, response);
     }
 
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         String encodingParam = filterConfig.getInitParameter("encoding");
         if (encodingParam != null) {
             encoding = encodingParam;

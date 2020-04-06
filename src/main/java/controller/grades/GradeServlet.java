@@ -33,7 +33,8 @@ public class GradeServlet extends HttpServlet {
             dispatcher.forward(req, resp);
 
         } else {
-            RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/teacher/bar/teacherBarGradeNotAdded.jsp");
+            RequestDispatcher dispatcher = getServletContext()
+                    .getRequestDispatcher("/teacher/bar/teacherBarGradeNotAdded.jsp");
             dispatcher.forward(req, resp);
         }
     }
