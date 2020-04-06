@@ -24,6 +24,8 @@ public class GroupDAOImpl implements GroupDAO {
         newGroup.setName(name);
 
         save(newGroup);
+
+        logger.info("Group registered");
     }
 
     @Override
@@ -112,13 +114,11 @@ public class GroupDAOImpl implements GroupDAO {
                 group.setGroupId(result.getInt("groupId"));
                 group.setName(result.getString("name"));
                 groupList.add(group);
+                logger.info("Group found");
             }
         } catch (SQLException e) {
             logger.error("Error listing all groups", e);
         }
-
         return groupList;
-
     }
-
 }

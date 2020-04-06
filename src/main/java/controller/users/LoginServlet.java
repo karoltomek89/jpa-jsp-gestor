@@ -35,5 +35,7 @@ public class LoginServlet extends HttpServlet {
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
         dispatcher.forward(req, resp);
+
+        logger.info("Login correct");
     }
 }

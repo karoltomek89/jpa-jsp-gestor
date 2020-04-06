@@ -20,10 +20,9 @@ public class SubjectDAOImpl implements SubjectDAO {
     @Override
     public void register(String name) {
         Subject newSubject = new Subject();
-
         newSubject.setName(name);
-
         save(newSubject);
+        logger.info("Subject registered");
     }
 
     @Override
@@ -89,6 +88,7 @@ public class SubjectDAOImpl implements SubjectDAO {
             ResultSet result = statement.executeQuery();
             if (result.next()) {
                 subject.setName(result.getString("subjectId"));
+                logger.info("Subject found");
             } else {
                 logger.info("Nothing found");
                 return null;
@@ -112,15 +112,13 @@ public class SubjectDAOImpl implements SubjectDAO {
                 subject.setSubjectId(result.getInt("subjectId"));
                 subject.setName(result.getString("name"));
                 list.add(subject);
+                logger.info("Subject added");
             }
         } catch (SQLException e) {
             logger.error("Error listing all subjects", e);
         }
-
         return list;
-
     }
-
 
     @Override
     public List<Subject> findAllByUserId(String userId) {
@@ -139,6 +137,7 @@ public class SubjectDAOImpl implements SubjectDAO {
                 subject.setSubjectId(result.getInt("subjectId"));
                 subject.setName(result.getString("name"));
                 list.add(subject);
+                logger.info("Subject added");
             }
         } catch (SQLException e) {
             logger.error("Error listing subjects", e);
@@ -146,4 +145,3 @@ public class SubjectDAOImpl implements SubjectDAO {
         return list;
     }
 }
-

@@ -1,8 +1,11 @@
 package controller.messages;
 
+import model.SQLSessionFactory;
 import model.group.Group;
 import model.group.GroupDAO;
 import model.group.GroupDAOImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,14 +22,14 @@ import java.util.Optional;
 public class GetGroupListForMessagesServlet extends HttpServlet {
     List<Group> groupList = new ArrayList<>();
     GroupDAO group = new GroupDAOImpl();
+    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
         Optional<Object> userId_value = Optional.ofNullable(req.getSession().getAttribute("userId").toString());
 
-        if (!userId_value.isEmpty()) {
-            String userId = userId_value.get().toString();
+        if (userId_value.isPresent()) {
             groupList = group.findAll();
             req.setAttribute("groupList", groupList);
             RequestDispatcher dispatcher = getServletContext()
@@ -35,6 +38,7 @@ public class GetGroupListForMessagesServlet extends HttpServlet {
         } else {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
             dispatcher.forward(req, resp);
+            logger.info("No userId, groupList not created");
         }
     }
 }

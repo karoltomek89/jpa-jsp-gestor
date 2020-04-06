@@ -1,8 +1,11 @@
 package controller.grades;
 
+import model.SQLSessionFactory;
 import model.group.Group;
 import model.group.GroupDAO;
 import model.group.GroupDAOImpl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,6 +20,7 @@ import java.util.Optional;
 
 @WebServlet(name = "GetGroupListForGradesServlet", value = "/getgrouplistforgrades")
 public class GetGroupListForGradesServlet extends HttpServlet {
+    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
     List<Group> groupList = new ArrayList<>();
     GroupDAO group = new GroupDAOImpl();
 
@@ -25,7 +29,7 @@ public class GetGroupListForGradesServlet extends HttpServlet {
 
         Optional<Object> userIdValue = Optional.ofNullable(req.getSession().getAttribute("userId").toString());
 
-        if (!userIdValue.isEmpty()) {
+        if (userIdValue.isPresent()) {
             groupList = group.findAll();
             req.setAttribute("groupList", groupList);
             RequestDispatcher dispatcher = getServletContext()
@@ -33,7 +37,7 @@ public class GetGroupListForGradesServlet extends HttpServlet {
             dispatcher.forward(req, resp);
         } else {
             RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-            dispatcher.forward(req, resp);
+            logger.info("No userId, list not created");
         }
     }
 }

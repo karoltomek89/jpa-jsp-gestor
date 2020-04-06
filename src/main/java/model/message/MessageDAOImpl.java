@@ -2,7 +2,10 @@ package model.message;
 
 import com.mongodb.client.FindIterable;
 import model.MongoDBSessionFactory;
+import model.SQLSessionFactory;
 import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +13,7 @@ import java.util.List;
 import static com.mongodb.client.model.Filters.eq;
 
 public class MessageDAOImpl implements MessageDAO {
+    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
 
     MongoDBSessionFactory mongoDBSessionFactory = new MongoDBSessionFactory();
 
@@ -20,11 +24,11 @@ public class MessageDAOImpl implements MessageDAO {
 
         mongoDBSessionFactory.getCollection().insertOne(newMessage);
 
+        logger.info("Message sended");
     }
 
     @Override
     public List<Message> findAllOfUser(String userEmail) {
-
 
         List<Message> messageList = new ArrayList<>();
 
@@ -38,6 +42,7 @@ public class MessageDAOImpl implements MessageDAO {
         for (Message m : messagesFrom) {
             messageList.add(m);
         }
+        logger.info("Messages found");
         return messageList;
     }
 
@@ -49,21 +54,17 @@ public class MessageDAOImpl implements MessageDAO {
 
     @Override
     public void update(Message m) {
-
     }
 
     @Override
     public void delete(String id) {
-
         mongoDBSessionFactory.getCollection().findOneAndDelete(eq("_id", new ObjectId(id)));
-
+        logger.info("Messages deleted");
     }
-
 
     @Override
     public List<Message> findAll() {
         return null;
     }
-
 
 }
