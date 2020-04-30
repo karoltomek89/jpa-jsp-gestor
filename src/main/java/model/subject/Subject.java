@@ -1,7 +1,16 @@
 package model.subject;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "subjects")
 public class Subject {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "subjectId")
     private int subjectId;
+
     private String name;
 
     public int getSubjectId() {

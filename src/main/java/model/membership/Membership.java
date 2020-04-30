@@ -1,10 +1,22 @@
 package model.membership;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "membership")
 public class Membership {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "membershipId")
     private int membershipId;
+
     private MembershipType type;
+
     private String comment;
+
+    public Membership() {
+    }
 
     public Membership(int membershipId, MembershipType type, String comment) {
         this.membershipId = membershipId;

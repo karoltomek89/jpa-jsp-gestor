@@ -1,8 +1,15 @@
 package model.group;
 
-public class Group {
+import javax.persistence.*;
 
+@Entity
+@Table(name = "groups")
+public class Group {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "groupId")
     private int groupId;
+
     private String name;
 
     public int getGroupId() {

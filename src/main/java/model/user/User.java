@@ -2,12 +2,23 @@ package model.user;
 
 import model.membership.MembershipType;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "userId")
     private int userId;
+
     private String name;
     private String surname;
     private String email;
     private String password;
+
+    @Column(name = "membershipId")
     private MembershipType membershipType;
 
     public MembershipType getMembershipType() {

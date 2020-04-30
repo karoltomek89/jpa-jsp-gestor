@@ -1,7 +1,16 @@
 package model.grade;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "grades")
 public class Grade {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "gradeId")
     private int gradeId;
+
     private double value;
 
     public int getGradeId() {
