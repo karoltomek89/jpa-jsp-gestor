@@ -21,6 +21,9 @@ public class User {
     @Column(name = "membershipId")
     private MembershipType membershipType;
 
+    public User() {
+    }
+
     public MembershipType getMembershipType() {
         return membershipType;
     }

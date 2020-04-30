@@ -13,6 +13,9 @@ public class Grade {
 
     private double value;
 
+    public Grade() {
+    }
+
     public int getGradeId() {
         return gradeId;
     }

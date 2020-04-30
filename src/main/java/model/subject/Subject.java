@@ -13,6 +13,9 @@ public class Subject {
 
     private String name;
 
+    public Subject() {
+    }
+
     public int getSubjectId() {
         return subjectId;
     }

@@ -10,6 +10,9 @@ public class Group {
     @Column(name = "groupId")
     private int groupId;
 
+    public Group() {
+    }
+
     private String name;
 
     public int getGroupId() {
