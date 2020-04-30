@@ -23,8 +23,8 @@ public class InfoServlet extends HttpServlet {
 
         RequestDispatcher dispatcher;
 
-        switch (user.getMembershipById(
-                user.getMembershipId(
+        switch (user.getMembershipTypeById(
+                user.getMembershipTypeId(
                         Integer.parseInt(req.getSession().getAttribute("userId").toString())))) {
             case STUDENT:
                 dispatcher = getServletContext().getRequestDispatcher("/student/bar/studentBarGetInfo.jsp");

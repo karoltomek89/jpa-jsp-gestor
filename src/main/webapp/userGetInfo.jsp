@@ -35,7 +35,7 @@
                 </tr>
                 <tr>
                     <td>Grupa</td>
-                    <td>${user.membership}</td>
+                    <td>${user.membershipType}</td>
                 </tr>
                 </tbody>
             </table>
