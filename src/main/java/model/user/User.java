@@ -1,6 +1,6 @@
 package model.user;
 
-import model.Membership;
+import model.membership.MembershipType;
 
 public class User {
     private int userId;
@@ -8,14 +8,14 @@ public class User {
     private String surname;
     private String email;
     private String password;
-    private Membership membership;
+    private MembershipType membershipType;
 
-    public Membership getMembership() {
-        return membership;
+    public MembershipType getMembershipType() {
+        return membershipType;
     }
 
-    public void setMembership(Membership membership) {
-        this.membership = membership;
+    public void setMembershipType(MembershipType membershipType) {
+        this.membershipType = membershipType;
     }
 
     public int getUserId() {
@@ -66,7 +66,7 @@ public class User {
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", membership=" + membership +
+                ", membership=" + membershipType +
                 '}';
     }
 }

@@ -47,6 +47,10 @@ target/
 
 /target/JSP_Project_Gestor.war
 
+/out/
+out
+out/
+
 
 
 

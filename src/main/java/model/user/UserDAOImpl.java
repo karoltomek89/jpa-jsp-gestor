@@ -1,7 +1,7 @@
 package model.user;
 
-import model.Membership;
 import model.SQLSessionFactory;
+import model.membership.MembershipType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,14 +20,14 @@ public class UserDAOImpl implements UserDAO {
     SQLSessionFactory SQLSessionFactory = new SQLSessionFactory();
 
     @Override
-    public void register(String name, String surname, String email, String password, Membership membership) {
+    public void register(String name, String surname, String email, String password, MembershipType membershipType) {
         User newUser = new User();
 
         newUser.setName(name);
         newUser.setSurname(surname);
         newUser.setEmail(email);
         newUser.setPassword(password);
-        newUser.setMembership(membership);
+        newUser.setMembershipType(membershipType);
 
         save(newUser);
         logger.info("User registered");
@@ -36,14 +36,14 @@ public class UserDAOImpl implements UserDAO {
     @Override
     public void save(User u) {
         String query =
-                "INSERT INTO gestordatabase.users (name, surname, email, password, membershipId) VALUES (?,?,?,?,?)";
+                "INSERT INTO gestorDatabase.users (name, surname, email, password, membershipId) VALUES (?,?,?,?,?)";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, u.getName());
             statement.setString(2, u.getSurname());
             statement.setString(3, u.getEmail());
             statement.setString(4, u.getPassword());
-            statement.setInt(5, u.getMembership().getMembershipId());
+            statement.setInt(5, u.getMembershipType().getMembershipTypeId());
             int i = statement.executeUpdate();
             if (i == 0) {
                 logger.info("User not added");
@@ -55,7 +55,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void update(User u) {
-        String query = "UPDATE gestordatabase.users SET name = ?, surname =?, email =?, password= ? WHERE userId= ?";
+        String query = "UPDATE gestorDatabase.users SET name = ?, surname =?, email =?, password= ? WHERE userId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, u.getName());
@@ -77,7 +77,7 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public void delete(String id) {
-        String query = "DELETE FROM gestordatabase.users WHERE userId= ?";
+        String query = "DELETE FROM gestorDatabase.users WHERE userId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, id);
@@ -99,7 +99,7 @@ public class UserDAOImpl implements UserDAO {
     public User findById(String id) {
         User user = new User();
 
-        String query = "SELECT * FROM gestordatabase.users WHERE userId= ?";
+        String query = "SELECT * FROM gestorDatabase.users WHERE userId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, id);
@@ -110,7 +110,7 @@ public class UserDAOImpl implements UserDAO {
                 user.setEmail(result.getString("email"));
                 user.setPassword(result.getString("password"));
                 user.setUserId(result.getInt("userId"));
-                user.setMembership(getMembershipById(result.getInt("membershipId")));
+                user.setMembershipType(getMembershipTypeById(result.getInt("membershipId")));
                 logger.info("User found");
             } else {
                 logger.info("Nothing found");
@@ -126,7 +126,7 @@ public class UserDAOImpl implements UserDAO {
     public List<User> findAll() {
         List<User> list = new ArrayList<>();
 
-        String query = "SELECT * FROM gestordatabase.users";
+        String query = "SELECT * FROM gestorDatabase.users";
 
         try (Statement statement = SQLSessionFactory.getConnection().createStatement()) {
             ResultSet result = statement.executeQuery(query);
@@ -137,7 +137,7 @@ public class UserDAOImpl implements UserDAO {
                 user.setSurname(result.getString("surname"));
                 user.setEmail(result.getString("email"));
                 user.setPassword(result.getString("password"));
-                user.setMembership(getMembershipById(result.getInt("membershipId")));
+                user.setMembershipType(getMembershipTypeById(result.getInt("membershipId")));
                 list.add(user);
             }
         } catch (SQLException e) {
@@ -148,11 +148,11 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public List<User> findAllByMembership(Membership membership) {
+    public List<User> findAllByMembershipType(MembershipType membershipType) {
         List<User> list = new ArrayList<>();
-        Integer id = membership.getMembershipId();
+        Integer id = membershipType.getMembershipTypeId();
 
-        String query = "SELECT * FROM gestordatabase.users WHERE membershipId= ?";
+        String query = "SELECT * FROM gestorDatabase.users WHERE membershipId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, id.toString());
@@ -164,7 +164,7 @@ public class UserDAOImpl implements UserDAO {
                 user.setSurname(result.getString("surname"));
                 user.setEmail(result.getString("email"));
                 user.setPassword(result.getString("password"));
-                user.setMembership(getMembershipById(result.getInt("membershipId")));
+                user.setMembershipType(getMembershipTypeById(result.getInt("membershipId")));
                 list.add(user);
             }
         } catch (SQLException e) {
@@ -178,7 +178,7 @@ public class UserDAOImpl implements UserDAO {
     public int login(String email, String password) {
         User user = new User();
 
-        String query = "SELECT * FROM gestordatabase.users WHERE email= ? && password= ?";
+        String query = "SELECT * FROM gestorDatabase.users WHERE email= ? && password= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, email);
@@ -190,15 +190,15 @@ public class UserDAOImpl implements UserDAO {
                 user.setEmail(result.getString("email"));
                 user.setPassword(result.getString("password"));
                 user.setUserId(result.getInt("userId"));
-                user.setMembership(getMembershipById(result.getInt("membershipId")));
+                user.setMembershipType(getMembershipTypeById(result.getInt("membershipId")));
+                logger.info("User founded in database and logged");
             } else {
-                logger.info("Error login user");
+                logger.info("Error serching user for login");
                 return user.getUserId();
             }
         } catch (SQLException e) {
-            logger.error("Error login user", e);
+            logger.error("Exception in database during searching user", e);
         }
-        logger.info("User logged");
         return user.getUserId();
     }
 
@@ -208,42 +208,41 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
-    public int getMembershipId(int userId) {
+    public int getMembershipTypeId(int userId) {
 
-        int membershipId = 0;
+        int membershipTypeId = 0;
 
-        String query = "SELECT membershipId FROM gestordatabase.users WHERE userId= ?";
+        String query = "SELECT membershipId FROM gestorDatabase.users WHERE userId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, Integer.toString(userId));
             ResultSet result = statement.executeQuery();
             if (result.next()) {
-                membershipId = result.getInt("membershipId");
+                membershipTypeId = result.getInt("membershipId");
+                logger.info("User membership found in database");
             } else {
-                logger.info("Nothing found");
-                return membershipId;
+                logger.info("User membership not found in database");
+                return membershipTypeId;
             }
         } catch (SQLException e) {
-            logger.error("Error searching membershipId", e);
+            logger.error("Error searching user membershipId in database", e);
         }
-        logger.info("Membership found");
-        return membershipId;
-
+        return membershipTypeId;
     }
 
     @Override
-    public Membership getMembershipById(int membershipId) {
-        switch (membershipId) {
+    public MembershipType getMembershipTypeById(int membershipTypeId) {
+        switch (membershipTypeId) {
             case 1:
-                return Membership.STUDENT;
+                return MembershipType.STUDENT;
             case 2:
-                return Membership.TEACHER;
+                return MembershipType.TEACHER;
             case 3:
-                return Membership.PARENT;
+                return MembershipType.PARENT;
             case 4:
-                return Membership.DIRECTOR;
+                return MembershipType.DIRECTOR;
             default:
-                return Membership.UNSET;
+                return MembershipType.UNSET;
         }
     }
 
@@ -257,7 +256,7 @@ public class UserDAOImpl implements UserDAO {
 
         int groupId = 0;
 
-        String query = "SELECT groups_groupId FROM gestordatabase.groups_has_users WHERE users_userId= ?";
+        String query = "SELECT groups_groupId FROM gestorDatabase.groups_has_users WHERE users_userId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, userId);
@@ -279,8 +278,8 @@ public class UserDAOImpl implements UserDAO {
     public List<User> findAllByGroup(String groupId) {
         List<User> list = new ArrayList<>();
 
-        String query = "SELECT * FROM gestordatabase.users " +
-                "JOIN gestordatabase.groups_has_users " +
+        String query = "SELECT * FROM gestorDatabase.users " +
+                "JOIN gestorDatabase.groups_has_users " +
                 "ON users.userId = groups_has_users.users_userId  WHERE groups_groupId= ?;";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
@@ -293,7 +292,7 @@ public class UserDAOImpl implements UserDAO {
                 user.setSurname(result.getString("surname"));
                 user.setEmail(result.getString("email"));
                 user.setPassword(result.getString("password"));
-                user.setMembership(getMembershipById(result.getInt("membershipId")));
+                user.setMembershipType(getMembershipTypeById(result.getInt("membershipId")));
                 list.add(user);
             }
         } catch (SQLException e) {

@@ -1,0 +1,3 @@
+FROM mysql
+ADD ./src/main/resources/generateUserDatabaseMembership.sql /docker-entrypoint-initdb.d
+ENV MYSQL_ROOT_PASSWORD=adelfofagia MYSQL_DATABASE=gestorDatabase

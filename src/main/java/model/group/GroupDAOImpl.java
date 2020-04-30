@@ -30,7 +30,7 @@ public class GroupDAOImpl implements GroupDAO {
 
     @Override
     public void save(Group g) {
-        String query = "INSERT INTO gestordatabase.groups (name) VALUES (?)";
+        String query = "INSERT INTO gestorDatabase.groups (name) VALUES (?)";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, g.getName());
@@ -45,7 +45,7 @@ public class GroupDAOImpl implements GroupDAO {
 
     @Override
     public void update(Group g) {
-        String query = "UPDATE gestordatabase.groups SET name = ? WHERE groupId= ?";
+        String query = "UPDATE gestorDatabase.groups SET name = ? WHERE groupId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, g.getName());
@@ -63,7 +63,7 @@ public class GroupDAOImpl implements GroupDAO {
 
     @Override
     public void delete(String id) {
-        String query = "DELETE FROM gestordatabase.groups WHERE groupId= ?";
+        String query = "DELETE FROM gestorDatabase.groups WHERE groupId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, id);
@@ -84,7 +84,7 @@ public class GroupDAOImpl implements GroupDAO {
     public Group find(String id) {
         Group groups = new Group();
 
-        String query = "SELECT * FROM gestordatabase.groups WHERE groupId= ?";
+        String query = "SELECT * FROM gestorDatabase.groups WHERE groupId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, id);
@@ -105,7 +105,7 @@ public class GroupDAOImpl implements GroupDAO {
     public List<Group> findAll() {
         List<Group> groupList = new ArrayList<>();
 
-        String query = "SELECT * FROM gestordatabase.groups";
+        String query = "SELECT * FROM gestorDatabase.groups";
 
         try (Statement statement = SQLSessionFactory.getConnection().createStatement()) {
             ResultSet result = statement.executeQuery(query);

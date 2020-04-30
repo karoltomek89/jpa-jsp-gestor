@@ -19,7 +19,7 @@ public class GradeDAOImpl implements GradeDAO {
 
     @Override
     public void save(int value, int userId, int subjectsSubjectId) {
-        String query = "INSERT INTO gestordatabase.grades (value, users_userId, subjects_subjectId) VALUES (?, ?, ?)";
+        String query = "INSERT INTO gestorDatabase.grades (value, users_userId, subjects_subjectId) VALUES (?, ?, ?)";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setDouble(1, value);
@@ -37,7 +37,7 @@ public class GradeDAOImpl implements GradeDAO {
 
     @Override
     public void update(Grade g) {
-        String query = "UPDATE gestordatabase.grades SET value = ? WHERE gradeId= ?";
+        String query = "UPDATE gestorDatabase.grades SET value = ? WHERE gradeId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setDouble(1, g.getValue());
@@ -55,7 +55,7 @@ public class GradeDAOImpl implements GradeDAO {
 
     @Override
     public void delete(String id) {
-        String query = "DELETE FROM gestordatabase.grades WHERE gradeId= ?";
+        String query = "DELETE FROM gestorDatabase.grades WHERE gradeId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, id);
@@ -76,7 +76,7 @@ public class GradeDAOImpl implements GradeDAO {
     public Grade find(String id) {
         Grade grade = new Grade();
 
-        String query = "SELECT * FROM gestordatabase.grades WHERE gradeId= ?";
+        String query = "SELECT * FROM gestorDatabase.grades WHERE gradeId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, id);
@@ -98,7 +98,7 @@ public class GradeDAOImpl implements GradeDAO {
     public List<Grade> findAll() {
         List<Grade> list = new ArrayList<>();
 
-        String query = "SELECT * FROM gestordatabase.grades";
+        String query = "SELECT * FROM gestorDatabase.grades";
 
         try (Statement statement = SQLSessionFactory.getConnection().createStatement()) {
             ResultSet result = statement.executeQuery(query);
@@ -119,7 +119,7 @@ public class GradeDAOImpl implements GradeDAO {
     public List<Grade> findAllByStudentId(int studentId) {
         List<Grade> list = new ArrayList<>();
 
-        String query = "SELECT * FROM gestordatabase.grades WHERE users_userId= ?";
+        String query = "SELECT * FROM gestorDatabase.grades WHERE users_userId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, Integer.toString(studentId));
@@ -141,7 +141,7 @@ public class GradeDAOImpl implements GradeDAO {
     public List<GradeWithSubjectName> findAllByStudentIdWithName(int studentId) {
         List<GradeWithSubjectName> list = new ArrayList<>();
 
-        String query = "SELECT * FROM gestordatabase.grades JOIN gestordatabase.subjects ON subjects.subjectId = grades.subjects_subjectId WHERE users_userId= ?";
+        String query = "SELECT * FROM gestorDatabase.grades JOIN gestorDatabase.subjects ON subjects.subjectId = grades.subjects_subjectId WHERE users_userId= ?";
 
         try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
             statement.setString(1, Integer.toString(studentId));

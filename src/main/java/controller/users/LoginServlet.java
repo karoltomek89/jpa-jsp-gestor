@@ -31,11 +31,10 @@ public class LoginServlet extends HttpServlet {
 
         HttpSession session = req.getSession();
         session.setAttribute("userId", userId);
-        session.setAttribute("membershipId", user.getMembershipId(userId));
+        session.setAttribute("membershipId", user.getMembershipTypeId(userId));
 
         RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
         dispatcher.forward(req, resp);
 
-        logger.info("Login correct");
     }
 }

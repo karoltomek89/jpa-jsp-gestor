@@ -1,6 +1,6 @@
 package controller.messages;
 
-import model.Membership;
+import model.membership.MembershipType;
 import model.user.User;
 import model.user.UserDAO;
 import model.user.UserDAOImpl;
@@ -23,7 +23,7 @@ public class GetStudentsListServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        userList = user.findAllByMembership(Membership.STUDENT);
+        userList = user.findAllByMembershipType(MembershipType.STUDENT);
         req.setAttribute("studentsList", userList);
         RequestDispatcher dispatcher = getServletContext()
                 .getRequestDispatcher("/teacher/bar/teacherBarSendMessage.jsp");
