@@ -5,7 +5,7 @@ import model.membership.MembershipType;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users", schema = "gestorDatabase", catalog = "gestorDatabase")
 public class User {
 
     @Id

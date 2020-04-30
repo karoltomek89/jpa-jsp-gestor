@@ -3,17 +3,23 @@ package model.group;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "groups")
+@Table(name = "groups", schema = "gestorDatabase", catalog = "gestorDatabase")
 public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "groupId")
     private int groupId;
 
+    @Column(name = "name")
+    private String name;
+
     public Group() {
     }
 
-    private String name;
+    public Group(String name) {
+        this.name = name;
+    }
+
 
     public int getGroupId() {
         return groupId;
