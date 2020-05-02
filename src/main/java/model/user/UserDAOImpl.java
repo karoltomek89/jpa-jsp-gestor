@@ -27,7 +27,7 @@ public class UserDAOImpl implements UserDAO {
         newUser.setSurname(surname);
         newUser.setEmail(email);
         newUser.setPassword(password);
-        newUser.setMembershipType(membershipType);
+        newUser.setMembershipId(membershipType);
 
         save(newUser);
         logger.info("User registered");
@@ -43,7 +43,7 @@ public class UserDAOImpl implements UserDAO {
             statement.setString(2, u.getSurname());
             statement.setString(3, u.getEmail());
             statement.setString(4, u.getPassword());
-            statement.setInt(5, u.getMembershipType().getMembershipTypeId());
+            statement.setInt(5, u.getMembershipId());
             int i = statement.executeUpdate();
             if (i == 0) {
                 logger.info("User not added");
@@ -110,7 +110,7 @@ public class UserDAOImpl implements UserDAO {
                 user.setEmail(result.getString("email"));
                 user.setPassword(result.getString("password"));
                 user.setUserId(result.getInt("userId"));
-                user.setMembershipType(getMembershipTypeById(result.getInt("membershipId")));
+                user.setMembershipId(getMembershipTypeById(result.getInt("membershipId")));
                 logger.info("User found");
             } else {
                 logger.info("Nothing found");
@@ -137,7 +137,7 @@ public class UserDAOImpl implements UserDAO {
                 user.setSurname(result.getString("surname"));
                 user.setEmail(result.getString("email"));
                 user.setPassword(result.getString("password"));
-                user.setMembershipType(getMembershipTypeById(result.getInt("membershipId")));
+                user.setMembershipId(getMembershipTypeById(result.getInt("membershipId")));
                 list.add(user);
             }
         } catch (SQLException e) {
@@ -164,7 +164,7 @@ public class UserDAOImpl implements UserDAO {
                 user.setSurname(result.getString("surname"));
                 user.setEmail(result.getString("email"));
                 user.setPassword(result.getString("password"));
-                user.setMembershipType(getMembershipTypeById(result.getInt("membershipId")));
+                user.setMembershipId(getMembershipTypeById(result.getInt("membershipId")));
                 list.add(user);
             }
         } catch (SQLException e) {
@@ -190,7 +190,7 @@ public class UserDAOImpl implements UserDAO {
                 user.setEmail(result.getString("email"));
                 user.setPassword(result.getString("password"));
                 user.setUserId(result.getInt("userId"));
-                user.setMembershipType(getMembershipTypeById(result.getInt("membershipId")));
+                user.setMembershipId(getMembershipTypeById(result.getInt("membershipId")));
                 logger.info("User founded in database and logged");
             } else {
                 logger.info("Error serching user for login");
@@ -292,7 +292,7 @@ public class UserDAOImpl implements UserDAO {
                 user.setSurname(result.getString("surname"));
                 user.setEmail(result.getString("email"));
                 user.setPassword(result.getString("password"));
-                user.setMembershipType(getMembershipTypeById(result.getInt("membershipId")));
+                user.setMembershipId(getMembershipTypeById(result.getInt("membershipId")));
                 list.add(user);
             }
         } catch (SQLException e) {

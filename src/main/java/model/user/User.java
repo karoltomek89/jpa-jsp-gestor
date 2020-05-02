@@ -19,7 +19,7 @@ public class User {
     private String password;
 
     @Column(name = "membershipId")
-    private MembershipType membershipType;
+    private int membershipId;
 
     public User() {
     }
@@ -29,16 +29,16 @@ public class User {
         this.surname = surname;
         this.email = email;
         this.password = password;
-        this.membershipType = membershipType;
+        this.membershipId = membershipType.getMembershipTypeId();
     }
 
 
-    public MembershipType getMembershipType() {
-        return membershipType;
+    public int getMembershipId() {
+        return membershipId;
     }
 
-    public void setMembershipType(MembershipType membershipType) {
-        this.membershipType = membershipType;
+    public void setMembershipId(MembershipType membershipType) {
+        this.membershipId = membershipType.getMembershipTypeId();
     }
 
     public int getUserId() {
@@ -89,7 +89,7 @@ public class User {
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", membership=" + membershipType +
+                ", membership=" + membershipId +
                 '}';
     }
 }

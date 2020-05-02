@@ -36,10 +36,11 @@ public class JpaTest {
             /**
              * Zapisujemy encję w bazie danych
              */
-            Group group = new Group("test2");
+            Group group = new Group("testowa");
             Membership membership = new Membership(MembershipType.TEST, "testowanko");
             Subject subject = new Subject("WF");
-            User user = new User("Test", "Test", "test@test", "test@test", MembershipType.TEST);
+            User user = new User
+                    ("Test", "Test", "test@test", "test@test", MembershipType.TEST);
 
             entityManager.persist(group); // zapisanie do bazy danych
             entityManager.persist(membership);
