@@ -24,6 +24,15 @@ public class User {
     public User() {
     }
 
+    public User(String name, String surname, String email, String password, MembershipType membershipType) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.password = password;
+        this.membershipType = membershipType;
+    }
+
+
     public MembershipType getMembershipType() {
         return membershipType;
     }

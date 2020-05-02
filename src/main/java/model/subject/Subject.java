@@ -16,6 +16,10 @@ public class Subject {
     public Subject() {
     }
 
+    public Subject(String name) {
+        this.name = name;
+    }
+
     public int getSubjectId() {
         return subjectId;
     }

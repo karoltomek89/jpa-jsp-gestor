@@ -6,6 +6,7 @@ public enum MembershipType {
     TEACHER(2),
     PARENT(3),
     DIRECTOR(4),
+    TEST(5),
     UNSET(0);
 
     private int membershipTypeId;

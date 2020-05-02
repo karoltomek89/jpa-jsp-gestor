@@ -1,6 +1,10 @@
 package model;
 
 import model.group.Group;
+import model.membership.Membership;
+import model.membership.MembershipType;
+import model.subject.Subject;
+import model.user.User;
 
 import javax.persistence.*;
 import java.util.List;
@@ -32,9 +36,15 @@ public class JpaTest {
             /**
              * Zapisujemy encję w bazie danych
              */
-            Group group = new Group("testowa");
+            Group group = new Group("test2");
+            Membership membership = new Membership(MembershipType.TEST, "testowanko");
+            Subject subject = new Subject("WF");
+            User user = new User("Test", "Test", "test@test", "test@test", MembershipType.TEST);
 
             entityManager.persist(group); // zapisanie do bazy danych
+            entityManager.persist(membership);
+            entityManager.persist(subject);
+            entityManager.persist(user);
 
             //entityManager.remove(coachEntity);
 

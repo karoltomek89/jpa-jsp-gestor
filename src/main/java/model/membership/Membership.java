@@ -18,8 +18,7 @@ public class Membership {
     public Membership() {
     }
 
-    public Membership(int membershipId, MembershipType type, String comment) {
-        this.membershipId = membershipId;
+    public Membership(MembershipType type, String comment) {
         this.type = type;
         this.comment = comment;
     }
