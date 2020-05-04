@@ -6,11 +6,13 @@ import javax.persistence.*;
 @Table(name = "subjects", schema = "gestorDatabase", catalog = "gestorDatabase")
 public class Subject {
 
+//    @ManyToOne
+//    User user;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "subjectId")
     private int subjectId;
-
     private String name;
 
     public Subject() {

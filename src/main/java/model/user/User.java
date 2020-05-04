@@ -1,24 +1,36 @@
 package model.user;
 
+import model.group.Group;
+import model.membership.Membership;
 import model.membership.MembershipType;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users", schema = "gestorDatabase", catalog = "gestorDatabase")
 public class User {
 
+    @OneToOne
+    @JoinColumn(name = "membershipId", insertable = false, updatable = false)
+    Membership membership;
+
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(
+            name = "users_has_groups",
+            joinColumns = @JoinColumn(name = "userId"),
+            inverseJoinColumns = @JoinColumn(name = "groupId"))
+    private Set<Group> groups = new HashSet();
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userId")
     private int userId;
-
     private String name;
     private String surname;
     private String email;
     private String password;
-
-    @Column(name = "membershipId")
     private int membershipId;
 
     public User() {

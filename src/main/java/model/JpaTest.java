@@ -39,13 +39,25 @@ public class JpaTest {
             Group group = new Group("testowa");
             Membership membership = new Membership(MembershipType.TEST, "testowanko");
             Subject subject = new Subject("WF");
-            User user = new User
-                    ("Test", "Test", "test@test", "test@test", MembershipType.TEST);
+            User user = new User("Test", "Test", "test@test", "test@test", MembershipType.TEST);
+            User user2 = new User("Test2", "Test2", "test2@test2", "test2@test2", MembershipType.TEST);
 
             entityManager.persist(group); // zapisanie do bazy danych
-            entityManager.persist(membership);
             entityManager.persist(subject);
+            entityManager.persist(membership);
             entityManager.persist(user);
+            entityManager.persist(user2);
+            entityManager.remove(user);
+            entityManager.remove(user2);
+            entityManager.remove(membership);
+            entityManager.persist(membership);
+            entityManager.persist(user);
+            entityManager.persist(user2);
+            user.setMembershipId(MembershipType.STUDENT);
+            user2.setMembershipId(MembershipType.TEACHER);
+            entityManager.merge(user);
+            entityManager.merge(user2);
+
 
             //entityManager.remove(coachEntity);
 

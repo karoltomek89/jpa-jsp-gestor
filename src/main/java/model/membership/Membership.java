@@ -1,13 +1,16 @@
 package model.membership;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import model.user.User;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name = "membership", schema = "gestorDatabase", catalog = "gestorDatabase")
 public class Membership {
+
+
+    @OneToOne(mappedBy = "membership")
+    User user;
 
     @Id
     @Column(name = "membershipId")
