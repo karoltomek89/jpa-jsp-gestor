@@ -1,13 +1,18 @@
 package model.subject;
 
+import model.user.User;
+
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "subjects", schema = "gestorDatabase", catalog = "gestorDatabase")
 public class Subject {
 
-//    @ManyToOne
-//    User user;
+    @ManyToMany
+            (mappedBy = "subjects")
+    private Set<User> users = new HashSet();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,6 +41,10 @@ public class Subject {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<User> getUsers() {
+        return users;
     }
 
     @Override

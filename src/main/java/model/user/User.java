@@ -3,6 +3,7 @@ package model.user;
 import model.group.Group;
 import model.membership.Membership;
 import model.membership.MembershipType;
+import model.subject.Subject;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -22,6 +23,13 @@ public class User {
             joinColumns = @JoinColumn(name = "users_userId"),
             inverseJoinColumns = @JoinColumn(name = "groups_groupId"))
     private Set<Group> groups = new HashSet();
+
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinTable(
+            name = "users_has_subjects",
+            joinColumns = @JoinColumn(name = "users_userId"),
+            inverseJoinColumns = @JoinColumn(name = "subjects_subjectId"))
+    private Set<Subject> subjects = new HashSet();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -101,6 +109,16 @@ public class User {
     public void removeGroup(Group group) {
         this.groups.add(group);
         group.getUsers().remove(this);
+    }
+
+    public void addSubject(Subject subject) {
+        this.subjects.add(subject);
+        subject.getUsers().add(this);
+    }
+
+    public void removeSubject(Subject subject) {
+        this.subjects.add(subject);
+        subject.getUsers().remove(this);
     }
 
     @Override

@@ -61,6 +61,9 @@ public class JpaTest {
             user.addGroup(group);
             user2.addGroup(group);
 
+            user.addSubject(subject);
+            user2.addSubject(subject);
+
 
             //entityManager.remove(coachEntity);
 
