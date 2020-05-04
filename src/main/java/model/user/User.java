@@ -18,9 +18,9 @@ public class User {
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
-            name = "users_has_groups",
-            joinColumns = @JoinColumn(name = "userId"),
-            inverseJoinColumns = @JoinColumn(name = "groupId"))
+            name = "groups_has_users",
+            joinColumns = @JoinColumn(name = "users_userId"),
+            inverseJoinColumns = @JoinColumn(name = "groups_groupId"))
     private Set<Group> groups = new HashSet();
 
     @Id
@@ -91,6 +91,16 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public void addGroup(Group group) {
+        this.groups.add(group);
+        group.getUsers().add(this);
+    }
+
+    public void removeGroup(Group group) {
+        this.groups.add(group);
+        group.getUsers().remove(this);
     }
 
     @Override

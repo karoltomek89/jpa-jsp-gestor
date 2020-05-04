@@ -47,6 +47,10 @@ public class Group {
         this.name = name;
     }
 
+    public Set<User> getUsers() {
+        return users;
+    }
+
     @Override
     public String toString() {
         return "Group{" +

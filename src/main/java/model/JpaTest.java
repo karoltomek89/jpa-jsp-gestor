@@ -58,6 +58,9 @@ public class JpaTest {
             entityManager.merge(user);
             entityManager.merge(user2);
 
+            user.addGroup(group);
+            user2.addGroup(group);
+
 
             //entityManager.remove(coachEntity);
 
