@@ -1,8 +1,10 @@
 package model;
 
+import model.grade.Grade;
 import model.group.Group;
 import model.membership.Membership;
 import model.membership.MembershipType;
+import model.parenthood.Parenthood;
 import model.subject.Subject;
 import model.user.User;
 
@@ -42,6 +44,12 @@ public class JpaTest {
             User user = new User("Test", "Test", "test@test", "test@test", MembershipType.TEST);
             User user2 = new User("Test2", "Test2", "test2@test2", "test2@test2", MembershipType.TEST);
 
+            Parenthood parenthood = new Parenthood(8, 3);
+            Parenthood parenthood2 = new Parenthood(9, 3);
+
+            Grade grade = new Grade(8.0D);
+            Grade grade2 = new Grade(9.0D);
+
             entityManager.persist(group); // zapisanie do bazy danych
             entityManager.persist(subject);
             entityManager.persist(membership);
@@ -63,6 +71,18 @@ public class JpaTest {
 
             user.addSubject(subject);
             user2.addSubject(subject);
+
+            grade.setSubject(subject);
+            grade.setUser(user);
+
+            grade2.setSubject(subject);
+            grade2.setUser(user2);
+
+            entityManager.persist(grade);
+            entityManager.persist(grade2);
+
+            entityManager.persist(parenthood);
+            entityManager.persist(parenthood2);
 
 
             //entityManager.remove(coachEntity);

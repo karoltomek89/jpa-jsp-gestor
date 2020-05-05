@@ -1,8 +1,10 @@
 package model.user;
 
+import model.grade.Grade;
 import model.group.Group;
 import model.membership.Membership;
 import model.membership.MembershipType;
+import model.parenthood.Parenthood;
 import model.subject.Subject;
 
 import javax.persistence.*;
@@ -13,9 +15,15 @@ import java.util.Set;
 @Table(name = "users", schema = "gestorDatabase", catalog = "gestorDatabase")
 public class User {
 
+    @OneToOne(mappedBy = "user")
+    Parenthood parenthood;
+
     @OneToOne
     @JoinColumn(name = "membershipId", insertable = false, updatable = false)
     Membership membership;
+
+    @OneToMany(mappedBy = "user")
+    Set<Grade> grades;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
@@ -35,6 +43,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "userId")
     private int userId;
+
     private String name;
     private String surname;
     private String email;
@@ -119,6 +128,19 @@ public class User {
     public void removeSubject(Subject subject) {
         this.subjects.add(subject);
         subject.getUsers().remove(this);
+    }
+
+
+    public Set<Grade> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(Set<Grade> grades) {
+        this.grades = grades;
+    }
+
+    public void addGrade(Grade grade) {
+        this.grades.add(grade);
     }
 
     @Override

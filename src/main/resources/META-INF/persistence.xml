@@ -11,6 +11,7 @@
         <class>model.subject.Subject</class>
         <class>model.user.User</class>
         <class>model.membership.Membership</class>
+        <class>model.parenthood.Parenthood</class>
 
         <!-- domyślnie mechanizmy JPA skanują wszystkie dostępne pakiety i dodają do PU encje które znajdą - ta opcja wyłącza tę funkcjonalność -->
         <exclude-unlisted-classes>true</exclude-unlisted-classes>

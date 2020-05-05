@@ -1,5 +1,6 @@
 package model.subject;
 
+import model.grade.Grade;
 import model.user.User;
 
 import javax.persistence.*;
@@ -19,6 +20,9 @@ public class Subject {
     @Column(name = "subjectId")
     private int subjectId;
     private String name;
+
+    @OneToMany(mappedBy = "subject")
+    private Set<Grade> grades = new HashSet();
 
     public Subject() {
     }
@@ -46,6 +50,20 @@ public class Subject {
     public Set<User> getUsers() {
         return users;
     }
+
+
+    public Set<Grade> getGrades() {
+        return grades;
+    }
+
+    public void setGrades(Set<Grade> grades) {
+        this.grades = grades;
+    }
+
+    public void addGrade(Grade grade) {
+        this.grades.add(grade);
+    }
+
 
     @Override
     public String toString() {
