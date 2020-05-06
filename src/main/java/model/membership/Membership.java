@@ -2,18 +2,19 @@ package model.membership;
 
 import model.user.User;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "membership", schema = "gestorDatabase", catalog = "gestorDatabase")
 public class Membership {
 
-
     @OneToOne(mappedBy = "membership")
-    User user;
+    private User user;
 
     @Id
-    @Column(name = "membershipId")
     private int membershipId;
 
     private String type;
@@ -24,7 +25,6 @@ public class Membership {
     }
 
     public Membership(MembershipType type, String comment) {
-
         this.type = type.name();
         this.comment = comment;
         this.membershipId = type.getMembershipTypeId();

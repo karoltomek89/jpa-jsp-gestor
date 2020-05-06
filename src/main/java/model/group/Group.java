@@ -11,16 +11,13 @@ import java.util.Set;
 @Table(name = "groups", schema = "gestorDatabase", catalog = "gestorDatabase")
 public class Group {
 
-    @ManyToMany
-            (mappedBy = "groups")
+    @ManyToMany(mappedBy = "groups")
     private Set<User> users = new HashSet();
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "groupId")
     private int groupId;
 
-    @Column(name = "name")
     private String name;
 
     public Group() {
@@ -29,7 +26,6 @@ public class Group {
     public Group(String name) {
         this.name = name;
     }
-
 
     public int getGroupId() {
         return groupId;
@@ -49,6 +45,14 @@ public class Group {
 
     public Set<User> getUsers() {
         return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
+    public void addUser(User user) {
+        this.users.add(user);
     }
 
     @Override

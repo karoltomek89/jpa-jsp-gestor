@@ -19,10 +19,8 @@ public class Grade {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "gradeId")
     private int gradeId;
 
-    @Column(name = "value")
     private double value;
 
     public Grade() {
@@ -48,7 +46,6 @@ public class Grade {
         this.value = value;
     }
 
-
     public User getUser() {
         return user;
     }
@@ -56,7 +53,6 @@ public class Grade {
     public void setUser(User user) {
         this.user = user;
     }
-
 
     public Subject getSubject() {
         return subject;

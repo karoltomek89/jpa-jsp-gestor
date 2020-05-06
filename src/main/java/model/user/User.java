@@ -16,14 +16,14 @@ import java.util.Set;
 public class User {
 
     @OneToOne(mappedBy = "user")
-    Parenthood parenthood;
+    private Parenthood parenthood;
 
     @OneToOne
     @JoinColumn(name = "membershipId", insertable = false, updatable = false)
-    Membership membership;
+    private Membership membership;
 
     @OneToMany(mappedBy = "user")
-    Set<Grade> grades;
+    private Set<Grade> grades;
 
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(
@@ -41,14 +41,13 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "userId")
     private int userId;
 
     private String name;
     private String surname;
     private String email;
     private String password;
-    private int membershipId;
+    private int membershipId; //TODO remove this field and use only Membership object
 
     public User() {
     }
@@ -58,15 +57,6 @@ public class User {
         this.surname = surname;
         this.email = email;
         this.password = password;
-        this.membershipId = membershipType.getMembershipTypeId();
-    }
-
-
-    public int getMembershipId() {
-        return membershipId;
-    }
-
-    public void setMembershipId(MembershipType membershipType) {
         this.membershipId = membershipType.getMembershipTypeId();
     }
 
@@ -110,6 +100,14 @@ public class User {
         this.password = password;
     }
 
+    public int getMembershipId() {
+        return membershipId;
+    }
+
+    public void setMembershipId(MembershipType membershipType) {
+        this.membershipId = membershipType.getMembershipTypeId();
+    }
+
     public void addGroup(Group group) {
         this.groups.add(group);
         group.getUsers().add(this);
@@ -118,6 +116,14 @@ public class User {
     public void removeGroup(Group group) {
         this.groups.add(group);
         group.getUsers().remove(this);
+    }
+
+    public Set<Group> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Set<Group> groups) {
+        this.groups = groups;
     }
 
     public void addSubject(Subject subject) {
@@ -130,6 +136,13 @@ public class User {
         subject.getUsers().remove(this);
     }
 
+    public Set<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
+    }
 
     public Set<Grade> getGrades() {
         return grades;
@@ -143,6 +156,27 @@ public class User {
         this.grades.add(grade);
     }
 
+    public void removeGrade(Grade grade) {
+        this.grades.remove(grade);
+    }
+
+    public Parenthood getParenthood() {
+        return parenthood;
+    }
+
+    public void setParenthood(Parenthood parenthood) {
+        this.parenthood = parenthood;
+    }
+
+    public Membership getMembership() {
+        return membership;
+    }
+
+    public void setMembership(Membership membership) {
+        this.membership = membership;
+    }
+
+
     @Override
     public String toString() {
         return "User{" +
@@ -151,7 +185,6 @@ public class User {
                 ", surname='" + surname + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", membership=" + membershipId +
                 '}';
     }
 }

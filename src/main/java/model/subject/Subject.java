@@ -11,18 +11,17 @@ import java.util.Set;
 @Table(name = "subjects", schema = "gestorDatabase", catalog = "gestorDatabase")
 public class Subject {
 
-    @ManyToMany
-            (mappedBy = "subjects")
+    @ManyToMany(mappedBy = "subjects")
     private Set<User> users = new HashSet();
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "subjectId")
-    private int subjectId;
-    private String name;
 
     @OneToMany(mappedBy = "subject")
     private Set<Grade> grades = new HashSet();
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int subjectId;
+
+    private String name;
 
     public Subject() {
     }
@@ -51,6 +50,13 @@ public class Subject {
         return users;
     }
 
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
+    public void addUser(User user) {
+        this.users.add(user);
+    }
 
     public Set<Grade> getGrades() {
         return grades;

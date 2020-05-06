@@ -27,7 +27,7 @@ public class UserDAOImpl implements UserDAO {
         newUser.setSurname(surname);
         newUser.setEmail(email);
         newUser.setPassword(password);
-        newUser.setMembershipId(membershipType);
+        //TODOnewUser.setMembershipId(membershipType);
 
         save(newUser);
         logger.info("User registered");

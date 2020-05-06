@@ -44,8 +44,10 @@ public class JpaTest {
             User user = new User("Test", "Test", "test@test", "test@test", MembershipType.TEST);
             User user2 = new User("Test2", "Test2", "test2@test2", "test2@test2", MembershipType.TEST);
 
-            Parenthood parenthood = new Parenthood(8, 3);
-            Parenthood parenthood2 = new Parenthood(9, 3);
+            Parenthood parenthood = new Parenthood(3);
+            Parenthood parenthood2 = new Parenthood(3);
+            parenthood.setUser(user);
+            parenthood2.setUser(user2);
 
             Grade grade = new Grade(8.0D);
             Grade grade2 = new Grade(9.0D);

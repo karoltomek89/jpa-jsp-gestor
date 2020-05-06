@@ -9,16 +9,12 @@ import javax.persistence.*;
 public class Parenthood {
 
     @OneToOne
-    @JoinColumn(name = "users_userId", insertable = false, updatable = false)
-    User user;
+    @JoinColumn(name = "users_userId")
+    private User user;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "parenthoodId")
     private int parenthoodId;
-
-    @Column(name = "users_userId")
-    private int userId;
 
     @Column(name = "users_first_parent_Id")
     private int firstPrentId;
@@ -29,8 +25,7 @@ public class Parenthood {
     public Parenthood() {
     }
 
-    public Parenthood(int userId, int firstPrentId) {
-        this.userId = userId;
+    public Parenthood(int firstPrentId) {
         this.firstPrentId = firstPrentId;
     }
 
@@ -40,14 +35,6 @@ public class Parenthood {
 
     public void setParenthoodId(int parenthoodId) {
         this.parenthoodId = parenthoodId;
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public int getFirstPrentId() {
@@ -65,4 +52,14 @@ public class Parenthood {
     public void setSecondPrentId(int secondPrentId) {
         this.secondPrentId = secondPrentId;
     }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+
 }
