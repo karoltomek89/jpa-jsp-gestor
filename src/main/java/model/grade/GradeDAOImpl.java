@@ -1,162 +1,185 @@
 package model.grade;
 
+import model.EntityManagerFactoryStaticBlockSingleton;
 import model.SQLSessionFactory;
+import model.subject.Subject;
+import model.user.User;
+import org.hibernate.transform.ResultTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
 import java.util.List;
 
 public class GradeDAOImpl implements GradeDAO {
 
     private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
 
-    SQLSessionFactory SQLSessionFactory = new SQLSessionFactory();
+    private EntityManagerFactory entityManagerFactory = null;
+
+    private EntityManager entityManager = null;
+
+    public GradeDAOImpl() {
+        this.entityManagerFactory = EntityManagerFactoryStaticBlockSingleton.getFactory();
+    }
 
     @Override
     public void save(int value, int userId, int subjectsSubjectId) {
-        String query = "INSERT INTO gestorDatabase.grades (value, users_userId, subjects_subjectId) VALUES (?, ?, ?)";
+        try {
+            entityManager = entityManagerFactory.createEntityManager();
+            EntityTransaction transaction = entityManager.getTransaction();
+            transaction.begin();
 
-        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
-            statement.setDouble(1, value);
-            statement.setInt(2, userId);
-            statement.setInt(3, subjectsSubjectId);
-            int i = statement.executeUpdate();
-            logger.info("Grade added");
-            if (i == 0) {
-                logger.info("Grade not added");
+            Grade grade = new Grade((double) value);
+            grade.setSubject(entityManager.find(Subject.class, subjectsSubjectId));
+            grade.setUser(entityManager.find(User.class, userId));
+
+            entityManager.persist(grade);
+
+            transaction.commit();
+
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();
             }
-        } catch (SQLException e) {
-            logger.error("Grade cannot be added", e);
         }
     }
 
     @Override
-    public void update(Grade g) {
-        String query = "UPDATE gestorDatabase.grades SET value = ? WHERE gradeId= ?";
+    public void update(Grade grade) {
+        try {
+            entityManager = entityManagerFactory.createEntityManager();
+            EntityTransaction transaction = entityManager.getTransaction();
+            transaction.begin();
 
-        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
-            statement.setDouble(1, g.getValue());
-            int i = statement.executeUpdate();
-            if (i == 0) {
-                logger.info("Nothing changed");
-            } else {
-                logger.info(i + " grades changed");
+            entityManager.merge(grade);
+
+            transaction.commit();
+
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();
             }
-
-        } catch (SQLException e) {
-            logger.error("Grade cannot be changed", e);
         }
     }
 
     @Override
     public void delete(String id) {
-        String query = "DELETE FROM gestorDatabase.grades WHERE gradeId= ?";
+        try {
+            entityManager = entityManagerFactory.createEntityManager();
+            EntityTransaction transaction = entityManager.getTransaction();
+            transaction.begin();
 
-        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
-            statement.setString(1, id);
-            int i = statement.executeUpdate();
+            Grade grade = entityManager.find(Grade.class, id);
+            entityManager.remove(grade);
 
-            if (i == 0) {
-                logger.info("Nothing deleted");
-            } else {
-                logger.info("Grade deleted");
+            transaction.commit();
+
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();
             }
-
-        } catch (SQLException e) {
-            logger.error("Grade cannot be deleted", e);
         }
     }
 
     @Override
     public Grade find(String id) {
-        Grade grade = new Grade();
+        try {
+            entityManager = entityManagerFactory.createEntityManager();
+            EntityTransaction transaction = entityManager.getTransaction();
+            transaction.begin();
 
-        String query = "SELECT * FROM gestorDatabase.grades WHERE gradeId= ?";
+            Grade grade = entityManager.find(Grade.class, id);
 
-        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
-            statement.setString(1, id);
-            ResultSet result = statement.executeQuery();
-            if (result.next()) {
-                grade.setValue(result.getDouble("value"));
-                logger.info("Grade found");
-            } else {
-                logger.info("Nothing found");
-                return null;
+            transaction.commit();
+            return grade;
+
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();
             }
-        } catch (SQLException e) {
-            logger.error("Error searching grades", e);
         }
-        return grade;
     }
 
     @Override
     public List<Grade> findAll() {
-        List<Grade> list = new ArrayList<>();
+        try {
+            entityManager = entityManagerFactory.createEntityManager();
+            EntityTransaction transaction = entityManager.getTransaction();
+            transaction.begin();
 
-        String query = "SELECT * FROM gestorDatabase.grades";
+            List<Grade> grades = entityManager.createQuery("from Grade", Grade.class).getResultList();
 
-        try (Statement statement = SQLSessionFactory.getConnection().createStatement()) {
-            ResultSet result = statement.executeQuery(query);
-            while (result.next()) {
-                Grade grade = new Grade();
-                grade.setGradeId(result.getInt("gradeId"));
-                grade.setValue(result.getDouble("value"));
-                list.add(grade);
-                logger.info("Grade listed");
+            transaction.commit();
+            return grades;
+
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();
             }
-        } catch (SQLException e) {
-            logger.error("Error listing all grades", e);
         }
-        return list;
     }
 
     @Override
     public List<Grade> findAllByStudentId(int studentId) {
-        List<Grade> list = new ArrayList<>();
+        try {
+            entityManager = entityManagerFactory.createEntityManager();
+            EntityTransaction transaction = entityManager.getTransaction();
+            transaction.begin();
 
-        String query = "SELECT * FROM gestorDatabase.grades WHERE users_userId= ?";
+            List<Grade> list = entityManager.createQuery(" FROM Grade g JOIN Subject WHERE g.users_userId = :studentId")
+                    .setParameter("studentId", studentId)
+                    .getResultList();
 
-        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
-            statement.setString(1, Integer.toString(studentId));
-            ResultSet result = statement.executeQuery();
-            while (result.next()) {
-                Grade grade = new Grade();
-                grade.setGradeId(result.getInt("gradeId"));
-                grade.setValue(result.getDouble("value"));
-                list.add(grade);
-                logger.info("Grade found");
+            transaction.commit();
+            return list;
+
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();
             }
-        } catch (SQLException e) {
-            logger.error("Error listing all grades", e);
         }
-        return list;
+
     }
 
     @Override
     public List<GradeWithSubjectName> findAllByStudentIdWithName(int studentId) {
-        List<GradeWithSubjectName> list = new ArrayList<>();
+        try {
+            entityManager = entityManagerFactory.createEntityManager();
+            EntityTransaction transaction = entityManager.getTransaction();
+            transaction.begin();
 
-        String query = "SELECT * FROM gestorDatabase.grades JOIN gestorDatabase.subjects ON subjects.subjectId = grades.subjects_subjectId WHERE users_userId= ?";
+            List<GradeWithSubjectName> list = entityManager.createQuery("SELECT g.value, g.gradeId, s.name  FROM Grade g JOIN Subject s ON s.subjectId = g.subject.subjectId WHERE g.user.userId = :studentId")
+                    .setParameter("studentId", studentId).unwrap(org.hibernate.query.Query.class).setResultTransformer(
+                            new ResultTransformer() {
+                                @Override
+                                public Object transformTuple(
+                                        Object[] tuple,
+                                        String[] aliases) {
+                                    return new GradeWithSubjectName(
+                                            (int) tuple[1],
+                                            (double) tuple[0],
+                                            (String) tuple[2]
+                                    );
+                                }
 
-        try (PreparedStatement statement = SQLSessionFactory.getConnection().prepareStatement(query)) {
-            statement.setString(1, Integer.toString(studentId));
-            ResultSet result = statement.executeQuery();
-            while (result.next()) {
-                GradeWithSubjectName grade = new GradeWithSubjectName();
-                grade.setGradeId(result.getInt("gradeId"));
-                grade.setValue(result.getDouble("value"));
-                grade.setName(result.getString("name"));
-                list.add(grade);
-                logger.info("Grade found");
+                                @Override
+                                public List transformList(List collection) {
+                                    return collection;
+                                }
+                            }
+                    )
+                    .getResultList();
+
+            transaction.commit();
+            return list;
+
+        } finally {
+            if (entityManager != null) {
+                entityManager.close();
             }
-        } catch (SQLException e) {
-            logger.error("Error listing all grades", e);
         }
-        return list;
     }
 }

@@ -1,13 +1,33 @@
 package model.grade;
 
+import model.SQLSessionFactory;
 import model.subject.Subject;
 import model.user.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "grades", schema = "gestorDatabase", catalog = "gestorDatabase")
 public class Grade {
+
+    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
+
+    @PostPersist
+    public void logAdd() {
+        logger.info("Grade added");
+    }
+
+    @PostUpdate
+    public void logUpdate() {
+        logger.info("Grade updated");
+    }
+
+    @PostRemove
+    public void logRemove() {
+        logger.info("Grade removed");
+    }
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "users_userId")

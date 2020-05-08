@@ -27,6 +27,7 @@ public class Parenthood {
 
     public Parenthood(int firstPrentId) {
         this.firstPrentId = firstPrentId;
+        this.secondPrentId = 0;
     }
 
     public int getParenthoodId() {

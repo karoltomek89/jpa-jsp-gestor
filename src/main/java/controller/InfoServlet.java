@@ -1,5 +1,6 @@
 package controller;
 
+import model.membership.MembershipType;
 import model.user.User;
 import model.user.UserDAO;
 import model.user.UserDAOImpl;
@@ -19,6 +20,10 @@ public class InfoServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User newUser = user.findById(req.getSession().getAttribute("userId").toString());
+        MembershipType membershipType = user.getMembershipTypeById(user.getMembershipTypeId((Integer) req.getSession().getAttribute("userId"))); //TODO new method must be created
+        String membership = membershipType.name();
+
+        req.setAttribute("membership", membership);
         req.setAttribute("user", newUser);
 
         RequestDispatcher dispatcher;
