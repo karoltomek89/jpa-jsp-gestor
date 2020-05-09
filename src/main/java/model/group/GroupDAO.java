@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface GroupDAO {
 
-    void register(String s);
+//    void register(String s);
 
-    void save(Group group);
+    void save(String name);
 
     void update(Group group);
 
