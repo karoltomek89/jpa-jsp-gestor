@@ -11,7 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GradeDAOImplJDBC implements GradeDAO {
+public class GradeDAOImplJdbc implements GradeDAO {
 
     private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
 

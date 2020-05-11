@@ -11,7 +11,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GroupDAOImplJDBC implements GroupDAO {
+public class GroupDAOImplJdbc implements GroupDAO {
 
     private static Logger logger = LoggerFactory.getLogger(model.SQLSessionFactory.class);
 

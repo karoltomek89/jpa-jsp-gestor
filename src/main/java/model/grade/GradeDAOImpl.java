@@ -33,6 +33,7 @@ public class GradeDAOImpl implements GradeDAO {
             grade.setSubject(subject);
             grade.setUser(user);
             entityManager.persist(grade);
+            transaction.commit();
         } finally {
             if (entityManager != null) {
                 entityManager.close();

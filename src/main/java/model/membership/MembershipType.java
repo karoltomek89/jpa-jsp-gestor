@@ -7,7 +7,7 @@ public enum MembershipType {
     PARENT(3),
     DIRECTOR(4),
     TEST(5),
-    UNSET(0);
+    UNSET(0); //TODO remove unset
 
     private int membershipTypeId;
 
