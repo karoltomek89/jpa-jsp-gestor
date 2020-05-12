@@ -1,6 +1,6 @@
 package model.group;
 
-import model.SQLSessionFactory;
+import model.EntityManagerFactoryStaticBlockSingleton;
 import model.user.User;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,7 @@ import java.util.Set;
 @Table(name = "groups", schema = "gestorDatabase", catalog = "gestorDatabase")
 public class Group {
 
-    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
+    private static Logger logger = LoggerFactory.getLogger(EntityManagerFactoryStaticBlockSingleton.class);
 
     @PostPersist
     public void logAdd() {

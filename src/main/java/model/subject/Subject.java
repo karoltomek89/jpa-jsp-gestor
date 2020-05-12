@@ -1,6 +1,6 @@
 package model.subject;
 
-import model.SQLSessionFactory;
+import model.EntityManagerFactoryStaticBlockSingleton;
 import model.grade.Grade;
 import model.user.User;
 import org.slf4j.Logger;
@@ -14,7 +14,7 @@ import java.util.Set;
 @Table(name = "subjects", schema = "gestorDatabase", catalog = "gestorDatabase")
 public class Subject {
 
-    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
+    private static Logger logger = LoggerFactory.getLogger(EntityManagerFactoryStaticBlockSingleton.class);
 
     @PostPersist
     public void logAdd() {

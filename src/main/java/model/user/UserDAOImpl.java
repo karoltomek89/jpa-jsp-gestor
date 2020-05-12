@@ -2,7 +2,6 @@ package model.user;
 
 import model.EntityManagerFactoryStaticBlockSingleton;
 import model.GeneralDAO;
-import model.SQLSessionFactory;
 import model.membership.MembershipType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +12,7 @@ import javax.persistence.EntityTransaction;
 import java.util.List;
 
 public class UserDAOImpl implements UserDAO {
-    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
+    private static Logger logger = LoggerFactory.getLogger(EntityManagerFactoryStaticBlockSingleton.class);
 
     GeneralDAO generalDAO = new GeneralDAO();
     private EntityManagerFactory entityManagerFactory;

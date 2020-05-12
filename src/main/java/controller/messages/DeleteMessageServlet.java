@@ -1,6 +1,6 @@
 package controller.messages;
 
-import model.SQLSessionFactory;
+import model.EntityManagerFactoryStaticBlockSingleton;
 import model.message.MessageDAO;
 import model.message.MessageDAOImpl;
 import org.slf4j.Logger;
@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @WebServlet(name = "DeleteMessageServlet", value = "/deleteMessage")
 public class DeleteMessageServlet extends HttpServlet {
-    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
+    private static Logger logger = LoggerFactory.getLogger(EntityManagerFactoryStaticBlockSingleton.class);
     MessageDAO message = new MessageDAOImpl();
 
     @Override

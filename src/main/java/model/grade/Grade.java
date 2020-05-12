@@ -1,6 +1,6 @@
 package model.grade;
 
-import model.SQLSessionFactory;
+import model.EntityManagerFactoryStaticBlockSingleton;
 import model.subject.Subject;
 import model.user.User;
 import org.slf4j.Logger;
@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Table(name = "grades", schema = "gestorDatabase", catalog = "gestorDatabase")
 public class Grade {
 
-    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
+    private static Logger logger = LoggerFactory.getLogger(EntityManagerFactoryStaticBlockSingleton.class);
 
     @PostPersist
     public void logAdd() {

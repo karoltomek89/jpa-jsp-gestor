@@ -1,6 +1,6 @@
 package controller.grades;
 
-import model.SQLSessionFactory;
+import model.EntityManagerFactoryStaticBlockSingleton;
 import model.subject.Subject;
 import model.subject.SubjectDAO;
 import model.subject.SubjectDAOImpl;
@@ -23,7 +23,7 @@ import java.util.Optional;
 
 @WebServlet(name = "GetSubjectListServlet", value = "/getsubjectlist")
 public class GetSubjectsListServlet extends HttpServlet {
-    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
+    private static Logger logger = LoggerFactory.getLogger(EntityManagerFactoryStaticBlockSingleton.class);
     List<Subject> subjectList = new ArrayList<>();
     List<User> studentList = new ArrayList<>();
     SubjectDAO subject = new SubjectDAOImpl();

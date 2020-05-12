@@ -1,6 +1,6 @@
 package controller.grades;
 
-import model.SQLSessionFactory;
+import model.EntityManagerFactoryStaticBlockSingleton;
 import model.group.Group;
 import model.group.GroupDAO;
 import model.group.GroupDAOImpl;
@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @WebServlet(name = "GetGroupListForGradesServlet", value = "/getgrouplistforgrades")
 public class GetGroupListForGradesServlet extends HttpServlet {
-    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
+    private static Logger logger = LoggerFactory.getLogger(EntityManagerFactoryStaticBlockSingleton.class);
     List<Group> groupList = new ArrayList<>();
     GroupDAO group = new GroupDAOImpl();
 

@@ -1,6 +1,7 @@
 package controller.users;
 
-import model.SQLSessionFactory;
+
+import model.EntityManagerFactoryStaticBlockSingleton;
 import model.user.UserDAO;
 import model.user.UserDAOImpl;
 import org.slf4j.Logger;
@@ -18,7 +19,7 @@ import java.io.IOException;
 @WebServlet(name = "LoginServlet", value = "/login")
 public class LoginServlet extends HttpServlet {
 
-    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
+    private static Logger logger = LoggerFactory.getLogger(EntityManagerFactoryStaticBlockSingleton.class);
 
     UserDAO user = new UserDAOImpl();
 

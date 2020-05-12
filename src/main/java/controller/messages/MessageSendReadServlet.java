@@ -1,6 +1,6 @@
 package controller.messages;
 
-import model.SQLSessionFactory;
+import model.EntityManagerFactoryStaticBlockSingleton;
 import model.message.Message;
 import model.message.MessageDAO;
 import model.message.MessageDAOImpl;
@@ -22,7 +22,7 @@ import java.util.Optional;
 
 @WebServlet(name = "MessageSendReadServlet", value = "/messages")
 public class MessageSendReadServlet extends HttpServlet {
-    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
+    private static Logger logger = LoggerFactory.getLogger(EntityManagerFactoryStaticBlockSingleton.class);
     List<Message> messagesList = new ArrayList<>();
     MessageDAO message = new MessageDAOImpl();
     UserDAO user = new UserDAOImpl();

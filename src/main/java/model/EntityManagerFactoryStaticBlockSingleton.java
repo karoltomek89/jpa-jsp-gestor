@@ -8,7 +8,7 @@ import javax.persistence.Persistence;
 
 public class EntityManagerFactoryStaticBlockSingleton {
 
-    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
+    private static Logger logger = LoggerFactory.getLogger(EntityManagerFactoryStaticBlockSingleton.class);
 
     private static EntityManagerFactory entityManagerFactoryStaticBlockSingleton = null;
 

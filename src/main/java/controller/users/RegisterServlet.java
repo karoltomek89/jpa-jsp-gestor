@@ -1,6 +1,6 @@
 package controller.users;
 
-import model.SQLSessionFactory;
+import model.EntityManagerFactoryStaticBlockSingleton;
 import model.membership.MembershipType;
 import model.user.UserDAO;
 import model.user.UserDAOImpl;
@@ -19,7 +19,7 @@ import java.util.Optional;
 @WebServlet(name = "RegisterServlet", value = "/register")
 public class RegisterServlet extends HttpServlet {
     UserDAO user = new UserDAOImpl();
-    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
+    private static Logger logger = LoggerFactory.getLogger(EntityManagerFactoryStaticBlockSingleton.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
