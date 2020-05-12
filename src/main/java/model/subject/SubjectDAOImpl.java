@@ -2,9 +2,6 @@ package model.subject;
 
 import model.EntityManagerFactoryStaticBlockSingleton;
 import model.GeneralDAO;
-import model.SQLSessionFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,7 +10,6 @@ import java.util.List;
 
 public class SubjectDAOImpl implements SubjectDAO {
 
-    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
     GeneralDAO generalDAO = new GeneralDAO();
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager = null;
@@ -21,7 +17,6 @@ public class SubjectDAOImpl implements SubjectDAO {
     public SubjectDAOImpl() {
         this.entityManagerFactory = EntityManagerFactoryStaticBlockSingleton.getFactory();
     }
-
 
     @Override
     public void register(String name) {

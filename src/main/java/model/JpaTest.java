@@ -11,8 +11,6 @@ import model.user.User;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.TypedQuery;
-import java.util.List;
 
 public class JpaTest {
     public static void main(String[] args) {
@@ -72,9 +70,6 @@ public class JpaTest {
             entityManager.persist(parenthood);
             entityManager.persist(parenthood2);
 
-            TypedQuery<Group> query = entityManager.createQuery("from Group", Group.class);
-            List<Group> groups = query.getResultList();
-            System.out.println("groups = " + groups);
 
 
 //            /**
