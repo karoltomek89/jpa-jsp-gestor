@@ -1,7 +1,10 @@
 package model.subject;
 
+import model.SQLSessionFactory;
 import model.grade.Grade;
 import model.user.User;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -10,6 +13,23 @@ import java.util.Set;
 @Entity
 @Table(name = "subjects", schema = "gestorDatabase", catalog = "gestorDatabase")
 public class Subject {
+
+    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
+
+    @PostPersist
+    public void logAdd() {
+        logger.info("Group added");
+    }
+
+    @PostUpdate
+    public void logUpdate() {
+        logger.info("Group updated");
+    }
+
+    @PostRemove
+    public void logRemove() {
+        logger.info("Group removed");
+    }
 
     @ManyToMany(mappedBy = "subjects")
     private Set<User> users = new HashSet();

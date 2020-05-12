@@ -69,7 +69,7 @@ public class GradeDAOImpl implements GradeDAO {
             entityManager = entityManagerFactory.createEntityManager();
             EntityTransaction transaction = entityManager.getTransaction();
             transaction.begin();
-            List<Grade> list = entityManager.createQuery(" FROM Grade g JOIN Subject WHERE g.users_userId = :studentId")
+            List<Grade> list = entityManager.createQuery("FROM Grade g JOIN Subject WHERE g.users_userId = :studentId")
                     .setParameter("studentId", studentId)
                     .getResultList();
             transaction.commit();
