@@ -1,6 +1,6 @@
 package controller.messages;
 
-import model.SQLSessionFactory;
+import model.EntityManagerFactoryStaticBlockSingleton;
 import model.user.User;
 import model.user.UserDAO;
 import model.user.UserDAOImpl;
@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @WebServlet(name = "GetStudentListServlet", value = "/getstudentlist")
 public class GetStudentsListServlet extends HttpServlet {
-    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
+    private static Logger logger = LoggerFactory.getLogger(EntityManagerFactoryStaticBlockSingleton.class);
     List<User> userList = new ArrayList<>();
     UserDAO user = new UserDAOImpl();
 

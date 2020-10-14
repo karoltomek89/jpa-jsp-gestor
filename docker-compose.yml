@@ -1,0 +1,41 @@
+version: '3'
+services:
+
+  web:
+    build:
+      context: .
+      dockerfile:  Dockerfile_webapp_compose
+    container_name: jsp_gestor_app
+    ports:
+      - 8888:8080
+    environment:
+      gestor_jdbc_db_server: db
+      gestor_jdbc_db_name: gestorDatabase
+      gestor_jdbc_db_user: root
+      gestor_jdbc_db_password: adelfofagia
+      gestor_jdbc_db_port: 3306
+      MONGODB_HOSTNAME: mongodb
+
+  mysql:
+    image: mongo:latest
+    container_name: jsp_gestor_mysql_database
+    environment:
+      MYSQL_ROOT_PASSWORD: adelfofagia
+      MYSQL_DATABASE: gestorDatabase
+    ports:
+      - 3306:3306
+    volumes:
+      - "f:/db_mysql:/var/lib/mysql"
+
+  mongodb:
+    image: mongo:latest
+    container_name: jsp_gestor_mongodb_database
+    environment:
+      MONGO_INITDB_DATABASE: gestorMessages
+    ports:
+      - 27017:27017
+    hostname: mongodb
+    volumes:
+      - db_mongodb:/data/db
+volumes:
+  db_mongodb:

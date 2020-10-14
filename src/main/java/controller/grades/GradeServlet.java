@@ -1,6 +1,6 @@
 package controller.grades;
 
-import model.SQLSessionFactory;
+import model.EntityManagerFactoryStaticBlockSingleton;
 import model.grade.GradeDAOImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +17,7 @@ import java.util.Optional;
 @WebServlet(name = "GradeServlet", value = "/addgrade")
 public class GradeServlet extends HttpServlet {
     GradeDAOImpl grade = new GradeDAOImpl();
-    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
+    private static Logger logger = LoggerFactory.getLogger(EntityManagerFactoryStaticBlockSingleton.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

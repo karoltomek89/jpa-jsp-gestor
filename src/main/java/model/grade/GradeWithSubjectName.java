@@ -5,6 +5,15 @@ public class GradeWithSubjectName {
     private double value;
     private String name;
 
+    public GradeWithSubjectName(int gradeId, double value, String name) {
+        this.gradeId = gradeId;
+        this.value = value;
+        this.name = name;
+    }
+
+    public GradeWithSubjectName() {
+    }
+
     public String getName() {
         return name;
     }

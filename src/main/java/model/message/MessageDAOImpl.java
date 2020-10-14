@@ -1,8 +1,8 @@
 package model.message;
 
 import com.mongodb.client.FindIterable;
+import model.EntityManagerFactoryStaticBlockSingleton;
 import model.MongoDBSessionFactory;
-import model.SQLSessionFactory;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,7 @@ import java.util.List;
 import static com.mongodb.client.model.Filters.eq;
 
 public class MessageDAOImpl implements MessageDAO {
-    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
+    private static Logger logger = LoggerFactory.getLogger(EntityManagerFactoryStaticBlockSingleton.class);
 
     MongoDBSessionFactory mongoDBSessionFactory = new MongoDBSessionFactory();
 

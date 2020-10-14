@@ -1,12 +1,12 @@
 package model.user;
 
-import model.Membership;
+import model.membership.MembershipType;
 
 import java.util.List;
 
 public interface UserDAO {
 
-    void register(String name, String surname, String email, String password, Membership membership);
+    void register(String name, String surname, String email, String password, MembershipType membershipType);
 
     void save(User user);
 
@@ -20,13 +20,13 @@ public interface UserDAO {
 
     List<User> findAll();
 
-    List<User> findAllByMembership(Membership membership);
+    List<User> findAllByMembershipType(MembershipType membershipType);
 
     String getEmail(String userId);
 
-    int getMembershipId(int userId);
+    int getMembershipTypeId(int userId);
 
-    Membership getMembershipById(int membershipId);
+    MembershipType getMembershipTypeById(int membershipTypeId);
 
     int getUserId(User user);
 

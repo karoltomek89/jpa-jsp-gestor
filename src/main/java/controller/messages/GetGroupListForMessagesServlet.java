@@ -1,6 +1,6 @@
 package controller.messages;
 
-import model.SQLSessionFactory;
+import model.EntityManagerFactoryStaticBlockSingleton;
 import model.group.Group;
 import model.group.GroupDAO;
 import model.group.GroupDAOImpl;
@@ -22,7 +22,7 @@ import java.util.Optional;
 public class GetGroupListForMessagesServlet extends HttpServlet {
     List<Group> groupList = new ArrayList<>();
     GroupDAO group = new GroupDAOImpl();
-    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
+    private static Logger logger = LoggerFactory.getLogger(EntityManagerFactoryStaticBlockSingleton.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

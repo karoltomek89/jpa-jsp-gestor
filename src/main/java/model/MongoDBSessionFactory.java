@@ -19,7 +19,7 @@ public class MongoDBSessionFactory {
     CodecRegistry pojoCodecRegistry = fromRegistries(MongoClient.getDefaultCodecRegistry(),
             fromProviders(PojoCodecProvider.builder().automatic(true).build()));
 
-    MongoClient mongoClient = new MongoClient();
+    MongoClient mongoClient = new MongoClient(System.getenv("MONGODB_HOSTNAME"));
     MongoDatabase database = mongoClient.getDatabase("gestorMessages")
             .withCodecRegistry(pojoCodecRegistry);
 

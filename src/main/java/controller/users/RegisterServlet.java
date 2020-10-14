@@ -1,7 +1,7 @@
 package controller.users;
 
-import model.Membership;
-import model.SQLSessionFactory;
+import model.EntityManagerFactoryStaticBlockSingleton;
+import model.membership.MembershipType;
 import model.user.UserDAO;
 import model.user.UserDAOImpl;
 import org.slf4j.Logger;
@@ -19,7 +19,7 @@ import java.util.Optional;
 @WebServlet(name = "RegisterServlet", value = "/register")
 public class RegisterServlet extends HttpServlet {
     UserDAO user = new UserDAOImpl();
-    private static Logger logger = LoggerFactory.getLogger(SQLSessionFactory.class);
+    private static Logger logger = LoggerFactory.getLogger(EntityManagerFactoryStaticBlockSingleton.class);
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,20 +28,20 @@ public class RegisterServlet extends HttpServlet {
 
         if (optional.isPresent()) {
             String accesType = optional.get().toString();
-            Membership accountType = Membership.UNSET;
+            MembershipType accountType = MembershipType.UNSET;
 
             switch (accesType) {
                 case "student":
-                    accountType = Membership.STUDENT;
+                    accountType = MembershipType.STUDENT;
                     break;
                 case "teacher":
-                    accountType = Membership.TEACHER;
+                    accountType = MembershipType.TEACHER;
                     break;
                 case "parent":
-                    accountType = Membership.PARENT;
+                    accountType = MembershipType.PARENT;
                     break;
                 case "director":
-                    accountType = Membership.DIRECTOR;
+                    accountType = MembershipType.DIRECTOR;
                     break;
                 default:
                     break;
