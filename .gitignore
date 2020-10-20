@@ -37,9 +37,4 @@ target/
 out
 out/
 
-
-
-
-
-
-
+!/src/main/java/model/TestJpaClass.java
