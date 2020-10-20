@@ -10,6 +10,7 @@
     <packaging>war</packaging>
 
     <name>Gestor</name>
+    <description>School management app</description>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
