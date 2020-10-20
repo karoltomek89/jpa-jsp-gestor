@@ -1,5 +1,9 @@
 package model.subject;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import model.EntityManagerFactoryStaticBlockSingleton;
 import model.grade.Grade;
 import model.user.User;
@@ -10,6 +14,10 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@NoArgsConstructor
+@Setter
+@Getter
+@ToString
 @Entity
 @Table(name = "subjects", schema = "gestorDatabase", catalog = "gestorDatabase")
 public class Subject {
@@ -43,59 +51,16 @@ public class Subject {
 
     private String name;
 
-    public Subject() {
-    }
-
     public Subject(String name) {
         this.name = name;
-    }
-
-    public int getSubjectId() {
-        return subjectId;
-    }
-
-    public void setSubjectId(int subjectId) {
-        this.subjectId = subjectId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
     }
 
     public void addUser(User user) {
         this.users.add(user);
     }
 
-    public Set<Grade> getGrades() {
-        return grades;
-    }
-
-    public void setGrades(Set<Grade> grades) {
-        this.grades = grades;
-    }
-
     public void addGrade(Grade grade) {
         this.grades.add(grade);
     }
 
-
-    @Override
-    public String toString() {
-        return "Subject{" +
-                "subjectId=" + subjectId +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }

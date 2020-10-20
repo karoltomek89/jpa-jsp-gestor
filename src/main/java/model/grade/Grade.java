@@ -1,5 +1,9 @@
 package model.grade;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import model.EntityManagerFactoryStaticBlockSingleton;
 import model.subject.Subject;
 import model.user.User;
@@ -8,6 +12,10 @@ import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 
+@NoArgsConstructor
+@Setter
+@Getter
+@ToString
 @Entity
 @Table(name = "grades", schema = "gestorDatabase", catalog = "gestorDatabase")
 public class Grade {
@@ -43,50 +51,8 @@ public class Grade {
 
     private double value;
 
-    public Grade() {
-    }
-
     public Grade(Double value) {
         this.value = value;
     }
 
-    public int getGradeId() {
-        return gradeId;
-    }
-
-    public void setGradeId(int gradeId) {
-        this.gradeId = gradeId;
-    }
-
-    public double getValue() {
-        return value;
-    }
-
-    public void setValue(double value) {
-        this.value = value;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public void setSubject(Subject subject) {
-        this.subject = subject;
-    }
-
-    @Override
-    public String toString() {
-        return "Grade{" +
-                "gradeId=" + gradeId +
-                ", value=" + value +
-                '}';
-    }
 }

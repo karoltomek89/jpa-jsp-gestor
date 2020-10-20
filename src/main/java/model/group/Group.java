@@ -1,5 +1,9 @@
 package model.group;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import model.EntityManagerFactoryStaticBlockSingleton;
 import model.user.User;
 import org.slf4j.Logger;
@@ -9,6 +13,10 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@NoArgsConstructor
+@Setter
+@Getter
+@ToString
 @Entity
 @Table(name = "groups", schema = "gestorDatabase", catalog = "gestorDatabase")
 public class Group {
@@ -39,46 +47,12 @@ public class Group {
 
     private String name;
 
-    public Group() {
-    }
-
     public Group(String name) {
         this.name = name;
-    }
-
-    public int getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Set<User> getUsers() {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
     }
 
     public void addUser(User user) {
         this.users.add(user);
     }
 
-    @Override
-    public String toString() {
-        return "Group{" +
-                "groupId=" + groupId +
-                ", name='" + name + '\'' +
-                '}';
-    }
 }

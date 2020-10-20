@@ -1,5 +1,9 @@
 package model.user;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import model.grade.Grade;
 import model.group.Group;
 import model.membership.Membership;
@@ -11,6 +15,10 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@NoArgsConstructor
+@Setter
+@Getter
+@ToString
 @Entity
 @Table(name = "users", schema = "gestorDatabase", catalog = "gestorDatabase")
 public class User {
@@ -49,62 +57,12 @@ public class User {
     private String password;
     private int membershipId; //TODO remove this field and use only Membership object
 
-    public User() {
-    }
 
     public User(String name, String surname, String email, String password, MembershipType membershipType) {
         this.name = name;
         this.surname = surname;
         this.email = email;
         this.password = password;
-        this.membershipId = membershipType.getMembershipTypeId();
-    }
-
-    public int getUserId() {
-        return userId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public int getMembershipId() {
-        return membershipId;
-    }
-
-    public void setMembershipId(MembershipType membershipType) {
         this.membershipId = membershipType.getMembershipTypeId();
     }
 
@@ -118,14 +76,6 @@ public class User {
         group.getUsers().remove(this);
     }
 
-    public Set<Group> getGroups() {
-        return groups;
-    }
-
-    public void setGroups(Set<Group> groups) {
-        this.groups = groups;
-    }
-
     public void addSubject(Subject subject) {
         this.subjects.add(subject);
         subject.getUsers().add(this);
@@ -136,22 +86,6 @@ public class User {
         subject.getUsers().remove(this);
     }
 
-    public Set<Subject> getSubjects() {
-        return subjects;
-    }
-
-    public void setSubjects(Set<Subject> subjects) {
-        this.subjects = subjects;
-    }
-
-    public Set<Grade> getGrades() {
-        return grades;
-    }
-
-    public void setGrades(Set<Grade> grades) {
-        this.grades = grades;
-    }
-
     public void addGrade(Grade grade) {
         this.grades.add(grade);
     }
@@ -160,31 +94,4 @@ public class User {
         this.grades.remove(grade);
     }
 
-    public Parenthood getParenthood() {
-        return parenthood;
-    }
-
-    public void setParenthood(Parenthood parenthood) {
-        this.parenthood = parenthood;
-    }
-
-    public Membership getMembership() {
-        return membership;
-    }
-
-    public void setMembership(Membership membership) {
-        this.membership = membership;
-    }
-
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "userId=" + userId +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
 }
