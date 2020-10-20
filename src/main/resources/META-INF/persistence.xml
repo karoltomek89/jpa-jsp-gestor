@@ -3,15 +3,15 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
              version="2.0">
 
-    <!-- Początek konfiguracji dla PersistenceUnit o nazwie: 'model' -->
-    <persistence-unit name="model">
+    <!-- Początek konfiguracji dla PersistenceUnit o nazwie: 'com.kt.jspjpa.gestor.model' -->
+    <persistence-unit name="com.kt.jspjpa.gestor.model">
         <!-- lista klas do mapowania do bazy danych -->
-        <class>model.grade.Grade</class>
-        <class>model.group.Group</class>
-        <class>model.subject.Subject</class>
-        <class>model.user.User</class>
-        <class>model.membership.Membership</class>
-        <class>model.parenthood.Parenthood</class>
+        <class>com.kt.jspjpa.gestor.model.grade.Grade</class>
+        <class>com.kt.jspjpa.gestor.model.group.Group</class>
+        <class>com.kt.jspjpa.gestor.model.subject.Subject</class>
+        <class>com.kt.jspjpa.gestor.model.user.User</class>
+        <class>com.kt.jspjpa.gestor.model.membership.Membership</class>
+        <class>com.kt.jspjpa.gestor.model.parenthood.Parenthood</class>
 
         <!-- domyślnie mechanizmy JPA skanują wszystkie dostępne pakiety i dodają do PU encje które znajdą - ta opcja wyłącza tę funkcjonalność -->
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
